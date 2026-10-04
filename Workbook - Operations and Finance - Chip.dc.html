@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F3EFE6;color:#141412;font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#9C6B1E;text-decoration:none}
+a:hover{color:#7E5414}
+*{box-sizing:border-box}
+input,textarea,button{font:inherit}
+textarea{field-sizing:content}
+textarea::placeholder{color:#8F897D}
+input:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(217,164,65,0.45);border-color:#D9A441}
+@media print{nav,.noprint{display:none !important}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F3EFE6">
+<sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;background:#141412;color:#F3EFE6;display:flex;flex-direction:column">
+  <div style="max-width:1040px;width:100%;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+    <a href="DEEPER%20Team%20Guide.dc.html" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#E6BE6E">← Planning week site</a>
+  </div>
+  <div style="flex:1;display:flex;align-items:center">
+    <div style="max-width:1040px;width:100%;margin:0 auto;padding:clamp(40px,8vw,96px) clamp(20px,5vw,48px)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E">{{ hero.eyebrow }}</div>
+      <h1 style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,9vw,104px);line-height:0.92;color:#F3EFE6;font-stretch:125%;text-wrap:balance">{{ hero.title }}</h1>
+      <p style="margin:24px 0 0;max-width:560px;font-size:18px;line-height:1.55;color:#CFC9BC">This workbook is private. Enter the password Chip gave you.</p>
+      <form onSubmit="{{ submitPw }}" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;max-width:520px">
+        <input type="password" value="{{ pwVal }}" onChange="{{ onPw }}" placeholder="Password" autocomplete="current-password" style="flex:1;min-width:220px;padding:14px 16px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:#1E1E1B;color:#F3EFE6;font-size:16px">
+        <button type="submit" style="padding:14px 22px;border:none;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;cursor:pointer" style-hover="background:#E6BE6E">Unlock</button>
+      </form>
+      <sc-if value="{{ hasPwErr }}" hint-placeholder-val="{{ false }}"><div style="margin-top:12px;font-size:15px;color:#F2A9A6">That password does not match this workbook.</div></sc-if>
+    </div>
+  </div>
+</div>
+</sc-if>
+<sc-if value="{{ unlocked }}" hint-placeholder-val="{{ false }}">
+
+<header style="background:#141412;color:#F3EFE6">
+  <div style="max-width:1040px;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px) clamp(40px,7vw,72px)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+      <div style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#A8A398"><span style="width:8px;height:8px;border-radius:50%;background:#D9A441"></span>Workbook · Private</div>
+    </div>
+    <div style="margin-top:clamp(48px,8vw,80px);font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E;line-height:1.6">{{ hero.eyebrow }}</div>
+    <h1 style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,9vw,104px);line-height:0.92;letter-spacing:0.01em;color:#F3EFE6;font-stretch:125%;text-wrap:balance">{{ hero.title }}</h1>
+    <p style="margin:24px 0 0;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.5;color:#CFC9BC;text-wrap:pretty">{{ hero.sub }}</p>
+    <div class="noprint" style="margin-top:clamp(36px,6vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14);border-radius:12px;overflow:hidden">
+      <div style="background:#1E1E1B;padding:24px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">How saving works</div>
+        <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#F3EFE6">{{ saveCopy }}</p>
+      </div>
+      <div style="background:#1E1E1B;padding:24px;display:flex;flex-direction:column;gap:12px;justify-content:center">
+        <button onClick="{{ download }}" style="padding:14px 18px;border:none;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;cursor:pointer;text-align:left" style-hover="background:#E6BE6E">Download for Chip ↓</button>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+          <button onClick="{{ pickFile }}" style="padding:0;border:none;background:none;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#E6BE6E;cursor:pointer">Open a saved file</button>
+          <a href="DEEPER%20Team%20Guide.dc.html" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#E6BE6E">Team Guide ↗</a>
+          <input ref="{{ fileRef }}" type="file" accept=".doc,.html,.htm" onChange="{{ onFile }}" style="display:none">
+        </div>
+        <sc-if value="{{ hasMsg }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:#CFC9BC">{{ msg }}</div></sc-if>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav style="position:sticky;top:0;z-index:20;background:rgba(20,20,18,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.1)">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px">
+    <div style="flex:1;min-width:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a href="{{ n.href }}" style="flex:none;padding:16px 12px 14px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;color:{{ n.color }};border-bottom:2px solid {{ n.line }}">{{ n.label }}</a>
+      </sc-for>
+    </div>
+    <div style="flex:none;display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#A8A398">
+      <span style="white-space:nowrap;color:{{ syncColor }}">{{ syncLabel }}</span>
+      <span style="white-space:nowrap">{{ progress }}</span>
+      <div style="width:56px;height:4px;border-radius:2px;background:rgba(255,255,255,0.14);overflow:hidden"><div style="height:100%;background:#D9A441;width:{{ pct }}"></div></div>
+    </div>
+  </div>
+</nav>
+
+<main>
+<sc-for list="{{ parts }}" as="part" hint-placeholder-count="5">
+<section id="{{ part.id }}" data-screen-label="{{ part.label }}" style="scroll-margin-top:56px;padding:clamp(56px,8vw,88px) 0;border-top:1px solid #DDD6C8;background:{{ part.bg }}">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">{{ part.eyebrow }}</div>
+    <sc-for list="{{ part.blocks }}" as="b" hint-placeholder-count="6">
+      <sc-if value="{{ b.isH1 }}" hint-placeholder-val="{{ false }}">
+        <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%;text-wrap:balance">{{ b.text }}</h2>
+      </sc-if>
+      <sc-if value="{{ b.isH2 }}" hint-placeholder-val="{{ false }}">
+        <h3 style="margin:56px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;line-height:1.25;color:#141412">{{ b.text }}</h3>
+      </sc-if>
+      <sc-if value="{{ b.isH3 }}" hint-placeholder-val="{{ false }}">
+        <h4 style="margin:36px 0 0;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#5E5A52">{{ b.text }}</h4>
+      </sc-if>
+      <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:16px 0 0;max-width:720px;font-size:17px;line-height:1.65;color:#2E2C28;text-wrap:pretty">{{ b.text }}</p>
+      </sc-if>
+      <sc-if value="{{ b.isUl }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:20px;max-width:760px;display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:14px minmax(0,1fr);gap:14px;font-size:16px;line-height:1.6;color:#2E2C28"><span style="width:8px;height:8px;margin-top:9px;background:#D9A441"></span><span style="text-wrap:pretty">{{ it }}</span></div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isBrief }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:rgba(255,255,255,0.12);border-radius:12px;overflow:hidden;border:1px solid #141412">
+          <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
+            <div style="background:#141412;padding:22px 20px">
+              <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">{{ r.k }}</div>
+              <p style="margin:10px 0 0;font-size:15px;line-height:1.55;color:#F3EFE6">{{ r.v }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isKv }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:28px;border:1px solid #DDD6C8;border-radius:12px;overflow:hidden;background:#FAF7F0">
+          <sc-if value="{{ b.hasTitle }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:20px 24px;background:#141412;color:#F3EFE6">
+              <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px">{{ b.title }}</div>
+              <p style="margin:6px 0 0;font-size:15px;line-height:1.55;color:#CFC9BC">{{ b.lead }}</p>
+            </div>
+          </sc-if>
+          <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:6px 24px;padding:18px 24px;border-top:1px solid #E8E2D5">
+              <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;line-height:1.45;color:#141412">{{ r.k }}</div>
+              <div style="grid-column:span 2;font-size:15px;line-height:1.6;color:#2E2C28;white-space:pre-line">{{ r.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isCallout }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:20px;background:#D9A441;border-radius:16px;padding:clamp(22px,3vw,32px);color:#141412">
+          <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase">{{ b.title }}</div>
+          <sc-for list="{{ b.body }}" as="l" hint-placeholder-count="1">
+            <p style="margin:10px 0 0;font-size:16px;line-height:1.6;font-weight:600;text-wrap:pretty">{{ l }}</p>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isExample }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:24px;border:1.5px dashed #A8A398;border-radius:16px;padding:clamp(22px,3vw,32px)">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+            <span style="padding:4px 10px;border-radius:4px;background:#E8E2D5;font-family:'Archivo',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.14em;color:#4A463F">EXAMPLE</span>
+            <span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#141412">{{ b.title }}</span>
+          </div>
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ b.body }}" as="e" hint-placeholder-count="4">
+              <div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#9C6B1E">{{ e.lab }}</div>
+                <p style="margin:4px 0 0;font-size:15px;line-height:1.6;color:#2E2C28">{{ e.txt }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isField }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:32px">
+          <label style="display:block;max-width:760px;font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;line-height:1.45;color:#141412;text-wrap:pretty">{{ b.label }}</label>
+          <textarea value="{{ b.value }}" onChange="{{ b.onChange }}" rows="{{ b.rows }}" placeholder="{{ b.hint }}" style="margin-top:10px;display:block;width:100%;min-height:72px;padding:14px 16px;border:1px solid #DDD6C8;border-radius:10px;background:#FFFDF8;font-size:16px;line-height:1.6;color:#141412;resize:vertical"></textarea>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isOutcome }}" hint-placeholder-val="{{ false }}">
+        <article style="margin-top:20px;border:1px solid #DDD6C8;border-radius:14px;overflow:hidden;background:#FAF7F0">
+          <div style="padding:14px 24px;background:#141412;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#D9A441">{{ b.title }}</div>
+          <div style="padding:8px 24px 24px;display:flex;flex-direction:column">
+            <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px 24px;padding-top:16px">
+                <div style="padding-top:12px;font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;line-height:1.4;color:#141412">{{ r.label }}</div>
+                <textarea value="{{ r.value }}" onChange="{{ r.onChange }}" rows="{{ r.rows }}" placeholder="{{ r.hint }}" style="grid-column:span 2;width:100%;min-height:52px;padding:12px 14px;border:1px solid #DDD6C8;border-radius:8px;background:#FFFDF8;font-size:15px;line-height:1.55;color:#141412;resize:vertical"></textarea>
+              </div>
+            </sc-for>
+          </div>
+        </article>
+      </sc-if>
+      <sc-if value="{{ b.isGrid }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:24px;border:1px solid #DDD6C8;border-radius:12px;overflow-x:auto;background:#FAF7F0">
+          <div style="min-width:{{ b.minW }}">
+            <div style="display:grid;grid-template-columns:{{ b.cols }};gap:12px;padding:14px 20px;background:#141412;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:#A8A398">
+              <sc-for list="{{ b.head }}" as="h" hint-placeholder-count="4"><div>{{ h }}</div></sc-for>
+            </div>
+            <sc-for list="{{ b.rows }}" as="row" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:{{ b.cols }};gap:12px;padding:12px 20px;border-top:1px solid #E8E2D5;align-items:start">
+                <sc-for list="{{ row }}" as="c" hint-placeholder-count="4">
+                  <div style="min-width:0">
+                    <sc-if value="{{ c.edit }}" hint-placeholder-val="{{ false }}">
+                      <textarea value="{{ c.value }}" onChange="{{ c.onChange }}" rows="{{ c.rows }}" placeholder="{{ c.ph }}" style="width:100%;min-height:42px;padding:9px 11px;border:1px solid #DDD6C8;border-radius:6px;background:#FFFDF8;font-size:14px;line-height:1.5;color:#141412;resize:vertical"></textarea>
+                    </sc-if>
+                    <sc-if value="{{ c.ro }}" hint-placeholder-val="{{ true }}">
+                      <div style="padding-top:2px;font-size:14px;line-height:1.5;color:{{ c.color }};font-weight:{{ c.weight }};white-space:pre-line">{{ c.text }}</div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ b.canAdd }}" hint-placeholder-val="{{ false }}">
+            <div class="noprint" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:12px 20px;border-top:1px solid #E8E2D5">
+              <button onClick="{{ b.addRow }}" style="padding:9px 14px;border:1.5px dashed #D9A441;border-radius:8px;background:transparent;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#7E5414;cursor:pointer" style-hover="background:#F1E6CC">+ Add row</button>
+              <sc-if value="{{ b.hasExtra }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ b.removeRow }}" style="padding:0;border:none;background:none;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#7A756B;cursor:pointer">Remove last added row</button>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </sc-for>
+  </div>
+</section>
+</sc-for>
+
+<section class="noprint" style="padding:clamp(56px,8vw,88px) 0;background:#141412;color:#F3EFE6">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:32px;align-items:end">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#D9A441">Submit</div>
+      <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.1;font-stretch:125%">Hand your workbook to Chip</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#CFC9BC">Download the file and send it to Chip by Thursday, October 8. It opens in Word, and Melo and Chip can load it into their review page.</p>
+    </div>
+    <button onClick="{{ download }}" style="padding:18px 22px;border:none;border-radius:10px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;cursor:pointer" style-hover="background:#E6BE6E">Download for Chip ↓</button>
+  </div>
+</section>
+</main>
+
+<footer style="background:#141412;padding:32px 0;border-top:1px solid rgba(255,255,255,0.1)">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.14em;color:#F3EFE6">DEEPER: <span style="color:#A8A398;font-weight:600;letter-spacing:0.04em">{{ footer }}</span></div>
+    <a href="#p0" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#D9A441">Back to top ↑</a>
+  </div>
+</footer>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  static DATA = {"key":"chip","person":"Chip","ministry":"Operations and Finance","hero":{"eyebrow":"CHIP | OPERATIONS AND FINANCE | READ FIRST","title":"Operations and Finance","sub":"2027 planning workbook | Chip | Operations Pastor | leadership copy"},"parts":[{"id":"p0","label":"Start","eyebrow":"CHIP | OPERATIONS AND FINANCE | READ FIRST","blocks":[{"k":"kv","title":"","lead":"","rows":[{"k":"You own","v":"The Operations and Finance plan: internal giving fully supporting the approved operating budget by Dec 31; one month of operating expenses in unrestricted reserve; staffing stabilized by Mar 31; systems (register, scorecard supervision, coverage); the Students draft as interim (separate workbook); co-facilitation and integration of the week."},{"k":"You do not own","v":"Vision and theology (Melo); Bre's supervision (Melo); ministry content inside each plan; final approvals reserved to Melo and the elders."},{"k":"Work closely with","v":"Melo, Crystal (scorecard, facilities), Fanancy (scheduling agreement), the future students leader (Students assessment), Bre (generosity communication), elders (budget)."},{"k":"Where your plan touches the 2027 goals","v":"Goal 3 directly: giving, reserve, staffing, systems, team sustainability. You also integrate every plan's costs and workloads so the three goals stay affordable and humane."},{"k":"What Deeper looks like here","v":"Equipping responsible ministry owners, providing reliable coverage, protecting rest, and funding ongoing ministry responsibly without treating growth as guaranteed income."},{"k":"Team Guide sections to have open","v":"Section 1 (the vision), Section 2 (targets), Section 5 (how to write a plan), Section 7 (status words)."}]},{"k":"callout","title":"Boundary to confirm on Monday","body":["Financial and personnel detail stays in this leadership copy and the Facilitator Guide, not in shared pages or the register. About $112,000 of outside operating support (2026) is the gap the 2027 giving plan must close; attendance growth is not assumed to produce giving. You also facilitate: draft your Monday and Tuesday pages before October 5 where you can. The appendix holds the cross-plan tables for Friday, October 9."]},{"k":"h2","text":"How this workbook works"},{"k":"ul","items":["Pages for each day open with what to do and what you finish with. Write in the boxes; they expand. The Team Guide is where you look things up.","EXAMPLE boxes show the form of a good answer. Borrow the form, never the content. Examples add no targets.","Every date you add is PROPOSED until Melo and Chip approve it. Requests are Pending until the person agrees. Costs are estimates with a basis; \"unknown\" and \"none\" are honest answers. Nothing is written twice: costs, people and dates live on Wednesday; Thursday points to them."]}]},{"id":"p1","label":"Monday","eyebrow":"MONDAY, OCTOBER 5 | AFTER THE VISION","blocks":[{"k":"h1","text":"Current reality"},{"k":"p","text":"The honest operating picture: money, people, systems. 2026 year to date, with the end date written."},{"k":"brief","rows":[{"k":"Do this","v":"Turn your prework into a clear current picture: what exists, what works, what is missing."},{"k":"Time","v":"About 60 minutes of the 1:00 to 3:45 window, plus the closing check-in."},{"k":"You finish with","v":"The finance and staffing tables filled; systems failures named; one sentence naming the most important risk to sustaining the mission in 2027."}]},{"k":"h2","text":"Finance (2026 year to date, through ________)"},{"k":"p","text":"Use the authorized summaries you prepared for prework. Annualize only where you say so."},{"k":"grid","id":"f15","head":["Measure","Figure","Source","Note"],"rows":[[{"text":"Regular internal giving, year to date (and annualized)"},{"id":"f15_0_1","val":"","rows":1},{"id":"f15_0_2","val":"","rows":1},{"id":"f15_0_3","val":"","rows":1}],[{"text":"Approved operating expenses, year to date (and annual budget)"},{"id":"f15_1_1","val":"","rows":1},{"id":"f15_1_2","val":"","rows":1},{"id":"f15_1_3","val":"","rows":1}],[{"text":"Outside operating support received, year to date"},{"id":"f15_2_1","val":"","rows":1},{"id":"f15_2_2","val":"","rows":1},{"text":"About $112,000 annual (stated)"}],[{"text":"Internal giving as a share of approved operating budget"},{"id":"f15_3_1","val":"","rows":1},{"id":"f15_3_2","val":"","rows":1},{"id":"f15_3_3","val":"","rows":1}],[{"text":"Unrestricted cash today, and one month of operating expenses"},{"id":"f15_4_1","val":"","rows":1},{"id":"f15_4_2","val":"","rows":1},{"text":"Reserve target: one month"}],[{"text":"Giving units; share giving recurringly"},{"id":"f15_5_1","val":"","rows":1},{"id":"f15_5_2","val":"","rows":1},{"id":"f15_5_3","val":"","rows":1}],[{"text":"Restricted funds held separately (mission, partner gift)"},{"id":"f15_6_1","val":"","rows":1},{"id":"f15_6_2","val":"","rows":1},{"text":"Never counted as operating"}],[{"text":"Known 2027 fixed commitments (lease, insurance, subscriptions, debt)"},{"id":"f15_7_1","val":"","rows":1},{"id":"f15_7_2","val":"","rows":1},{"id":"f15_7_3","val":"","rows":1}]]},{"k":"h2","text":"Staffing and systems"},{"k":"grid","id":"f17","head":["Area","Current state","Gap or risk","Decision point"],"rows":[[{"id":"f17_0_0","val":"Worship Leader (stabilize by Mar 31)","rows":1},{"id":"f17_0_1","val":"","rows":2},{"id":"f17_0_2","val":"","rows":2},{"id":"f17_0_3","val":"","rows":2}],[{"id":"f17_1_0","val":"Student Ministry Director (stabilize by Mar 31)","rows":1},{"id":"f17_1_1","val":"","rows":2},{"id":"f17_1_2","val":"","rows":2},{"id":"f17_1_3","val":"","rows":2}],[{"id":"f17_2_0","val":"Interim coverage: Students; Worship","rows":1},{"id":"f17_2_1","val":"","rows":2},{"id":"f17_2_2","val":"","rows":2},{"id":"f17_2_3","val":"","rows":2}],[{"id":"f17_3_0","val":"Volunteer background checks and onboarding pipeline","rows":1},{"id":"f17_3_1","val":"","rows":2},{"id":"f17_3_2","val":"","rows":2},{"id":"f17_3_3","val":"","rows":2}],[{"id":"f17_4_0","val":"Coverage for protected windows (Feb 22-25, Jul 5-20, Sep 13-17) and the June trip","rows":1},{"id":"f17_4_1","val":"","rows":2},{"id":"f17_4_2","val":"","rows":2},{"id":"f17_4_3","val":"","rows":2}],[{"id":"f17_5_0","val":"Records and register (owners, dates, status)","rows":1},{"id":"f17_5_1","val":"","rows":2},{"id":"f17_5_2","val":"","rows":2},{"id":"f17_5_3","val":"","rows":2}],[{"id":"f17_6_0","val":"Facilities and partner room use (with Crystal)","rows":1},{"id":"f17_6_1","val":"","rows":2},{"id":"f17_6_2","val":"","rows":2},{"id":"f17_6_3","val":"","rows":2}]]},{"k":"field","id":"f19","label":"Where does the operating budget depend on outside support, and what has to be true each month for internal giving to cover it by December?","hint":"Monthly, not annual. Name the assumptions you refuse to make.","rows":4},{"k":"field","id":"f21","label":"The realistic staffing path to March 31 for both roles: options, cost, and the decision points on the way","hint":"Include the interim plan if a role is not filled by then. Sensitive detail stays here.","rows":4},{"k":"field","id":"f23","label":"Which systems fail most often, what does each failure cost in hours or trust, and what would fixing it take?","hint":"Scheduling, records, approvals, facilities, communication intake.","rows":3},{"k":"field","id":"f25","label":"What do you want from Fanancy in 2027, and what stays with you?","hint":"She advises and carries assigned projects; she continues scheduling. You confirm priorities and assign. Nothing transfers supervision, and no ministry loses ownership of its own workflow.","rows":3},{"k":"field","id":"f27","label":"The most important risk to sustaining the mission in 2027, in one or two sentences","hint":"Name it plainly. This is what Tuesday's outcomes must answer.","rows":2}]},{"id":"p2","label":"Tuesday","eyebrow":"TUESDAY, OCTOBER 6 | CHOOSE THE RESULTS","blocks":[{"k":"h1","text":"One to three outcomes"},{"k":"p","text":"Two good outcomes beat three weak ones. Each must answer Monday's problem and serve a 2027 goal."},{"k":"brief","rows":[{"k":"Do this","v":"Choose the results this ministry pursues in 2027. Write each as an observable change for people by a date, with its baseline, evidence and first action."},{"k":"Time","v":"Morning block for drafting and consultation; refine in the afternoon; share at the closing check-in."},{"k":"You finish with","v":"Outcome cards 1 and 2 complete (3 is optional), each with a first action and owner."}]},{"k":"h2","text":"Where your plan meets the settled targets"},{"k":"p","text":"These are the settled 2027 targets your ministry most directly serves. You are choosing outcomes that contribute; you are not inventing new targets."},{"k":"grid","id":"f34","head":["Focus area","Settled target it serves","What is yours to move"],"rows":[[{"text":"Financial sustainability"},{"text":"Internal giving fully supports the approved operating budget by Dec 31; one month of operating expenses in unrestricted reserve"},{"text":"Month-by-month giving path; expense discipline; the outside-support step-down; reserve build; honest reporting"}],[{"text":"Generosity teaching and communication"},{"text":"Nov 7 and 14 series; year-end message; Dec 5 partner gift kept distinct (D28)"},{"text":"What is taught and communicated when, with Melo and Bre; recurring giving; no conflation of purposes"}],[{"text":"Staffing"},{"text":"Worship Leader and Student Ministry Director stabilized by Mar 31"},{"text":"Options, cost, interim coverage, decision dates, onboarding; the residency onboarding in January"}],[{"text":"Systems and coverage"},{"text":"Goal 3: systems that hold; no silent cancellations (D19); Oct 13 DFT covered (D20)"},{"text":"Register live from the first staff meeting; scorecard supervised; coverage named for every protected window and the June trip"}]]},{"k":"example","title":"Operations and Finance (illustrative; not an added target)","body":[{"lab":"Outcome","txt":"By December 31, 2027, regular internal giving covers 100% of the approved operating budget for the trailing three months and unrestricted reserves equal one month of operating expenses, so that ministry no longer depends on outside operating support."},{"lab":"Baseline","txt":"Outside operating support about $112,000 (2026). Internal giving at [x]% of the approved budget, year to date through [date]. Reserve at [x] months."},{"lab":"Evidence","txt":"Monthly finance summary: giving versus budget, outside support received, reserve in months; quarterly to the elders."},{"lab":"First action","txt":"Build the month-by-month 2027 giving path and agree the generosity teaching and communication plan with Melo and Bre; Chip, by November 30."}]},{"k":"p","text":"The example shows the level of specificity. Your outcome may pursue a different result entirely."},{"k":"outcome","title":"OUTCOME 1","rows":[{"id":"f37_0","label":"Outcome","hint":"By [date], [who] will [observable result], so that [benefit to people].","rows":2},{"id":"f37_1","label":"Baseline today, and source","hint":"Or \"missing: how and by when we will get it.\"","rows":2},{"id":"f37_2","label":"Evidence we will look at","hint":"What we count or observe, and how often.","rows":2},{"id":"f37_3","label":"First action, owner, due","hint":"","rows":2},{"id":"f37_4","label":"Goal served","hint":"Write 1 Engage & Expand, 2 Mature & Multiply or 3 Strengthen & Sustain.","rows":2}]},{"k":"outcome","title":"OUTCOME 2","rows":[{"id":"f38_0","label":"Outcome","hint":"By [date], [who] will [observable result], so that [benefit to people].","rows":2},{"id":"f38_1","label":"Baseline today, and source","hint":"Or \"missing: how and by when we will get it.\"","rows":2},{"id":"f38_2","label":"Evidence we will look at","hint":"What we count or observe, and how often.","rows":2},{"id":"f38_3","label":"First action, owner, due","hint":"","rows":2},{"id":"f38_4","label":"Goal served","hint":"Write 1 Engage & Expand, 2 Mature & Multiply or 3 Strengthen & Sustain.","rows":2}]},{"k":"outcome","title":"OUTCOME 3  (optional)","rows":[{"id":"f39_0","label":"Outcome","hint":"By [date], [who] will [observable result], so that [benefit to people].","rows":2},{"id":"f39_1","label":"Baseline today, and source","hint":"Or \"missing: how and by when we will get it.\"","rows":2},{"id":"f39_2","label":"Evidence we will look at","hint":"What we count or observe, and how often.","rows":2},{"id":"f39_3","label":"First action, owner, due","hint":"","rows":2},{"id":"f39_4","label":"Goal served","hint":"Write 1 Engage & Expand, 2 Mature & Multiply or 3 Strengthen & Sustain.","rows":2}]},{"k":"field","id":"f41","label":"Which outcome, if missed, most endangers the others?","hint":"","rows":2}]},{"id":"p3","label":"Wednesday","eyebrow":"WEDNESDAY, OCTOBER 7 | PEOPLE, DATES, BUDGET","blocks":[{"k":"h1","text":"What the outcomes require"},{"k":"p","text":"Reconcile your outcomes with the calendar, coverage, ministry needs and other people's time. Your draft plan is complete by the end of today; you present it this afternoon for feedback."},{"k":"brief","rows":[{"k":"Do this","v":"Check the retained calendar items below, add your proposals, name the people you need, build the budget your plan requires, and turn every dependency into a request marked Agreed or Pending."},{"k":"Time","v":"Morning for the shared calendar walk and handoffs; midday to finish. Draft presentations and feedback in the afternoon."},{"k":"You finish with","v":"A complete draft: calendar proposals, people and coverage, budget proposal and requests, presented and marked up with feedback."}]},{"k":"h2","text":"Already on the 2027 calendar for your area"},{"k":"p","text":"Pulled from the 2027 calendar record. SETTLED means the ministry or rhythm is approved; \"Date proposed\" means the exact date still awaits approval. Do not re-propose these; note changes or conflicts in the box below."},{"k":"grid","id":"f48","head":["Date","Retained item","Status","Owner and time"],"rows":[[{"text":"Jan 1 to 31"},{"text":"Made to Flourish residency begins. January start agreed; onboarding dates pending"},{"text":"SETTLED\nPending partner/organizer"},{"text":"Melo / resident supervision lead TBD. Onboarding dates TBD"}],[{"text":"9 dates"},{"text":"2027 Ministry Scorecard review (monthly). Jan 12, Feb 9, Mar 9, May 11, Jun 8, Aug 10, Sep 7, Nov 9, Dec 14."},{"text":"SETTLED\nDates proposed"},{"text":"Crystal / Chip. Existing staff meeting"}],[{"text":"Sun Jan 17"},{"text":"Family Business Meeting"},{"text":"PROPOSED\nDate proposed"},{"text":"Melo / elders / Chip. After services; time TBD"}],[{"text":"Feb 22 to 25"},{"text":"Melo early-year review retreat. Protected window"},{"text":"SETTLED\nDate proposed"},{"text":"Melo; coverage coordinated by Chip. Protected"}],[{"text":"Wed Mar 31"},{"text":"Q1 checkpoint: staffing and guest-return baseline. Agreed deadline"},{"text":"SETTLED\nDate set"},{"text":"Melo / Chip; Brittney / Nicole for connection data. Internal"}],[{"text":"3 dates"},{"text":"2027 Ministry Scorecard review (quarterly). Apr 13, Jul 13, Oct 12."},{"text":"SETTLED\nDates proposed"},{"text":"Crystal / Chip. Existing staff meeting"}],[{"text":"Apr 19 to 20"},{"text":"Staff retreat: team health and spiritual renewal. Two weekdays; one overnight proposed"},{"text":"SETTLED\nDate proposed"},{"text":"Chip / staff lead TBD. Venue not booked"}],[{"text":"Jun 1 to 30"},{"text":"Prince of Peace annual mission trip. June window; exact travel dates pending partner"},{"text":"SETTLED\nPending partner/organizer"},{"text":"Melo / trip lead TBD / Prince of Peace. Exact dates TBD"}],[{"text":"Wed Jun 30"},{"text":"Q2 checkpoint: leader-development identification. Agreed deadline"},{"text":"SETTLED\nDate set"},{"text":"Ministry leaders / supervising coaches. Internal"}],[{"text":"Jul 5 to 20"},{"text":"Melo family vacation. Provisional protected leave; family approval needed"},{"text":"SETTLED\nDate proposed"},{"text":"Melo; coverage coordinated by Chip. Leave, not ministry travel"}],[{"text":"Sun Aug 15"},{"text":"Family Business Meeting"},{"text":"PROPOSED\nDate proposed"},{"text":"Melo / elders / Chip. After services; time TBD"}],[{"text":"Sep 13 to 17"},{"text":"Melo annual planning retreat for 2028. Protected window"},{"text":"SETTLED\nDate proposed"},{"text":"Melo; coverage coordinated by Chip. Protected"}],[{"text":"Oct 11 to 14"},{"text":"Staff Ministry Planning Week (plans 2028)"},{"text":"SETTLED\nDate proposed"},{"text":"Melo / Chip / staff. Daytime; times TBD"}],[{"text":"Fri Dec 10"},{"text":"Staff Christmas Party. Staff-only"},{"text":"SETTLED\nDate proposed"},{"text":"Crystal / staff team. Evening; time TBD"}],[{"text":"Fri Dec 31"},{"text":"Year-end: 2027 outcomes and financial sustainability. Agreed deadline"},{"text":"SETTLED\nDate set"},{"text":"Melo / Chip / finance steward / ministry owners. Internal"}]]},{"k":"h3","text":"Open items in the register that touch your area"},{"k":"grid","id":"f50","head":["Ref","Open item and what remains","Status","Owner"],"rows":[[{"text":"D01"},{"text":"Staff development conference. Verify real 2027 dates, budget and travel before overlaying the calendar. Do not reuse the 2026 October conference dates automatically."},{"text":"Annual commitment; dates TBD"},{"text":"Chip / staff"}],[{"text":"D19"},{"text":"Holiday Wednesdays. No silent holiday cancellation. Keep teaching unless Melo expressly approves a prayer replacement or other change."},{"text":"Scheduled; coverage decision needed"},{"text":"Formation team / Chip"}],[{"text":"D20"},{"text":"October 13 DFT during planning week. Assign prepared coverage. Planning week does not suspend the 10-session cohort."},{"text":"Teaching must continue"},{"text":"DFT teacher / Chip"}],[{"text":"D24"},{"text":"Christmas Eve service. Adds a service and possible preaching beyond the 36 assignments planned. Resolve in 2026 planning before budget and public calendar."},{"text":"UNDER REVIEW"},{"text":"Melo / worship / Chip"}],[{"text":"D27"},{"text":"Family vacation. Family approves dates; no remote church supervision during leave."},{"text":"PROPOSED protected leave"},{"text":"Melo / family; Chip for coverage"}],[{"text":"D28"},{"text":"November and December generosity. Explain regular operating giving, year-end sustainability and the Prince of Peace gift without conflating purposes."},{"text":"Coordinate distinct purposes"},{"text":"Melo / finance / communications"}],[{"text":"D30"},{"text":"2026 launch preparation. Approve 2027 dates and budget; name owners; approve initial Groups leaders and proposals; confirm teachers and guest preachers; continue staffing and mission coordination."},{"text":"Must precede January"},{"text":"Melo / Chip / ministry owners"}],[{"text":"D31"},{"text":"One Groups ministry coordinator. Name one operational coordinator and the approval/contact route. Administration does not confer pastoral authority. No five category directors."},{"text":"Implementation decision"},{"text":"Melo / Chip / pastors and elders"}]]},{"k":"field","id":"f52","label":"Conflicts or concerns: protected windows against deadlines, the June trip against Jun 13, 20 and 27 coverage, the Oct 11-14 planning week against Oct 13 DFT","hint":"Name the date and the concern. Proposals to change a settled date go to the register as DECISION NEEDED.","rows":3},{"k":"h2","text":"New calendar proposals"},{"k":"p","text":"Only what your outcomes require. Every row stays PROPOSED until Melo and Chip approve. Worship owns the sanctuary and Kids owns the classrooms on Sunday; for anything else the building has to hold, check with Crystal before writing a date."},{"k":"grid","id":"f55","head":["Proposed date","Item and purpose (who it serves)","Needs: people, room, cost","Status"],"rows":[[{"id":"f55_0_0","val":"","rows":2},{"id":"f55_0_1","val":"","rows":2},{"id":"f55_0_2","val":"","rows":2},{"id":"f55_0_3","val":"PROPOSED","rows":1}],[{"id":"f55_1_0","val":"","rows":2},{"id":"f55_1_1","val":"","rows":2},{"id":"f55_1_2","val":"","rows":2},{"id":"f55_1_3","val":"PROPOSED","rows":1}],[{"id":"f55_2_0","val":"","rows":2},{"id":"f55_2_1","val":"","rows":2},{"id":"f55_2_2","val":"","rows":2},{"id":"f55_2_3","val":"PROPOSED","rows":1}]]},{"k":"h2","text":"People and coverage"},{"k":"field","id":"f58","label":"Coverage by window: who carries what while Melo is away (Feb 22-25, Jul 5-20, Sep 13-17) and during the June trip?","hint":"Preaching, pastoral care, Formation, decisions. Names or \"to name by [date].\"","rows":4},{"k":"field","id":"f60","label":"Staffing decisions and their dates: what must be decided by whom, and when, to hit March 31?","hint":"","rows":3},{"k":"field","id":"f62","label":"Who carries the register day to day, and who is the backup?","hint":"You retain accountability. Fanancy reads it monthly and flags items with no owner or a past-due date; that is a review, not upkeep.","rows":2},{"k":"h2","text":"Ministry budget proposal"},{"k":"p","text":"What this plan needs to happen, with an estimate and its basis. Mark recurring or one-time. Count a shared need once and name who shares it. Unknown is an honest entry."},{"k":"grid","id":"f65","head":["What the plan needs","Estimate","Basis (quote, last year, unit x count)","Recurring or one-time","Shared with"],"rows":[[{"id":"f65_0_0","val":"Worship Leader role (annual)","rows":1},{"id":"f65_0_1","val":"","rows":2},{"id":"f65_0_2","val":"","rows":2},{"id":"f65_0_3","val":"Recurring","rows":1},{"id":"f65_0_4","val":"","rows":2}],[{"id":"f65_1_0","val":"Student Ministry Director role (annual)","rows":1},{"id":"f65_1_1","val":"","rows":2},{"id":"f65_1_2","val":"","rows":2},{"id":"f65_1_3","val":"Recurring","rows":1},{"id":"f65_1_4","val":"","rows":2}],[{"id":"f65_2_0","val":"Staff retreat Apr 19-20","rows":1},{"id":"f65_2_1","val":"","rows":2},{"id":"f65_2_2","val":"","rows":2},{"id":"f65_2_3","val":"One-time","rows":1},{"id":"f65_2_4","val":"Crystal","rows":1}],[{"id":"f65_3_0","val":"Staff development conference (D01)","rows":1},{"id":"f65_3_1","val":"","rows":2},{"id":"f65_3_2","val":"","rows":2},{"id":"f65_3_3","val":"One-time","rows":1},{"id":"f65_3_4","val":"","rows":2}],[{"id":"f65_4_0","val":"Register, scorecard and scheduling tools","rows":1},{"id":"f65_4_1","val":"","rows":2},{"id":"f65_4_2","val":"","rows":2},{"id":"f65_4_3","val":"Recurring","rows":1},{"id":"f65_4_4","val":"","rows":2}],[{"id":"f65_5_0","val":"","rows":2},{"id":"f65_5_1","val":"","rows":2},{"id":"f65_5_2","val":"","rows":2},{"id":"f65_5_3","val":"","rows":2},{"id":"f65_5_4","val":"","rows":2}],[{"id":"f65_6_0","val":"","rows":2},{"id":"f65_6_1","val":"","rows":2},{"id":"f65_6_2","val":"","rows":2},{"id":"f65_6_3","val":"","rows":2},{"id":"f65_6_4","val":"","rows":2}],[{"id":"f65_7_0","val":"","rows":2},{"id":"f65_7_1","val":"","rows":2},{"id":"f65_7_2","val":"","rows":2},{"id":"f65_7_3","val":"","rows":2},{"id":"f65_7_4","val":"","rows":2}]]},{"k":"h2","text":"Requests of other people"},{"k":"p","text":"Ask the person. Write Agreed only after they say yes. If they are not in the room, it stays Pending."},{"k":"grid","id":"f68","head":["I need from (person)","What, specifically","By when","Agreed or Pending"],"rows":[[{"id":"f68_0_0","val":"Melo","rows":1},{"id":"f68_0_1","val":"Generosity teaching plan; staffing decisions and timing; coverage delegations","rows":1},{"id":"f68_0_2","val":"","rows":2},{"id":"f68_0_3","val":"Pending","rows":1}],[{"id":"f68_1_0","val":"Elders","rows":1},{"id":"f68_1_1","val":"Budget approval timeline; reserve policy; year-end sustainability review","rows":1},{"id":"f68_1_2","val":"","rows":2},{"id":"f68_1_3","val":"Pending","rows":1}],[{"id":"f68_2_0","val":"Crystal","rows":1},{"id":"f68_2_1","val":"Scorecard compiled by each review date; facility cost inputs","rows":1},{"id":"f68_2_2","val":"","rows":2},{"id":"f68_2_3","val":"Pending","rows":1}],[{"id":"f68_3_0","val":"Bre","rows":1},{"id":"f68_3_1","val":"Generosity and year-end communication from agreed facts","rows":1},{"id":"f68_3_2","val":"","rows":2},{"id":"f68_3_3","val":"Pending","rows":1}],[{"id":"f68_4_0","val":"Fanancy","rows":1},{"id":"f68_4_1","val":"Hours and scope agreed; her candidate projects reviewed and one assigned with a written brief","rows":1},{"id":"f68_4_2","val":"","rows":2},{"id":"f68_4_3","val":"Pending","rows":1}],[{"id":"f68_5_0","val":"","rows":2},{"id":"f68_5_1","val":"","rows":2},{"id":"f68_5_2","val":"","rows":2},{"id":"f68_5_3","val":"","rows":2}],[{"id":"f68_6_0","val":"","rows":2},{"id":"f68_6_1","val":"","rows":2},{"id":"f68_6_2","val":"","rows":2},{"id":"f68_6_3","val":"","rows":2}]]},{"k":"h2","text":"Keep, change, stop"},{"k":"p","text":"What this ministry currently does. Stopping or simplifying something is a legitimate 2027 action; it protects the work that matters most."},{"k":"grid","id":"f71","head":["Keep as is","Change (and how)","Stop or pause (and why)"],"rows":[[{"id":"f71_0_0","val":"","rows":7},{"id":"f71_0_1","val":"","rows":7},{"id":"f71_0_2","val":"","rows":7}]]}]},{"id":"p4","label":"Thursday","eyebrow":"THURSDAY, OCTOBER 8 | FINAL COMPLETION","blocks":[{"k":"h1","text":"Operations and Finance plan: 2027 draft"},{"k":"p","text":"Finish the plan from yesterday's feedback, complete this summary, and submit the workbook to Chip. We finish and close early."},{"k":"brief","rows":[{"k":"Do this","v":"Work in yesterday's feedback, fill any gap you left open, and write this summary from your Tuesday and Wednesday pages."},{"k":"Time","v":"Most of the morning; Melo and Chip circulate for final questions."},{"k":"You finish with","v":"This summary completed and the full workbook handed to Chip before you leave. Status: DRAFT for Melo and Chip review."}]},{"k":"kv","title":"","lead":"","rows":[{"k":"Ministry and plan preparer","v":"Operations and Finance  |  Chip"},{"k":"Accountable owner in 2027","v":"Chip (Operations and Finance); accountable to Melo and the elders"},{"k":"Status","v":"DRAFT. Melo and Chip review and approve after the week (Oct 9 to 16, 2026)."}]},{"k":"field","id":"f78","label":"Purpose and contribution to the vision","hint":"Why Operations and Finance exists at One Family, whom it serves, and which goals it moves. Two or three sentences.","rows":4},{"k":"h2","text":"Outcomes (final wording)"},{"k":"grid","id":"f80","head":["Outcome (by date, who, observable result)","Evidence","Owner"],"rows":[[{"id":"f80_0_0","val":"","rows":3},{"id":"f80_0_1","val":"","rows":3},{"id":"f80_0_2","val":"","rows":3}],[{"id":"f80_1_0","val":"","rows":3},{"id":"f80_1_1","val":"","rows":3},{"id":"f80_1_2","val":"","rows":3}],[{"id":"f80_2_0","val":"","rows":3},{"id":"f80_2_1","val":"","rows":3},{"id":"f80_2_2","val":"","rows":3}]]},{"k":"h2","text":"First quarter: actions and deadlines"},{"k":"p","text":"Include what must be ready before January 1. Actions, not intentions. One owner each."},{"k":"grid","id":"f83","head":["When","Action","Owner","Depends on"],"rows":[[{"id":"f83_0_0","val":"Before Jan 1","rows":1},{"id":"f83_0_1","val":"","rows":2},{"id":"f83_0_2","val":"","rows":2},{"id":"f83_0_3","val":"","rows":2}],[{"id":"f83_1_0","val":"","rows":2},{"id":"f83_1_1","val":"","rows":2},{"id":"f83_1_2","val":"","rows":2},{"id":"f83_1_3","val":"","rows":2}],[{"id":"f83_2_0","val":"","rows":2},{"id":"f83_2_1","val":"","rows":2},{"id":"f83_2_2","val":"","rows":2},{"id":"f83_2_3","val":"","rows":2}],[{"id":"f83_3_0","val":"","rows":2},{"id":"f83_3_1","val":"","rows":2},{"id":"f83_3_2","val":"","rows":2},{"id":"f83_3_3","val":"","rows":2}],[{"id":"f83_4_0","val":"","rows":2},{"id":"f83_4_1","val":"","rows":2},{"id":"f83_4_2","val":"","rows":2},{"id":"f83_4_3","val":"","rows":2}]]},{"k":"h2","text":"Annual milestones"},{"k":"grid","id":"f85","head":["By","What will be true"],"rows":[[{"id":"f85_0_0","val":"Mar 31 (Q1)","rows":1},{"id":"f85_0_1","val":"","rows":2}],[{"id":"f85_1_0","val":"Jun 30 (Q2)","rows":1},{"id":"f85_1_1","val":"","rows":2}],[{"id":"f85_2_0","val":"Sep 30 (Q3)","rows":1},{"id":"f85_2_1","val":"","rows":2}],[{"id":"f85_3_0","val":"Dec 31 (Q4)","rows":1},{"id":"f85_3_1","val":"","rows":2}]]},{"k":"h2","text":"Decisions requiring approval"},{"k":"p","text":"Anything that needs a yes from Melo or Chip: your ministry budget, staffing, a policy question, a new event, a date change to a settled item."},{"k":"grid","id":"f88","head":["Decision needed","Approver","Needed by","Register ref"],"rows":[[{"id":"f88_0_0","val":"","rows":2},{"id":"f88_0_1","val":"","rows":2},{"id":"f88_0_2","val":"","rows":2},{"id":"f88_0_3","val":"","rows":2}],[{"id":"f88_1_0","val":"","rows":2},{"id":"f88_1_1","val":"","rows":2},{"id":"f88_1_2","val":"","rows":2},{"id":"f88_1_3","val":"","rows":2}],[{"id":"f88_2_0","val":"","rows":2},{"id":"f88_2_1","val":"","rows":2},{"id":"f88_2_2","val":"","rows":2},{"id":"f88_2_3","val":"","rows":2}]]},{"k":"field","id":"f90","label":"What we will not add or continue in 2027, to protect this plan","hint":"","rows":2},{"k":"field","id":"f92","label":"First review: date and what we will look at","hint":"Monthly scorecard reviews happen in the Tuesday staff meeting (Jan 12 first). Name the evidence you will bring.","rows":2},{"k":"callout","title":"Where the rest lives","body":["The budget proposal, people and coverage, calendar proposals and requests are on the Wednesday page. Outcome detail (baselines and sources) is on the Tuesday cards. Do not copy them here; Chip consolidates from the whole workbook."]}]},{"id":"p5","label":"Appendix","eyebrow":"APPENDIX | LEADERSHIP COPY","blocks":[{"k":"h1","text":"Integrating everyone's plans"},{"k":"p","text":"Use during the week and on Friday, October 9. Fill from the submitted workbooks. Nothing here is shared with the team until Melo approves."},{"k":"h3","text":"Requests across plans"},{"k":"p","text":"Every request written on a Wednesday page, in one place. Conflicts show up as the same person asked for the same weeks by three plans."},{"k":"grid","id":"f99","head":["Requested of","Requested by (plan)","What","By when","Agreed / Pending","Conflict?"],"rows":[[{"id":"f99_0_0","val":"","rows":2},{"id":"f99_0_1","val":"","rows":2},{"id":"f99_0_2","val":"","rows":2},{"id":"f99_0_3","val":"","rows":2},{"id":"f99_0_4","val":"","rows":2},{"id":"f99_0_5","val":"","rows":2}],[{"id":"f99_1_0","val":"","rows":2},{"id":"f99_1_1","val":"","rows":2},{"id":"f99_1_2","val":"","rows":2},{"id":"f99_1_3","val":"","rows":2},{"id":"f99_1_4","val":"","rows":2},{"id":"f99_1_5","val":"","rows":2}],[{"id":"f99_2_0","val":"","rows":2},{"id":"f99_2_1","val":"","rows":2},{"id":"f99_2_2","val":"","rows":2},{"id":"f99_2_3","val":"","rows":2},{"id":"f99_2_4","val":"","rows":2},{"id":"f99_2_5","val":"","rows":2}],[{"id":"f99_3_0","val":"","rows":2},{"id":"f99_3_1","val":"","rows":2},{"id":"f99_3_2","val":"","rows":2},{"id":"f99_3_3","val":"","rows":2},{"id":"f99_3_4","val":"","rows":2},{"id":"f99_3_5","val":"","rows":2}],[{"id":"f99_4_0","val":"","rows":2},{"id":"f99_4_1","val":"","rows":2},{"id":"f99_4_2","val":"","rows":2},{"id":"f99_4_3","val":"","rows":2},{"id":"f99_4_4","val":"","rows":2},{"id":"f99_4_5","val":"","rows":2}],[{"id":"f99_5_0","val":"","rows":2},{"id":"f99_5_1","val":"","rows":2},{"id":"f99_5_2","val":"","rows":2},{"id":"f99_5_3","val":"","rows":2},{"id":"f99_5_4","val":"","rows":2},{"id":"f99_5_5","val":"","rows":2}],[{"id":"f99_6_0","val":"","rows":2},{"id":"f99_6_1","val":"","rows":2},{"id":"f99_6_2","val":"","rows":2},{"id":"f99_6_3","val":"","rows":2},{"id":"f99_6_4","val":"","rows":2},{"id":"f99_6_5","val":"","rows":2}],[{"id":"f99_7_0","val":"","rows":2},{"id":"f99_7_1","val":"","rows":2},{"id":"f99_7_2","val":"","rows":2},{"id":"f99_7_3","val":"","rows":2},{"id":"f99_7_4","val":"","rows":2},{"id":"f99_7_5","val":"","rows":2}]]},{"k":"h3","text":"Budget proposals across plans"},{"k":"p","text":"Shared needs counted once. Mark each: fund, defer, decline, needs more information."},{"k":"grid","id":"f102","head":["Plan","What it needs","Estimate","Basis","Recurring or one-time","Decision"],"rows":[[{"id":"f102_0_0","val":"","rows":2},{"id":"f102_0_1","val":"","rows":2},{"id":"f102_0_2","val":"","rows":2},{"id":"f102_0_3","val":"","rows":2},{"id":"f102_0_4","val":"","rows":2},{"id":"f102_0_5","val":"","rows":2}],[{"id":"f102_1_0","val":"","rows":2},{"id":"f102_1_1","val":"","rows":2},{"id":"f102_1_2","val":"","rows":2},{"id":"f102_1_3","val":"","rows":2},{"id":"f102_1_4","val":"","rows":2},{"id":"f102_1_5","val":"","rows":2}],[{"id":"f102_2_0","val":"","rows":2},{"id":"f102_2_1","val":"","rows":2},{"id":"f102_2_2","val":"","rows":2},{"id":"f102_2_3","val":"","rows":2},{"id":"f102_2_4","val":"","rows":2},{"id":"f102_2_5","val":"","rows":2}],[{"id":"f102_3_0","val":"","rows":2},{"id":"f102_3_1","val":"","rows":2},{"id":"f102_3_2","val":"","rows":2},{"id":"f102_3_3","val":"","rows":2},{"id":"f102_3_4","val":"","rows":2},{"id":"f102_3_5","val":"","rows":2}],[{"id":"f102_4_0","val":"","rows":2},{"id":"f102_4_1","val":"","rows":2},{"id":"f102_4_2","val":"","rows":2},{"id":"f102_4_3","val":"","rows":2},{"id":"f102_4_4","val":"","rows":2},{"id":"f102_4_5","val":"","rows":2}],[{"id":"f102_5_0","val":"","rows":2},{"id":"f102_5_1","val":"","rows":2},{"id":"f102_5_2","val":"","rows":2},{"id":"f102_5_3","val":"","rows":2},{"id":"f102_5_4","val":"","rows":2},{"id":"f102_5_5","val":"","rows":2}],[{"id":"f102_6_0","val":"","rows":2},{"id":"f102_6_1","val":"","rows":2},{"id":"f102_6_2","val":"","rows":2},{"id":"f102_6_3","val":"","rows":2},{"id":"f102_6_4","val":"","rows":2},{"id":"f102_6_5","val":"","rows":2}],[{"id":"f102_7_0","val":"","rows":2},{"id":"f102_7_1","val":"","rows":2},{"id":"f102_7_2","val":"","rows":2},{"id":"f102_7_3","val":"","rows":2},{"id":"f102_7_4","val":"","rows":2},{"id":"f102_7_5","val":"","rows":2}]]},{"k":"h3","text":"Workload check"},{"k":"p","text":"For each person: proposed new commitments across all plans, on top of current load. If the answer is \"everything,\" the plans are not yet realistic."},{"k":"grid","id":"f105","head":["Person","Current load (from prework)","New commitments proposed across plans","Realistic? What must give?"],"rows":[[{"id":"f105_0_0","val":"Melo","rows":1},{"id":"f105_0_1","val":"","rows":2},{"id":"f105_0_2","val":"","rows":2},{"id":"f105_0_3","val":"","rows":2}],[{"id":"f105_1_0","val":"Chip","rows":1},{"id":"f105_1_1","val":"","rows":2},{"id":"f105_1_2","val":"","rows":2},{"id":"f105_1_3","val":"","rows":2}],[{"id":"f105_2_0","val":"Brittney","rows":1},{"id":"f105_2_1","val":"","rows":2},{"id":"f105_2_2","val":"","rows":2},{"id":"f105_2_3","val":"","rows":2}],[{"id":"f105_3_0","val":"Nicole","rows":1},{"id":"f105_3_1","val":"","rows":2},{"id":"f105_3_2","val":"","rows":2},{"id":"f105_3_3","val":"","rows":2}],[{"id":"f105_4_0","val":"Bre","rows":1},{"id":"f105_4_1","val":"","rows":2},{"id":"f105_4_2","val":"","rows":2},{"id":"f105_4_3","val":"","rows":2}],[{"id":"f105_5_0","val":"Crystal","rows":1},{"id":"f105_5_1","val":"","rows":2},{"id":"f105_5_2","val":"","rows":2},{"id":"f105_5_3","val":"","rows":2}],[{"id":"f105_6_0","val":"Fanancy (bounded)","rows":1},{"id":"f105_6_1","val":"","rows":2},{"id":"f105_6_2","val":"","rows":2},{"id":"f105_6_3","val":"","rows":2}],[{"id":"f105_7_0","val":"Volunteers (core group)","rows":1},{"id":"f105_7_1","val":"","rows":2},{"id":"f105_7_2","val":"","rows":2},{"id":"f105_7_3","val":"","rows":2}]]}]}]};
+  static PW = {"own":"a22d5173","leader":"ac3adfdf"};
+  state = { a: {}, t: 0, active: 'p0', msg: '', unlocked: false, pw: '', pwErr: false, sync: 'local', syncAt: null };
+  syncUrl = '';
+  token() { try { const own = localStorage.getItem('ofc-unlock-' + this.D.key), ld = localStorage.getItem('ofc-unlock-leader'); return this.okHash(own) ? own : ld; } catch (e) { return ''; } }
+  initSync() {
+    fetch('sync-config.json', { cache: 'no-store' }).then(r => r.json()).then(j => { this.syncUrl = (j && j.url) || ''; if (this.syncUrl) { this.setState({ sync: 'loading' }); if (this.state.unlocked) this.pull(); } }).catch(() => {});
+  }
+  pull() {
+    if (!this.syncUrl) return;
+    this.setState({ sync: 'loading' });
+    fetch(this.syncUrl + '?key=' + encodeURIComponent(this.D.key) + '&token=' + encodeURIComponent(this.token()))
+      .then(r => r.json()).then(res => {
+        if (!res.ok) return this.setState({ sync: 'error' });
+        const d = res.data;
+        if (d && d.answers && (d.t || 0) > (this.state.t || 0)) this.setState({ a: d.answers, t: d.t, sync: 'saved', syncAt: new Date(d.t) }, () => this.saveLocal());
+        else { this.setState({ sync: 'saved', syncAt: d ? new Date(d.t) : this.state.syncAt }); if (!d || (this.state.t || 0) > (d.t || 0)) this.push(); }
+      }).catch(() => this.setState({ sync: 'error' }));
+  }
+  push() {
+    if (!this.syncUrl || !this.state.unlocked) return;
+    clearTimeout(this.pushTimer);
+    this.pushTimer = setTimeout(() => {
+      const t = this.state.t || Date.now();
+      this.setState({ sync: 'saving' });
+      fetch(this.syncUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ key: this.D.key, token: this.token(), t, payload: { ...this.buildExport(), t } }) })
+        .then(r => r.json()).then(res => { if (!res.ok) return this.setState({ sync: 'error' }); if (res.stale) return this.pull(); this.setState({ sync: 'saved', syncAt: new Date(t) }); })
+        .catch(() => this.setState({ sync: 'error' }));
+    }, 1200);
+  }
+  saveLocal() { try { localStorage.setItem(this.LS, JSON.stringify({ a: this.state.a, t: this.state.t })); } catch (e) {} }
+  hash(s) { let x = 0x811c9dc5; s = String(s).trim().toLowerCase(); for (let i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(16); }
+  okHash(h) { return h === this.constructor.PW.own || h === this.constructor.PW.leader; }
+  fileRef = React.createRef();
+  get D() { return this.constructor.DATA; }
+  get LS() { return 'ofc-wb-' + this.D.key; }
+  componentDidMount() {
+    try { if (this.okHash(localStorage.getItem('ofc-unlock-' + this.D.key)) || this.okHash(localStorage.getItem('ofc-unlock-leader'))) this.setState({ unlocked: true }); } catch (e) {}
+    try { const s = JSON.parse(localStorage.getItem(this.LS) || 'null'); if (s && s.a) this.setState({ a: s.a, t: s.t || 0 }); } catch (e) {}
+    this.initSync();
+    this.onScroll = () => {
+      let cur = 'p0';
+      for (const p of this.D.parts) { const el = document.getElementById(p.id); if (el && el.getBoundingClientRect().top < 140) cur = p.id; }
+      if (cur !== this.state.active) this.setState({ active: cur });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); clearTimeout(this.pushTimer); }
+  save() { this.setState({ t: Date.now() }, () => { this.saveLocal(); this.push(); }); }
+  set(id, v) { this.setState(s => ({ a: { ...s.a, [id]: v } }), () => this.save()); }
+  val(id, def) { const v = this.state.a[id]; return v === undefined ? (def || '') : v; }
+  gridRows(b) {
+    const n = b.head.length, extra = Number(this.state.a[b.id + '__n'] || 0);
+    const rows = b.rows.slice();
+    for (let x = 0; x < extra; x++) rows.push(Array.from({ length: n }, (_, ci) => ({ id: b.id + '_x' + x + '_' + ci, val: '', rows: 1 })));
+    return rows;
+  }
+  setExtra(b, d) {
+    const cur = Number(this.state.a[b.id + '__n'] || 0), next = Math.max(0, cur + d);
+    this.setState(s => { const a = { ...s.a, [b.id + '__n']: String(next) }; if (d < 0) for (let ci = 0; ci < b.head.length; ci++) delete a[b.id + '_x' + next + '_' + ci]; return { a }; }, () => this.save());
+  }
+  editables() {
+    const out = [];
+    this.D.parts.forEach(p => p.blocks.forEach(b => {
+      if (b.k === 'field') out.push([b.id, '']);
+      if (b.k === 'outcome') b.rows.forEach(r => out.push([r.id, '']));
+      if (b.k === 'grid') this.gridRows(b).forEach(r => r.forEach(c => { if (c.id) out.push([c.id, c.val]); }));
+    }));
+    return out;
+  }
+  buildExport() {
+    const D = this.D;
+    const sections = [];
+    D.parts.forEach(p => {
+      let h = '';
+      const items = [];
+      p.blocks.forEach(b => {
+        if (b.k === 'h1' || b.k === 'h2' || b.k === 'h3') h = b.text;
+        if (b.k === 'field') items.push({ t: 'f', label: b.label || h, value: this.val(b.id) });
+        if (b.k === 'outcome') items.push({ t: 'o', label: b.title, rows: b.rows.map(r => [r.label, this.val(r.id)]) });
+        if (b.k === 'grid' && b.rows.some(r => r.some(c => c.id))) items.push({ t: 'g', label: h, head: b.head, rows: this.gridRows(b).map(r => r.map(c => c.id ? this.val(c.id, c.val) : c.text)) });
+      });
+      if (items.length) sections.push({ label: p.label, eyebrow: p.eyebrow, items });
+    });
+    return { v: 1, key: D.key, person: D.person, ministry: D.ministry, title: D.hero.title, savedAt: new Date().toISOString(), answers: this.state.a, sections };
+  }
+  docHtml(ex) {
+    const e = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+    const ans = v => v && String(v).trim() ? '<p class="a">' + e(v) + '</p>' : '<p class="a e">Not answered</p>';
+    let body = '';
+    ex.sections.forEach(s => {
+      body += '<h2>' + e(s.eyebrow || s.label) + '</h2>';
+      s.items.forEach(it => {
+        if (it.t === 'f') body += '<p class="q">' + e(it.label) + '</p>' + ans(it.value);
+        if (it.t === 'o') { body += '<p class="q">' + e(it.label) + '</p><table>'; it.rows.forEach(r => { body += '<tr><th style="width:30%">' + e(r[0]) + '</th><td>' + e(r[1]) + '</td></tr>'; }); body += '</table>'; }
+        if (it.t === 'g') { body += '<p class="q">' + e(it.label) + '</p><table><tr>' + it.head.map(x => '<th>' + e(x) + '</th>').join('') + '</tr>' + it.rows.map(r => '<tr>' + r.map(c => '<td>' + e(c) + '</td>').join('') + '</tr>').join('') + '</table>'; }
+      });
+    });
+    const json = JSON.stringify(ex).replace(/</g, '\\u003c');
+    const TAG = 'scr' + 'ipt';
+    return '<html><head><meta charset="utf-8"><title>' + e(ex.ministry) + ' workbook</title><style>body{font-family:Arial,sans-serif;color:#141412;font-size:11pt;line-height:1.45}h1{font-size:24pt;margin:0 0 4pt}h2{font-size:13pt;color:#7E5414;border-bottom:1.5pt solid #D9A441;padding-bottom:3pt;margin:24pt 0 6pt;text-transform:uppercase;letter-spacing:1pt}.k{font-size:9pt;letter-spacing:1.5pt;color:#7E5414;text-transform:uppercase}.q{font-weight:bold;margin:12pt 0 3pt}.a{margin:0 0 6pt}.e{color:#8F897D;font-style:italic}table{border-collapse:collapse;width:100%;margin:4pt 0 8pt}td,th{border:1px solid #CFC9BC;padding:4pt 6pt;vertical-align:top;font-size:10pt;text-align:left}th{background:#EFEADF}</style></head><body><p class="k">One Family Church · Deeper 2027 · Draft workbook</p><h1>' + e(ex.title) + '</h1><p>' + e(ex.person) + ' · Saved ' + e(new Date(ex.savedAt).toLocaleString()) + '</p>' + body + '<' + TAG + ' type="application/json" id="ofc-workbook">' + json + '</' + TAG + '></body></html>';
+  }
+  download() {
+    const ex = this.buildExport();
+    const blob = new Blob(['\ufeff', this.docHtml(ex)], { type: 'application/msword' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'OFC ' + this.D.ministry + ' Workbook - ' + this.D.person + '.doc';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    this.setState({ msg: 'Downloaded. Send the file to Chip.' });
+  }
+  onFile(ev) {
+    const f = ev.target.files && ev.target.files[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      const TAG = 'scr' + 'ipt';
+      const m = String(r.result).match(new RegExp('<' + TAG + ' type="application/json" id="ofc-workbook">([\\s\\S]*?)</' + TAG + '>'));
+      let ex = null;
+      try { ex = m && JSON.parse(m[1]); } catch (e) {}
+      if (!ex || !ex.answers) return this.setState({ msg: 'That file is not a saved workbook.' });
+      if (ex.key !== this.D.key) return this.setState({ msg: 'That file belongs to a different workbook.' });
+      this.setState({ a: ex.answers, msg: 'Loaded your saved answers.' }, () => this.save());
+    };
+    r.readAsText(f);
+    ev.target.value = '';
+  }
+  renderVals() {
+    const D = this.D;
+    const seen = {};
+    const parts = D.parts.map((p, pi) => {
+      let label = p.label;
+      if (seen[label]) label = label + ' (cont.)';
+      seen[p.label] = 1;
+      const blocks = p.blocks.map(b => {
+        const o = { ...b, isH1: b.k === 'h1', isH2: b.k === 'h2', isH3: b.k === 'h3', isP: b.k === 'p', isUl: b.k === 'ul', isBrief: b.k === 'brief', isKv: b.k === 'kv', isCallout: b.k === 'callout', isExample: b.k === 'example', isField: b.k === 'field', isOutcome: b.k === 'outcome', isGrid: b.k === 'grid' };
+        if (b.k === 'kv') o.hasTitle = !!b.title;
+        if (b.k === 'callout') o.title = b.title || 'Note';
+        if (b.k === 'field') { o.value = this.val(b.id); o.onChange = e => this.set(b.id, e.target.value); }
+        if (b.k === 'outcome') o.rows = b.rows.map(r => ({ ...r, value: this.val(r.id), onChange: e => this.set(r.id, e.target.value) }));
+        if (b.k === 'grid') {
+          const n = b.head.length;
+          o.cols = n <= 2 ? 'minmax(140px,1fr) minmax(0,2fr)' : 'repeat(' + n + ',minmax(0,1fr))';
+          o.minW = (n * 150) + 'px';
+          o.canAdd = b.rows.some(r => r.some(c => c.id));
+          o.hasExtra = Number(this.state.a[b.id + '__n'] || 0) > 0;
+          o.addRow = () => this.setExtra(b, 1);
+          o.removeRow = () => this.setExtra(b, -1);
+          o.rows = this.gridRows(b).map(r => r.map((c, ci) => c.id
+            ? { edit: true, ro: false, value: this.val(c.id, c.val), rows: Math.min(c.rows, 6), ph: b.head[ci], onChange: e => this.set(c.id, e.target.value) }
+            : { edit: false, ro: true, text: c.text, color: ci === 0 ? '#141412' : '#2E2C28', weight: ci === 0 ? 700 : 400 }));
+        }
+        return o;
+      });
+      return { id: p.id, label, eyebrow: p.eyebrow, blocks, bg: pi % 2 ? '#FAF7F0' : '#F3EFE6' };
+    });
+    const nav = parts.map(p => { const on = this.state.active === p.id; return { href: '#' + p.id, label: p.label, color: on ? '#D9A441' : '#CFC9BC', line: on ? '#D9A441' : 'transparent' }; });
+    const eds = this.editables();
+    const filled = eds.filter(([id, def]) => { const v = this.state.a[id]; return v !== undefined && v.trim() && v !== def; }).length;
+    return {
+      hero: D.hero, parts, nav,
+      progress: filled + ' / ' + eds.length,
+      pct: Math.round(filled / Math.max(1, eds.length) * 100) + '%',
+      footer: D.ministry + ' workbook (' + D.person + ')',
+      download: () => this.download(),
+      pickFile: () => this.fileRef.current && this.fileRef.current.click(),
+      fileRef: this.fileRef,
+      onFile: e => this.onFile(e),
+      msg: this.state.msg, hasMsg: !!this.state.msg,
+      unlocked: this.state.unlocked, locked: !this.state.unlocked,
+      syncLabel: ({ local: 'On this device', loading: 'Loading…', saving: 'Saving…', saved: 'Saved' + (this.state.syncAt ? ' ' + this.state.syncAt.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : ''), error: 'Offline · saved on device' })[this.state.sync],
+      syncColor: this.state.sync === 'error' ? '#F2A9A6' : this.state.sync === 'saved' ? '#E6BE6E' : '#A8A398',
+      saveCopy: this.state.sync === 'local' ? 'Your answers save on this device as you type. When you finish, download the workbook and send the file to Chip.' : 'Your answers save to the church account as you type, so you can pick up on any device with your password. When you finish, download the workbook and send the file to Chip.',
+      pwVal: this.state.pw, hasPwErr: this.state.pwErr,
+      onPw: e => this.setState({ pw: e.target.value, pwErr: false }),
+      submitPw: e => { e.preventDefault(); const h = this.hash(this.state.pw); if (this.okHash(h)) { try { localStorage.setItem(h === this.constructor.PW.leader ? 'ofc-unlock-leader' : 'ofc-unlock-' + this.D.key, h); } catch (x) {} this.setState({ unlocked: true, pw: '' }, () => this.pull()); } else this.setState({ pwErr: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

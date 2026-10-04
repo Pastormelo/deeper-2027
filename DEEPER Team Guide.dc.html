@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F3EFE6;color:#141412;font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#9C6B1E;text-decoration:none}
+a:hover{color:#7E5414}
+*{box-sizing:border-box}
+input,textarea{font:inherit}
+input:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(217,164,65,0.45)}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F3EFE6">
+
+<header style="background:#141412;color:#F3EFE6;position:relative;overflow:hidden">
+  <div style="max-width:1040px;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px) clamp(48px,8vw,88px)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#A8A398">2027 Planning Week</div>
+    </div>
+    <div style="margin-top:clamp(48px,9vw,96px);position:relative;width:200px;height:100px"><div style="position:absolute;top:0;left:0px;width:200px;height:100px;box-sizing:border-box;border:5px solid #F3EFE6;border-top:none;border-radius:0 0 50% 50% / 0 0 100% 100%"></div><div style="position:absolute;top:0;left:15px;width:170px;height:85px;box-sizing:border-box;border:5px solid #F3EFE6;border-top:none;border-radius:0 0 50% 50% / 0 0 100% 100%"></div><div style="position:absolute;top:0;left:30px;width:140px;height:70px;box-sizing:border-box;border:5px solid #F3EFE6;border-top:none;border-radius:0 0 50% 50% / 0 0 100% 100%"></div><div style="position:absolute;top:0;left:45px;width:110px;height:55px;box-sizing:border-box;border:5px solid #F3EFE6;border-top:none;border-radius:0 0 50% 50% / 0 0 100% 100%"></div><div style="position:absolute;top:0;left:56px;width:88px;height:44px;background:#D9A441;border-radius:0 0 50% 50% / 0 0 100% 100%"></div><div style="position:absolute;top:0;left:-12px;width:224px;height:6px;background:#F3EFE6"></div></div>
+    <div style="margin-top:40px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E;line-height:1.6">SHARED DIRECTION | 2027</div>
+    <h1 style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(52px,13vw,150px);line-height:0.9;letter-spacing:0.02em;color:#F3EFE6;font-stretch:125%">DEEPER</h1>
+    <p style="margin:24px 0 0;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.5;color:#CFC9BC;text-wrap:pretty">Team Guide | One Family Church 2027 ministry planning | October 5 to 8, 2026</p>
+    <div style="margin-top:clamp(40px,7vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14);border-radius:12px;overflow:hidden">
+      <div style="background:#1E1E1B;padding:24px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">Our mission</div>
+        <p style="margin:12px 0 0;font-size:17px;line-height:1.6;color:#F3EFE6">Glorify God and expand His family by making disciples.</p>
+      </div>
+      <div style="background:#1E1E1B;padding:24px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">Our 2027 vision</div>
+        <p style="margin:12px 0 0;font-size:17px;line-height:1.6;color:#F3EFE6"><strong>DEEPER.</strong> Becoming more rooted in Christ so the gospel shapes more of who we are and how we live. In 2027, we will commit ourselves to being formed by God's Word, committed to one another, dependent on the Holy Spirit, and faithful in making disciples.</p>
+      </div>
+      <div style="background:#1E1E1B;padding:24px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">Our posture</div>
+        <p style="margin:12px 0 0;font-size:17px;line-height:1.6;color:#F3EFE6">Do the right things consistently and well. 2027 is an execution year. Consistent and excellent execution serves the formation and care we want the church to experience.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ showNav }}" hint-placeholder-val="{{ true }}">
+<nav style="position:sticky;top:0;z-index:20;background:rgba(20,20,18,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.1)">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(12px,4vw,40px);display:flex;gap:4px;overflow-x:auto;scrollbar-width:none">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="9">
+      <a href="{{ n.href }}" style="flex:none;padding:16px 12px 14px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;color:{{ n.color }};border-bottom:2px solid {{ n.line }}">{{ n.label }}</a>
+    </sc-for>
+  </div>
+</nav>
+</sc-if>
+
+<main>
+<section id="use" style="scroll-margin-top:56px;padding:clamp(56px,8vw,88px) 0">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,5vw,56px);align-items:start">
+    <div>
+      <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(28px,4vw,38px);line-height:1.1;letter-spacing:-0.02em;color:#141412">How to use this guide</h2>
+      <div style="margin-top:24px;display:flex;flex-direction:column;border-top:1px solid #DDD6C8">
+        <sc-for list="{{ howTo }}" as="h" hint-placeholder-count="6">
+          <a href="{{ h.href }}" style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid #DDD6C8;color:#2E2C28">
+            <span style="font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;color:#9C6B1E">{{ h.n }}</span>
+            <span style="font-size:16px;line-height:1.55">{{ h.t }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+    <div style="background:#D9A441;border-radius:16px;padding:clamp(28px,4vw,40px);color:#141412">
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase">What this week produces</div>
+      <p style="margin:16px 0 0;font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,24px);line-height:1.35;text-wrap:pretty">By Thursday, each ministry has a usable draft plan, including the budget that plan would require.</p>
+      <p style="margin:16px 0 0;font-size:17px;line-height:1.6">Leadership will review and approve afterward. Until then, nothing is approved or promised.</p>
+    </div>
+  </div>
+</section>
+
+<section id="wb" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;background:#141412;color:#F3EFE6">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#D9A441">Workbooks | Private</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#F3EFE6;font-stretch:125%">Calendar and workbooks</h2>
+    <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#CFC9BC;text-wrap:pretty">The 2027 calendar uses one team password. Each workbook has its own password, and Chip gives you yours. Your answers save on your device; download the finished file and send it to Chip.</p>
+    <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px">
+      <sc-for list="{{ workbooks }}" as="w" hint-placeholder-count="10">
+        <article style="display:flex;flex-direction:column;background:#1E1E1B;border:1px solid {{ w.line }};border-radius:12px;padding:22px 20px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#E6BE6E">{{ w.who }}</div>
+            <span style="width:10px;height:10px;border-radius:50%;border:2px solid #D9A441;background:{{ w.dot }}"></span>
+          </div>
+          <div style="margin-top:8px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;line-height:1.2;color:#F3EFE6;flex:1">{{ w.name }}</div>
+          <sc-if value="{{ w.closed }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ w.open }}" style="margin-top:18px;align-self:flex-start;padding:10px 14px;border:1.5px solid #D9A441;border-radius:8px;background:transparent;color:#D9A441;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer" style-hover="background:#D9A441;color:#141412">Open ›</button>
+          </sc-if>
+          <sc-if value="{{ w.isOpen }}" hint-placeholder-val="{{ false }}">
+            <form onSubmit="{{ wbSubmit }}" style="margin-top:16px;display:flex;gap:8px">
+              <input type="password" value="{{ wbPw }}" onChange="{{ wbOnPw }}" placeholder="Password" autofocus style="flex:1;min-width:0;padding:10px 12px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:#141412;color:#F3EFE6;font-size:15px">
+              <button type="submit" style="padding:10px 14px;border:none;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;cursor:pointer">Go</button>
+            </form>
+            <sc-if value="{{ wbHasErr }}" hint-placeholder-val="{{ false }}"><div style="margin-top:8px;font-size:14px;color:#F2A9A6">That password does not match.</div></sc-if>
+          </sc-if>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="s1" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;border-top:1px solid #DDD6C8;background:#FAF7F0">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">Section 1 | Reference</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">The vision: DEEPER</h2>
+    <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#5E5A52;text-wrap:pretty">Rooted in Christ, so that the gospel shapes more of who we are and how we live.</p>
+    <div style="margin-top:40px;max-width:720px;display:flex;flex-direction:column;gap:20px;font-size:18px;line-height:1.7;color:#2E2C28">
+      <p style="margin:0;text-wrap:pretty"><span style="font-family:'Archivo',sans-serif;font-weight:700;color:#141412">A tree does not grow taller than its roots can hold. Neither does a church.</span> We have spent years building what people can see: gatherings, teams, a pathway, a building full of ministry. In 2027, we are committing ourselves to what holds all of it up. We want a church of people who are genuinely rooted in Christ, formed by His Word, committed to one another, dependent on the Holy Spirit, and faithful in making disciples.</p>
+      <p style="margin:0;text-wrap:pretty">This is what makes reaching our city sustainable. Shallow roots produce fast growth and quick collapse. Deep roots produce fruit that lasts, in people who keep loving and serving long after the excitement passes.</p>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">What Deeper means, and what it does not</h3>
+    <div style="border:1px solid #DDD6C8;border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:#141412;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase">
+        <div style="padding:14px 20px;color:#D9A441">Deeper is</div>
+        <div style="padding:14px 20px;color:#A8A398;border-left:1px solid rgba(255,255,255,0.14)">Deeper is not</div>
+      </div>
+      <sc-for list="{{ isNot }}" as="r" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #DDD6C8;font-size:16px;line-height:1.55">
+          <div style="padding:18px 20px;color:#141412;font-weight:600">{{ r.is }}</div>
+          <div style="padding:18px 20px;color:#5E5A52;background:#EFEADF;border-left:1px solid #DDD6C8">{{ r.not }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 8px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">The three introduction messages</h3>
+    <p style="margin:0;max-width:720px;font-size:17px;line-height:1.65;color:#2E2C28;text-wrap:pretty">Melo introduces Deeper to the church on Sunday, January 10, our fifth anniversary. Three messages define it: what depth is, where it comes from, and what it looks like across a whole life. The rest of the year develops what flows from them.</p>
+    <div style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px">
+      <sc-for list="{{ messages }}" as="m" hint-placeholder-count="3">
+        <article style="display:flex;flex-direction:column;background:#F3EFE6;border:1px solid #DDD6C8;border-radius:12px;padding:28px 24px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#5E5A52">{{ m.date }}</div>
+          <div style="margin-top:8px;font-family:'Archivo',sans-serif;font-weight:900;font-size:32px;letter-spacing:-0.01em;color:#141412;font-stretch:125%">{{ m.title }}</div>
+          <div style="margin-top:4px;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:#9C6B1E">{{ m.ref }}</div>
+          <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#2E2C28;flex:1">{{ m.body }}</p>
+          <div style="margin-top:20px;padding-top:16px;border-top:2px solid #D9A441">
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#9C6B1E">Takeaway</div>
+            <p style="margin:6px 0 0;font-weight:700;font-size:16px;line-height:1.5;color:#141412">{{ m.take }}</p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="s2" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;border-top:1px solid #DDD6C8">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">Section 2 | Reference</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">Three goals and what we measure</h2>
+    <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px">
+      <sc-for list="{{ goals }}" as="g" hint-placeholder-count="3">
+        <article style="background:#FAF7F0;border:1px solid #DDD6C8;border-radius:12px;padding:28px 24px;box-shadow:0 1px 2px rgba(20,20,18,0.04)">
+          <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:48px;line-height:1;color:#D9A441;font-stretch:125%">{{ g.n }}</div>
+          <div style="margin-top:12px;font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.06em;color:#141412">{{ g.name }}</div>
+          <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#2E2C28">{{ g.body }}</p>
+          <div style="margin-top:20px;padding:14px 16px;background:#F1E6CC;border-radius:8px;font-size:15px;line-height:1.55;color:#141412"><strong style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7E5414">Under Deeper: </strong>{{ g.deeper }}</div>
+        </article>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">The settled 2027 targets</h3>
+    <div style="background:#FAF7F0;border:1px solid #DDD6C8;border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 24px;padding:14px 24px;background:#141412;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#A8A398">
+        <div>Target (baseline)</div>
+        <div>How it is counted</div>
+      </div>
+      <sc-for list="{{ targets }}" as="t" hint-placeholder-count="11">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:6px 24px;padding:18px 24px;border-top:1px solid #E8E2D5">
+          <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;line-height:1.45;color:#141412">{{ t.target }}</div>
+          <div style="font-size:15px;line-height:1.55;color:#5E5A52">{{ t.count }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">What stays distinct</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px">
+      <p style="margin:0;padding:20px;border-top:3px solid #141412;background:#FAF7F0;font-size:16px;line-height:1.6;color:#2E2C28">DFT completion, group participation, Formation attendance, and intentional disciple-making are four different measures. Do not add or swap them.</p>
+      <p style="margin:0;padding:20px;border-top:3px solid #141412;background:#FAF7F0;font-size:16px;line-height:1.6;color:#2E2C28">Partner gifts (the December Prince of Peace offering) and mission-trip funds are separate from operating giving.</p>
+      <p style="margin:0;padding:20px;border-top:3px solid #141412;background:#FAF7F0;font-size:16px;line-height:1.6;color:#2E2C28">Examples in workbooks show how to plan toward these targets. They never add a target.</p>
+    </div>
+  </div>
+</section>
+
+<section id="s3" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;border-top:1px solid #DDD6C8;background:#FAF7F0">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">Section 3 | Reference</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">Our discipleship language</h2>
+    <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#5E5A52">The same words in every ministry, so people can find their way.</p>
+    <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+      <div style="background:#141412;border-radius:12px;padding:28px 24px;color:#F3EFE6">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">Discipleship Pathway</div>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px">
+          <span style="padding:8px 14px;border:1.5px solid #D9A441;border-radius:999px;font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase">Gather</span>
+          <span style="padding:8px 14px;border:1.5px solid #D9A441;border-radius:999px;font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase">Grow</span>
+          <span style="padding:8px 14px;border:1.5px solid #D9A441;border-radius:999px;font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase">Serve</span>
+          <span style="padding:8px 14px;border:1.5px solid #D9A441;border-radius:999px;font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase">Share</span>
+        </div>
+      </div>
+      <div style="background:#141412;border-radius:12px;padding:28px 24px;color:#F3EFE6">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">MATURE</div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ mature }}" as="m" hint-placeholder-count="6">
+            <div style="display:flex;gap:12px;align-items:baseline;font-size:16px;line-height:1.4"><span style="width:26px;flex:none;font-family:'Archivo',sans-serif;font-weight:900;font-size:18px;color:#D9A441;font-stretch:125%">{{ m.l }}</span><span>{{ m.t }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+      <div style="border:1px solid #DDD6C8;border-radius:12px;padding:24px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#141412">Sunday gatherings</div>
+        <ul style="margin:12px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:16px;line-height:1.5;color:#2E2C28">
+          <li>Two services (9:09 and 11:11).</li>
+          <li>Monthly Communion.</li>
+          <li>Monthly One Weekend</li>
+          <li>Six Welcome to the Family affirmations of approved members</li>
+          <li>Six baptism opportunities</li>
+          <li>Six baptism Classes</li>
+        </ul>
+      </div>
+      <div style="border:1px solid #DDD6C8;border-radius:12px;padding:24px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#141412">Formation Night</div>
+        <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#2E2C28">Weekly on Wednesday, except when a scheduled Prayer/Worship Gathering replaces it (six in 2027). The primary environment for in-depth biblical and theological instruction, not the exclusive one. No automatic holiday or summer cancellations; coverage is decided explicitly.</p>
+      </div>
+      <div style="border:1px solid #DDD6C8;border-radius:12px;padding:24px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#141412">DFT</div>
+        <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#2E2C28">Disciple Formation Training. Two ten-session rounds inside the Wednesday slot: spring (January 13 to March 17) and fall (August 18 to October 27, skipping the September 15 prayer night). Target: 60 different completers. Completing DFT does not automatically approve someone to lead.</p>
+      </div>
+      <div style="border:1px solid #DDD6C8;border-radius:12px;padding:24px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#141412">Groups</div>
+        <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#2E2C28">One Groups ministry with multiple expressions (below). DNA Groups are the primary intentional disciple-making environment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s3g" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;border-top:1px solid #DDD6C8">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">Section 3 | Continued</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">One Groups ministry, multiple expressions</h2>
+    <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#5E5A52">The five categories are a map, not a mandate. No requirement that every category launches at once.</p>
+    <div style="margin-top:40px;display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+        <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px 32px;background:#FAF7F0;border:1px solid #DDD6C8;border-radius:12px;padding:24px">
+          <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;line-height:1.2;color:#141412">{{ g.name }}</div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#5E5A52">Purpose and normal shape</div>
+            <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#2E2C28">{{ g.purpose }}</p>
+          </div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#5E5A52">Leadership</div>
+            <p style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#2E2C28">{{ g.lead }}</p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">How we lead this well</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px">
+      <p style="margin:0;padding:20px 0;border-top:1px solid #CFC9BC;font-size:16px;line-height:1.6;color:#2E2C28"><strong style="color:#141412">Facilitation is not teaching.</strong> Opening Scripture, encouraging, praying, and guiding conversation differ from functioning as a theological teacher. Substantial teaching needs its own approval.</p>
+      <p style="margin:0;padding:20px 0;border-top:1px solid #CFC9BC;font-size:16px;line-height:1.6;color:#2E2C28"><strong style="color:#141412">We vet the person and the proposal:</strong> character, doctrinal alignment, maturity, reliability, teachability, and responsible spiritual influence.</p>
+      <p style="margin:0;padding:20px 0;border-top:1px solid #CFC9BC;font-size:16px;line-height:1.6;color:#2E2C28"><strong style="color:#141412">Leaders connect people to the church and its recognized shepherds.</strong> They do not cultivate dependency or act as unofficial pastors. "Let me ask a pastor" is a healthy answer.</p>
+      <p style="margin:0;padding:20px 0;border-top:1px solid #CFC9BC;font-size:16px;line-height:1.6;color:#2E2C28"><strong style="color:#141412">We communicate simply:</strong> what is available, whom it serves, what is expected, how to join. No one memorizes five categories or attends every environment.</p>
+    </div>
+  </div>
+</section>
+
+<section id="s3b" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;background:#F1E6CC;border-top:1px solid #E3D1A6">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#7E5414">Section 3b | Reference</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">Our Sunday gathering rhythm</h2>
+    <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#4A463F;text-wrap:pretty">Melo introduces the new order of service on Monday. This page is where the agreed version is written down so every plan is built on the same Sunday.</p>
+    <p style="margin:24px 0 0;max-width:720px;font-size:17px;line-height:1.7;color:#2E2C28;text-wrap:pretty">The elements of a gathering are not decoration. What we do together, and the order we do it in, forms the people who are there. Build your plans around the 2027 rhythm below rather than around how a Sunday ran in 2026, and bring anything significant into your outcomes on Tuesday.</p>
+
+    <div style="margin:48px 0 6px;display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap">
+      <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">The order of service</h3>
+      <span style="font-size:13px;color:#5E5A52">Saved in this browser</span>
+    </div>
+    <p style="margin:0 0 20px;font-size:16px;line-height:1.6;color:#4A463F">Filled in on Monday after Melo walks through it, so every ministry plans against the same Sunday.</p>
+    <div style="background:#FAF7F0;border:1px solid #E3D1A6;border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:0 12px;padding:12px 20px;background:#141412;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#A8A398">
+        <div>Element</div><div>Where it sits in the service</div><div>Who leads it</div><div>What it asks of my ministry</div>
+      </div>
+      <sc-for list="{{ oos }}" as="r" hint-placeholder-count="6">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px 12px;padding:12px 20px;border-top:1px solid #EBDDBA">
+          <input value="{{ r.a }}" onChange="{{ r.onA }}" placeholder="Element" style="width:100%;padding:10px 12px;border:1px solid #DDD6C8;border-radius:6px;background:#EFEADF;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#141412">
+          <input value="{{ r.b }}" onChange="{{ r.onB }}" placeholder="Where it sits" style="width:100%;padding:10px 12px;border:1px solid #DDD6C8;border-radius:6px;background:#EFEADF;font-size:15px;color:#141412">
+          <input value="{{ r.c }}" onChange="{{ r.onC }}" placeholder="Who leads it" style="width:100%;padding:10px 12px;border:1px solid #DDD6C8;border-radius:6px;background:#EFEADF;font-size:15px;color:#141412">
+          <input value="{{ r.d }}" onChange="{{ r.onD }}" placeholder="What it asks of my ministry" style="width:100%;padding:10px 12px;border:1px solid #DDD6C8;border-radius:6px;background:#EFEADF;font-size:15px;color:#141412">
+        </div>
+      </sc-for>
+      <div style="padding:12px 20px;border-top:1px solid #EBDDBA">
+        <button onClick="{{ addRow }}" style="padding:10px 16px;border:1.5px dashed #D9A441;border-radius:8px;background:transparent;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#7E5414;cursor:pointer" style-hover="background:#F1E6CC">+ Add element</button>
+      </div>
+    </div>
+
+    <h3 style="margin:48px 0 6px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">What changes for your area</h3>
+    <p style="margin:0 0 16px;max-width:720px;font-size:16px;line-height:1.6;color:#4A463F">Write this on your Monday page while it is fresh: what the new rhythm changes for what you prepare, when volunteers are needed, what has to be communicated, and anything it makes harder.</p>
+    <textarea value="{{ changes }}" onChange="{{ onChanges }}" rows="5" placeholder="What I prepare · When volunteers are needed · What has to be communicated · What it makes harder" style="width:100%;padding:16px;border:1px solid #E3D1A6;border-radius:12px;background:#FAF7F0;font-size:16px;line-height:1.6;color:#141412;resize:vertical"></textarea>
+  </div>
+</section>
+
+<section id="s4" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;background:#141412;color:#F3EFE6">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#D9A441">Section 4 | The week</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#F3EFE6;text-wrap:balance;font-stretch:125%">Four days, one usable draft per ministry</h2>
+    <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#CFC9BC">October 5 to 8, 2026, Monday to Thursday, 9:00 a.m. to 5:00 p.m. We are planning for 2027.</p>
+
+    <h3 style="margin:56px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#F3EFE6">The progression</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+      <sc-for list="{{ days }}" as="d" hint-placeholder-count="4">
+        <article style="display:flex;flex-direction:column;border-radius:12px;padding:24px 20px;background:{{ d.bg }};color:{{ d.fg }};border:1px solid {{ d.border }}">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:{{ d.sub }}">{{ d.date }}</div>
+            <sc-if value="{{ d.today }}" hint-placeholder-val="{{ false }}"><span style="padding:3px 8px;border-radius:999px;background:#141412;color:#D9A441;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:10px;letter-spacing:0.12em;text-transform:uppercase">Today</span></sc-if>
+          </div>
+          <div style="margin-top:6px;font-family:'Archivo',sans-serif;font-weight:900;font-size:28px;font-stretch:125%">{{ d.day }}</div>
+          <p style="margin:12px 0 0;font-size:15px;line-height:1.55;flex:1">{{ d.focus }}</p>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid {{ d.border }}">
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:{{ d.sub }}">You finish with</div>
+            <p style="margin:6px 0 0;font-size:15px;line-height:1.55;font-weight:600">{{ d.finish }}</p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 12px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#F3EFE6">The daily rhythm</h3>
+    <p style="margin:0;max-width:760px;font-size:16px;line-height:1.7;color:#CFC9BC;text-wrap:pretty">The morning block (9:00 to 12:15) and the closing block (3:45 to 5:00) are the reliable shared windows; collaborative work and decisions affecting several people happen there. The early afternoon is for individual drafting, consultations, and school pickup. Return for the closing block when you can; if you cannot, send Chip a short written update before 3:45. Two days run differently: Wednesday afternoon is when each plan is presented and gets feedback, and Thursday finishes by mid-afternoon.</p>
+    <div style="margin-top:28px;border:1px solid rgba(255,255,255,0.14);border-radius:12px;overflow:hidden">
+      <sc-for list="{{ rhythm }}" as="r" hint-placeholder-count="9">
+        <div style="display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:16px;padding:16px 20px;border-top:1px solid rgba(255,255,255,0.1);background:{{ r.bg }}">
+          <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:14px;line-height:1.4;color:{{ r.tc }}">{{ r.time }}</div>
+          <div style="font-size:15px;line-height:1.55;color:#DDD6C8">{{ r.what }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#F3EFE6">Who is planning what</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px">
+      <sc-for list="{{ people }}" as="p" hint-placeholder-count="8">
+        <article style="background:#1E1E1B;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px">
+          <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:19px;color:#F3EFE6">{{ p.name }}</div>
+          <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:#DDD6C8">{{ p.plan }}</p>
+          <div style="margin-top:14px;font-size:13px;line-height:1.5;color:#A8A398"><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#E6BE6E">Works closely with · </span>{{ p.with }}</div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="s5" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;background:#FAF7F0">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">Section 5 | How to write your plan</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">A plan that can be executed</h2>
+    <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px">
+      <div style="padding:14px 20px;background:#141412;border-radius:999px;font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#F3EFE6">Two good outcomes beat three weak ones.</div>
+      <div style="padding:14px 20px;background:#141412;border-radius:999px;font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:#F3EFE6">Honest uncertainty beats fake certainty.</div>
+    </div>
+
+    <h3 style="margin:56px 0 8px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">Outcome, not activity</h3>
+    <p style="margin:0;max-width:720px;font-size:17px;line-height:1.65;color:#2E2C28;text-wrap:pretty">An outcome is a change for people that you could observe by a date. An activity is something you do to help produce it. Write the outcome first; the activities become the first actions.</p>
+    <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ outcomes }}" as="o" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));border:1px solid #DDD6C8;border-radius:12px;overflow:hidden">
+          <div style="padding:18px 20px;background:#EFEADF">
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7A756B">Activity language</div>
+            <div style="margin-top:6px;font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;color:#5E5A52;text-decoration:line-through;text-decoration-color:#CFC9BC">{{ o.a }}</div>
+          </div>
+          <div style="grid-column:span 2;padding:18px 20px;border-left:3px solid #D9A441">
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#9C6B1E">Outcome language</div>
+            <div style="margin-top:6px;font-size:16px;line-height:1.55;color:#141412">{{ o.o }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">The outcome sentence</h3>
+    <div style="background:#141412;border-radius:16px;padding:clamp(24px,4vw,40px);color:#F3EFE6">
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#D9A441">Pattern</div>
+      <p style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(20px,3vw,30px);line-height:1.35;text-wrap:pretty">By <span style="color:#E6BE6E">[date]</span>, <span style="color:#E6BE6E">[who]</span> will <span style="color:#E6BE6E">[observable result]</span>, so that <span style="color:#E6BE6E">[benefit to people]</span>.</p>
+      <p style="margin:18px 0 0;max-width:760px;font-size:16px;line-height:1.65;color:#CFC9BC">Then add the baseline today (with its source, or "missing: how we will get it"), the evidence you will look at, and the first action with an owner and due date.</p>
+    </div>
+    <div style="margin-top:16px;border:1.5px dashed #A8A398;border-radius:16px;padding:clamp(24px,4vw,36px)">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <span style="padding:4px 10px;border-radius:4px;background:#E8E2D5;font-family:'Archivo',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.14em;color:#4A463F">EXAMPLE</span>
+        <span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#141412">Kids Ministry (illustrative; not a real target)</span>
+      </div>
+      <div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:20px 32px">
+        <sc-for list="{{ example }}" as="e" hint-placeholder-count="4">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#9C6B1E">{{ e.k }}</div>
+            <p style="margin:6px 0 0;font-size:15px;line-height:1.6;color:#2E2C28">{{ e.v }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">Six questions every draft answers</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px">
+      <sc-for list="{{ questions }}" as="q" hint-placeholder-count="6">
+        <div style="display:flex;gap:14px;padding:20px;background:#F3EFE6;border-radius:12px">
+          <span style="flex:none;width:32px;height:32px;border-radius:50%;background:#D9A441;display:flex;align-items:center;justify-content:center;font-family:'Archivo',sans-serif;font-weight:800;font-size:14px;color:#141412">{{ q.n }}</span>
+          <span style="font-family:'Archivo',sans-serif;font-weight:600;font-size:16px;line-height:1.45;color:#141412;padding-top:5px">{{ q.t }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">Requests, costs, and dates</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px">
+      <div style="padding:24px;border:1px solid #DDD6C8;border-radius:12px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#141412">Requests of other teams</div>
+        <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#2E2C28">Name the person, the deliverable and the needed-by date. Ask whether it is realistic. Write Agreed only after they confirm; otherwise Pending. If they are not in the room, it stays pending.</p>
+      </div>
+      <div style="padding:24px;border:1px solid #DDD6C8;border-radius:12px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#141412">Costs</div>
+        <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#2E2C28">Every cost is an estimate with a basis (a quote, last year's actual, unit price times count), marked recurring or one-time. Unknown is written as unknown. "None" is an acceptable answer. Shared costs are counted once and named as shared.</p>
+      </div>
+      <div style="padding:24px;border:1px solid #DDD6C8;border-radius:12px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;color:#141412">Dates</div>
+        <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#2E2C28">Every date you add is PROPOSED until leadership approves it. Check the 2027 calendar for retained dates and their status before proposing.</p>
+      </div>
+    </div>
+
+    <h3 style="margin:64px 0 6px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">What a complete draft contains</h3>
+    <p style="margin:0 0 20px;font-size:16px;color:#5E5A52">Your workbook collects these across the four days.</p>
+    <div style="border:1px solid #DDD6C8;border-radius:12px;overflow:hidden">
+      <sc-for list="{{ draft }}" as="d" hint-placeholder-count="5">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:6px 24px;padding:16px 20px;border-bottom:1px solid #E8E2D5">
+          <div style="font-size:16px;line-height:1.5;color:#141412;font-weight:600">{{ d.el }}</div>
+          <div style="font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;line-height:1.5;color:#9C6B1E">{{ d.where }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="s6" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;border-top:1px solid #DDD6C8">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">Section 6 | After the week</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">From draft to approved action</h2>
+    <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#5E5A52;text-wrap:pretty">The point of the week is action in 2027, not a document. Dates below are the proposed rhythm; Melo and Chip to confirm.</p>
+    <div style="margin-top:40px;position:relative;display:flex;flex-direction:column">
+      <sc-for list="{{ after }}" as="a" hint-placeholder-count="7">
+        <div style="display:grid;grid-template-columns:20px minmax(0,1fr);gap:16px">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <span style="width:14px;height:14px;margin-top:6px;border-radius:50%;background:#D9A441;border:3px solid #EBDDBA;flex:none"></span>
+            <span style="flex:1;width:2px;background:#DDD6C8"></span>
+          </div>
+          <div style="padding-bottom:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:4px 24px">
+            <div>
+              <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:#141412">{{ a.when }}</div>
+              <div style="margin-top:2px;font-size:14px;color:#5E5A52">{{ a.who }}</div>
+            </div>
+            <div style="grid-column:span 2;font-size:16px;line-height:1.55;color:#2E2C28">{{ a.what }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:24px;background:#FAF7F0;border:1px solid #DDD6C8;border-radius:16px;padding:clamp(24px,4vw,36px)">
+      <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">One register, one owner</h3>
+      <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px 32px;font-size:16px;line-height:1.6;color:#2E2C28">
+        <p style="margin:0">Approved actions and open decisions live in the Actions and Decisions tabs of the 2027 calendar workbook.</p>
+        <p style="margin:0">Each entry has an owner, a due or needed-by date, a status, a dependency, the approval reference, and the next step. Chip owns accountability. Fanancy may help keep the record current within her agreed availability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s7" style="scroll-margin-top:56px;padding:clamp(56px,8vw,96px) 0;background:#FAF7F0;border-top:1px solid #DDD6C8">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">Section 7 | Reference</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">Terms we use</h2>
+    <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#5E5A52">The same labels appear in every workbook, the facilitator guide, and both calendar views.</p>
+    <div style="margin-top:40px;display:flex;flex-direction:column;border-top:1px solid #DDD6C8">
+      <sc-for list="{{ labels }}" as="l" hint-placeholder-count="7">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px 24px;padding:20px 0;border-bottom:1px solid #DDD6C8;align-items:start">
+          <div><span style="display:inline-block;padding:6px 10px;border-radius:4px;background:{{ l.bg }};color:{{ l.fg }};font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;letter-spacing:0.12em">{{ l.label }}</span></div>
+          <div style="font-size:15px;line-height:1.55;color:#2E2C28">{{ l.meaning }}</div>
+          <div style="font-size:15px;line-height:1.55;color:#141412;font-weight:700">{{ l.may }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <h3 style="margin:64px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">The 2027 calendar</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+      <div style="padding:24px;background:#F3EFE6;border-radius:12px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#5E5A52">Word reading view</div>
+        <p style="margin:10px 0 0;font-size:16px;line-height:1.6;color:#141412">The Word reading view gives the year at a glance and one readable page per month.</p>
+      </div>
+      <div style="padding:24px;background:#F3EFE6;border-radius:12px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#5E5A52">Excel workbook</div>
+        <p style="margin:10px 0 0;font-size:16px;line-height:1.6;color:#141412">The Excel workbook holds the full operational record: every date with its status and owner, the preaching plan, the Wednesday plan, open decisions, the action register, the Groups framework, and backend items such as facility bookings, etc.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer style="background:#141412;padding:40px 0">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.14em;color:#F3EFE6">DEEPER: <span style="color:#A8A398;font-weight:600;letter-spacing:0.04em">Team Guide (shared)</span></div>
+    <a href="#use" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#D9A441">Back to top ↑</a>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showNav&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;highlightDay&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Auto&quot;,&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Wednesday&quot;,&quot;Thursday&quot;,&quot;None&quot;],&quot;default&quot;:&quot;Auto&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { active: 'use', rows: null, changes: '', wbOpen: null, wbPw: '', wbErr: false };
+  static WB = [
+    ['calendar', 'Everyone', '2027 Calendar', '2027 Calendar', '81bef21f'],
+    ['melo', 'Melo', 'Pastoral Portfolios', 'Workbook - Pastoral Portfolios - Melo', '7d77effa'],
+    ['chip', 'Chip', 'Operations and Finance', 'Workbook - Operations and Finance - Chip', 'a22d5173'],
+    ['brittney', 'Brittney', 'Kids Ministry', 'Workbook - Kids Ministry - Brittney', '6d0a4c36'],
+    ['nicole', 'Nicole', 'Creative', 'Workbook - Creative - Nicole', '4682fe35'],
+    ['connections', 'Brittney and Nicole', 'Connections', 'Workbook - Connections - Brittney and Nicole', 'aa968e03'],
+    ['bre', 'Bre', 'Executive Support and Communications', 'Workbook - Executive Support and Communications - Bre', 'bbacb9d8'],
+    ['crystal', 'Crystal', 'Events and Spaces', 'Workbook - Events and Spaces - Crystal', 'c8ad8b8'],
+    ['fanancy', 'Fanancy', 'Ministry Systems and Strategic Support', 'Workbook - Ministry Systems - Fanancy', 'c9239b9a'],
+    ['students', 'Chip with the future students leader', 'Student Ministry', 'Workbook - Student Ministry - Students Leader', 'f309460e'],
+    ['review', 'Melo and Chip', 'Leader Review', 'Leader Review', 'ac3adfdf']
+  ];
+  hash(s) { let x = 0x811c9dc5; s = String(s).trim().toLowerCase(); for (let i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(16); }
+  wbGo(e) {
+    e.preventDefault();
+    const w = this.constructor.WB.find(x => x[0] === this.state.wbOpen);
+    if (!w) return;
+    const h = this.hash(this.state.wbPw);
+    const leader = 'ac3adfdf';
+    if (h !== w[4] && h !== leader) return this.setState({ wbErr: true });
+    try { localStorage.setItem(h === leader ? 'ofc-unlock-leader' : 'ofc-unlock-' + w[0], h); } catch (x) {}
+    window.location.href = encodeURIComponent(w[3]) + '.dc.html';
+  }
+  componentDidMount() {
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem('ofc-deeper-guide') || '{}'); } catch (e) {}
+    const blank = () => ({ a: '', b: '', c: '', d: '' });
+    this.setState({ rows: saved.rows || Array.from({ length: 6 }, blank), changes: saved.changes || '' });
+    this.onScroll = () => {
+      const ids = ['use','wb','s1','s2','s3','s3g','s3b','s4','s5','s6','s7'];
+      let cur = 'use';
+      for (const id of ids) { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top < 140) cur = id; }
+      if (cur !== this.state.active) this.setState({ active: cur });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); }
+  persist() { try { localStorage.setItem('ofc-deeper-guide', JSON.stringify({ rows: this.state.rows, changes: this.state.changes })); } catch (e) {} }
+  setCell(i, k, v) { this.setState(s => { const rows = s.rows.slice(); rows[i] = { ...rows[i], [k]: v }; return { rows }; }, () => this.persist()); }
+  renderVals() {
+    const navDef = [['use','Start'],['wb','Workbooks'],['s1','Vision'],['s2','Goals'],['s3','Language'],['s3g','Groups'],['s3b','Sunday'],['s4','This Week'],['s5','Your Plan'],['s6','After'],['s7','Terms']];
+    const nav = navDef.map(([id, label]) => { const on = this.state.active === id; return { href: '#' + id, label, color: on ? '#D9A441' : '#CFC9BC', line: on ? '#D9A441' : 'transparent' }; });
+
+    const hd = this.props.highlightDay ?? 'Auto';
+    let todayIdx = -1;
+    if (hd === 'Auto') { const n = new Date(); if (n.getFullYear() === 2026 && n.getMonth() === 9 && n.getDate() >= 5 && n.getDate() <= 8) todayIdx = n.getDate() - 5; }
+    else todayIdx = ['Monday','Tuesday','Wednesday','Thursday'].indexOf(hd);
+    const daysRaw = [
+      ['Monday','Oct 5','Hear the vision and the new order of service. Clarify your assignment and boundaries. Assess current reality from your prework.','Monday page: current picture; the most important problem or opportunity; what the new Sunday rhythm changes for your area.'],
+      ['Tuesday','Oct 6','Choose one to three outcomes. Draft first steps. Consult the people your plan depends on.','Tuesday page: outcomes with baselines, evidence and first actions.'],
+      ['Wednesday','Oct 7','Reconcile calendar, coverage, people and the budget your plan needs. Confirm handoffs. Present the draft in the afternoon and hear feedback.','Wednesday page complete: calendar proposals, people, budget proposal, requests marked agreed or pending, and feedback written on your draft.'],
+      ['Thursday','Oct 8','Finish. Work in the feedback, close the gaps you left open, write the summary, submit. We finish and close early.',"Thursday page: the ministry plan summary, plus the completed workbook in Chip's hands."]
+    ];
+    const days = daysRaw.map(([day, date, focus, finish], i) => { const t = i === todayIdx; return { day, date, focus, finish, today: t, bg: t ? '#D9A441' : '#1E1E1B', fg: t ? '#141412' : '#F3EFE6', sub: t ? '#141412' : '#E6BE6E', border: t ? '#D9A441' : 'rgba(255,255,255,0.12)' }; });
+
+    const rhythmRaw = [
+      ['9:00 to 9:20',"Prayer, Scripture, today's outputs.",1],
+      ['9:20 to 12:15','Shared working block. Vision on Monday; consultations, group decisions, and calendar work on other days.',1],
+      ['12:15 to 1:00','Lunch.',0],
+      ['1:00 to 1:45','Coaching and consultations with Melo or Chip. Individual drafting.',0],
+      ['1:45 to 3:45','Flexible drafting and school pickup window. No group decisions.',0],
+      ['3:45 to 4:40','Closing check-in for everyone back in the room; written updates from anyone still out.',1],
+      ['4:40 to 5:00','Add decisions and requests to the register.',1],
+      ['Wednesday, 1:00 on','Each plan presented in about ten minutes with five minutes of feedback. Write down the two or three changes you will make.',2],
+      ['Thursday','Finish the plan, complete the summary, and hand the workbook to Chip. We close by mid-afternoon.',2]
+    ];
+    const rhythm = rhythmRaw.map(([time, what, k]) => ({ time, what, tc: k === 0 ? '#A8A398' : '#E6BE6E', bg: k === 1 ? 'rgba(217,164,65,0.08)' : k === 2 ? '#1E1E1B' : 'transparent' }));
+
+    const rows = this.state.rows || Array.from({ length: 6 }, () => ({ a: '', b: '', c: '', d: '' }));
+    const oos = rows.map((r, i) => ({ ...r, onA: e => this.setCell(i, 'a', e.target.value), onB: e => this.setCell(i, 'b', e.target.value), onC: e => this.setCell(i, 'c', e.target.value), onD: e => this.setCell(i, 'd', e.target.value) }));
+
+    const L = (label, bg, fg, meaning, may) => ({ label, bg, fg, meaning, may });
+    return {
+      showNav: this.props.showNav ?? true,
+      nav, days, rhythm, oos,
+      workbooks: this.constructor.WB.map(([key, who, name]) => { const on = this.state.wbOpen === key; return { who, name, isOpen: on, closed: !on, line: on ? '#D9A441' : 'rgba(255,255,255,0.1)', dot: key === 'review' ? '#D9A441' : 'transparent', open: () => this.setState({ wbOpen: key, wbPw: '', wbErr: false }) }; }),
+      wbPw: this.state.wbPw, wbHasErr: this.state.wbErr,
+      wbOnPw: e => this.setState({ wbPw: e.target.value, wbErr: false }),
+      wbSubmit: e => this.wbGo(e),
+      changes: this.state.changes,
+      onChanges: e => this.setState({ changes: e.target.value }, () => this.persist()),
+      addRow: () => this.setState(s => ({ rows: [...(s.rows || []), { a: '', b: '', c: '', d: '' }] }), () => this.persist()),
+      howTo: [
+        { n: '1–3', href: '#s1', t: 'Sections 1 to 3 are reference: read them once on Monday, come back to it when a question comes up.' },
+        { n: '3b', href: '#s3b', t: 'Section 3b is where the new Sunday gathering rhythm gets written down after Pastor Melo introduces it.' },
+        { n: '4', href: '#s4', t: 'Section 4 is how the week runs.' },
+        { n: '5', href: '#s5', t: 'Section 5 is how to write a plan that can be carried.' },
+        { n: '6', href: '#s6', t: 'Section 6 is what happens after Thursday.' },
+        { n: '7', href: '#s7', t: 'Section 7 defines the status words used in every document and both calendar views.' }
+      ],
+      isNot: [
+        { is: 'Communion with Christ: knowing Him, not just knowing about Him.', not: 'More complicated information, or a higher tier for advanced Christians.' },
+        { is: 'Dependence on the Holy Spirit in ordinary, everyday obedience.', not: 'Private contemplation that withdraws from mission and neighbor.' },
+        { is: 'Holiness, love, service, generosity, and disciple-making, worked out in real relationships.', not: 'Better meetings, more programs, or a fuller calendar.' },
+        { is: 'Christ as both the foundation and the goal.', not: 'Christ as a means to a bigger organization.' }
+      ],
+      messages: [
+        { date: 'Jan 10', title: 'Rooted', ref: 'Colossians 2:6-7', body: 'As you received Christ Jesus the Lord, so walk in Him: rooted, built up, established in the faith, overflowing with thanksgiving. Depth is not moving beyond Jesus to something more advanced. It is continuing in Him and going down into the same gospel that saved us.', take: 'The way forward is the way further in.' },
+        { date: 'Jan 17', title: 'Abide', ref: 'John 15:1-11', body: "Jesus is the vine; we are the branches. Apart from Him we can do nothing, and the branch that remains bears much fruit. Fruitfulness is not a technique that earns God's favor or a result we manufacture by effort. It grows out of remaining in Christ.", take: 'Stay connected to Christ, and expect real fruit, pruning included.' },
+        { date: 'Jan 24', title: 'All of Me', ref: 'Romans 12:1-13', body: "In view of God's mercy, present your bodies as a living sacrifice. Whole-life worship, a renewed mind, honest humility, gifts used in the body, sincere love, patience in affliction, constancy in prayer, generosity and hospitality.", take: 'Depth reaches the whole of a life, not some religious compartment of it.' }
+      ],
+      goals: [
+        { n: '1', name: 'ENGAGE & EXPAND', body: "Engage people with the gospel and help them become known, connected, and rooted in the life of Christ's church.", deeper: 'depth does not suspend evangelism, invitation, hospitality, or global mission. It gives people something worth inviting others into.' },
+        { n: '2', name: 'MATURE & MULTIPLY', body: 'Grow in Christ through His Word, obedience, community, and reliance on the Holy Spirit. Make disciples who make disciples, and leaders who develop others.', deeper: 'this is where the theme lives most directly because of our discipleship emphasis.' },
+        { n: '3', name: 'STRENGTHEN & SUSTAIN', body: 'Build trustworthy leadership, sustainable service, and faithful stewardship so people are cared for and equipped.', deeper: 'systems and resources serve spiritual ministry.' }
+      ],
+      targets: [
+        { target: '300 total unique people gathering weekly by Q4 (about 200 today)', count: 'Each person counted once across Adults, Kids, and Students.' },
+        { target: '20 professions of faith; 20 baptisms', count: 'Two distinct pastoral outcomes, tracked separately.' },
+        { target: '160 total adult members by December 31 (108 today)', count: 'Year-end total, not 160 new members. Additions and removals both matter.' },
+        { target: 'Reliable guest-return data in Q1, then an improvement target', count: 'Baseline established by March 31.' },
+        { target: '60 adults consistently in Formation Night', count: 'Consistent participation, not peak attendance.' },
+        { target: '60 different people completing DFT during 2027', count: 'Distinct completers across the spring and fall rounds (planning split about 30 and 30). Not 60% of membership. Repeat participants counted once.' },
+        { target: '60% of members intentionally discipling or being discipled', count: 'Formation attendance or DNA group participation' },
+        { target: '20 significant leaders, each developing someone (10 today)', count: 'Each leader identifies the person they are developing by June 30.' },
+        { target: 'Worship Leader and Student Ministry Director roles stabilized', count: 'By March 31.' },
+        { target: '40 qualified, available Kids volunteers, serving about twice monthly (about 20 today)', count: 'Roster size is not coverage. Qualified, available, and actually scheduled is what counts.' },
+        { target: 'Regular internal supports 90% of the approved operating budget; one month of operating expenses in unrestricted reserve', count: 'By December 31, without dependence on outside operating support. Dollar targets derive from the approved budget and sit in the leadership finance materials. Attendance growth is not assumed to produce giving.' }
+      ],
+      mature: [
+        { l: 'M', t: 'Makes disciples.' }, { l: 'A', t: 'Abides in the Word.' }, { l: 'T', t: 'Treasures community.' },
+        { l: 'U', t: 'Uses their gifts.' }, { l: 'R', t: 'Relies on the Holy Spirit.' }, { l: 'E', t: 'Embraces accountability.' }
+      ],
+      groups: [
+        { name: 'Family Groups', purpose: 'Ongoing communities of shared life: relationships, prayer, care, hospitality, encouragement. Not primarily sermon-discussion groups or mini Bible classes. About twice monthly; no compulsory semesters, no automatic summer or December shutdown. 8 to 14 adults. Normal entry through One Weekend, with leader-invitation exceptions.', lead: 'Approved, relationally mature leaders. Brief orientation, pastoral approval, an elder or coach. DFT is not required.' },
+        { name: 'Sharpen Groups', purpose: 'Time-bound growth in one area of faith or life. Defined start and finish. Not a more advanced spiritual tier.', lead: 'Significant teaching can be specifically approved: leader, subject, resources, audience, duration, oversight.' },
+        { name: 'Connection Groups', purpose: 'Relational doorways around shared interests, experiences, activities, or life stages. Generally seasonal; may relaunch.', lead: 'Approved facilitators. No Family Group-level pastoral-care expectations by default.' },
+        { name: 'Care Groups', purpose: 'Time-bound or need-specific support through hardship. Exists when there is a real need and an appropriate leader; need not exist every season.', lead: 'Stronger vetting and oversight. Clear scope and escalation.' },
+        { name: 'DNA Groups', purpose: 'The primary intentional disciple-making, accountability, obedience and multiplication environment. Gender-specific groups of 3 to 5; generally 6 to 8 months. Leaders launch as ready; a group may extend into 2028.', lead: 'Trained and approved leaders. Participants are prepared toward eventual multiplication by approval and readiness, not automatic promotion.' }
+      ],
+      people: [
+        { name: 'Melo', plan: 'Vision and theological direction. Initial direction for Groups, Formation and DFT, Worship, Prince of Peace missions, and the residency.', with: 'Chip; everyone for consultation' },
+        { name: 'Chip', plan: 'Operations and Finance plan. Students draft (interim). Co-facilitates, integrates plans and costs, leads follow-through after approval.', with: 'All staff except Bre operationally; Bre for shared work' },
+        { name: 'Brittney', plan: 'Kids Ministry plan. Shared Connections plan with Nicole.', with: 'Fanancy, Crystal, Nicole, Bre, Chip' },
+        { name: 'Nicole', plan: 'Creative plan. Shared Connections plan with Brittney.', with: 'Bre, Crystal, Brittney, Melo' },
+        { name: 'Bre', plan: 'Executive support to the Lead Pastor, and Communications. Reports directly to Melo.', with: 'Melo, Nicole, Chip, Crystal' },
+        { name: 'Crystal', plan: 'Events and Spaces plan. Continues compiling the 2027 Ministry Scorecard; Chip supervises.', with: 'Chip, Brittney, Bre, Nicole' },
+        { name: 'Fanancy', plan: 'Ministry Systems and Strategic Support. Advises Melo and Chip on systems and planning processes, completes projects they assign, and continues Planning Center scheduling for serve teams.', with: 'Chip, Melo, team leaders when consulted' },
+        { name: 'Future students leader (if attending)', plan: 'Assessment-first contribution to the Students draft. Chip remains responsible and provides authorized information.', with: 'Chip' }
+      ],
+      outcomes: [
+        { a: 'Recruit volunteers.', o: 'By December 31, forty qualified, available Kids volunteers cover every required Sunday position at both services, with no one serving more than about twice a month.' },
+        { a: 'Hold training.', o: 'By March 6, every new Kids volunteer has completed the approved onboarding and served alongside an experienced leader before serving alone.' },
+        { a: 'Communicate better.', o: 'By January 31, every communication request enters one intake with a brief, a factual approver and a lead time, and late requests fall below one a month.' },
+        { a: 'Grow groups.', o: 'By June 30, every approved group is listed with its purpose, audience and how to join, and every leader has a named elder or coach.' }
+      ],
+      example: [
+        { k: 'Outcome', v: 'By December 31, 2027, Kids Ministry has 40 qualified, available volunteers who cover every required Sunday position at both services with no one serving more than about twice a month, so that children are safe and welcomed and parents can worship.' },
+        { k: 'Baseline', v: 'About 20 on the roster (September 2026); qualified and available count to be confirmed in the roster review. Uncovered positions per Sunday: missing; count from the last eight Sundays.' },
+        { k: 'Evidence', v: 'Monthly roster review (qualified, active, available) and uncovered positions per Sunday.' },
+        { k: 'First action', v: 'Define required positions per service and room, with the qualification standard for each. Brittney, by October 30.' }
+      ],
+      questions: [
+        'What result are we pursuing, and for whom?', 'Where are we now, and what data is missing?', 'What happens first, and by when?',
+        'Who is responsible, and who else is needed?', 'What does it require: people, dates, money, decisions?', 'What evidence tells us whether it is working?'
+      ].map((t, i) => ({ n: i + 1, t })),
+      draft: [
+        { el: 'Purpose and contribution to the vision; accountable owner', where: 'Thursday summary' },
+        { el: 'One to three outcomes, each with baseline or missing data and evidence', where: 'Tuesday outcome cards; final wording on the Thursday summary' },
+        { el: 'Needed people; proposed calendar items; the budget the plan requires; dependencies', where: 'Wednesday page' },
+        { el: 'First-quarter actions and deadlines; annual milestones', where: 'Thursday summary' },
+        { el: 'Decisions requiring approval; what we will not add or continue', where: 'Thursday summary' }
+      ],
+      after: [
+        { when: 'Thursday, Oct 8', who: 'Each plan preparer', what: 'Submit the complete workbook: summary, costs and decisions needed.' },
+        { when: 'Friday, Oct 9', who: 'Chip', what: 'Consolidate: overlapping requests, duplicate costs, workload conflicts, missing owners.' },
+        { when: 'Oct 12 to 16', who: 'Melo and Chip', what: 'Approve, request revision, or defer each plan and the budget each one proposes.' },
+        { when: 'Next Tuesday staff meeting', who: 'Approved owners', what: 'First actions entered in the register and assigned in ClickUp, each with an owner, a due date, and its dependency.' },
+        { when: 'Monthly, Tuesday', who: 'Chip; ministry owners; Crystal (scorecard)', what: 'Brief progress review inside the Tuesday staff meeting.' },
+        { when: 'Quarterly (Apr 13, Jul 13, Oct 12)', who: 'Chip; ministry owners', what: 'Deeper review of the prior quarter. Elders receive a summary through existing meetings.' },
+        { when: 'Jul 25 and Oct 24', who: 'Melo, Crystal, Chip', what: 'Two church-wide ministry progress updates within services: stories and a few key numbers.' }
+      ],
+      labels: [
+        L('SETTLED', '#DDF1E4', '#1F6B40', 'The decision, ministry or rhythm is approved.', 'Plan to it. Do not reopen it in the room.'),
+        L('PROPOSED', '#EBDDBA', '#7E5414', 'Suggested and awaiting approval. Most new ministry dates are proposed.', 'Treat as likely but unconfirmed. Do not announce, book or spend.'),
+        L('UNDER REVIEW', '#D0ECF6', '#1D5F6E', 'Staff review required; not approved. May not happen.', 'Bring evidence for a recommendation. Reserve no date or budget.'),
+        L('PAUSED (REVIEW)', '#DDD6C8', '#2E2C28', 'Provisionally paused for 2027 pending staff review (VBS, Easter Egg Hunt).', 'A case may be made to retain it, without undermining regular ministry.'),
+        L('EXAMPLE', '#E8E2D5', '#4A463F', 'Illustrative wording showing how to plan. Never an added obligation or target.', 'Borrow the form, not the content.'),
+        L('DECISION NEEDED', '#F8DEDD', '#9A2E2B', 'A choice someone must make, with an approver and a needed-by date.', 'Add it to the register with the approver named.'),
+        L('TO CONFIRM', '#FBEBCF', '#8A5A0F', 'A logistic not yet confirmed (a time, a room, an attendance window).', 'Confirm with the owner before relying on it.')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

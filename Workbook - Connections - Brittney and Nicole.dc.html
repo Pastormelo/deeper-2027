@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F3EFE6;color:#141412;font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#9C6B1E;text-decoration:none}
+a:hover{color:#7E5414}
+*{box-sizing:border-box}
+input,textarea,button{font:inherit}
+textarea{field-sizing:content}
+textarea::placeholder{color:#8F897D}
+input:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(217,164,65,0.45);border-color:#D9A441}
+@media print{nav,.noprint{display:none !important}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F3EFE6">
+<sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;background:#141412;color:#F3EFE6;display:flex;flex-direction:column">
+  <div style="max-width:1040px;width:100%;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+    <a href="DEEPER%20Team%20Guide.dc.html" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#E6BE6E">← Planning week site</a>
+  </div>
+  <div style="flex:1;display:flex;align-items:center">
+    <div style="max-width:1040px;width:100%;margin:0 auto;padding:clamp(40px,8vw,96px) clamp(20px,5vw,48px)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E">{{ hero.eyebrow }}</div>
+      <h1 style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,9vw,104px);line-height:0.92;color:#F3EFE6;font-stretch:125%;text-wrap:balance">{{ hero.title }}</h1>
+      <p style="margin:24px 0 0;max-width:560px;font-size:18px;line-height:1.55;color:#CFC9BC">This workbook is private. Enter the password Chip gave you.</p>
+      <form onSubmit="{{ submitPw }}" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;max-width:520px">
+        <input type="password" value="{{ pwVal }}" onChange="{{ onPw }}" placeholder="Password" autocomplete="current-password" style="flex:1;min-width:220px;padding:14px 16px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:#1E1E1B;color:#F3EFE6;font-size:16px">
+        <button type="submit" style="padding:14px 22px;border:none;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;cursor:pointer" style-hover="background:#E6BE6E">Unlock</button>
+      </form>
+      <sc-if value="{{ hasPwErr }}" hint-placeholder-val="{{ false }}"><div style="margin-top:12px;font-size:15px;color:#F2A9A6">That password does not match this workbook.</div></sc-if>
+    </div>
+  </div>
+</div>
+</sc-if>
+<sc-if value="{{ unlocked }}" hint-placeholder-val="{{ false }}">
+
+<header style="background:#141412;color:#F3EFE6">
+  <div style="max-width:1040px;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px) clamp(40px,7vw,72px)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+      <div style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#A8A398"><span style="width:8px;height:8px;border-radius:50%;background:#D9A441"></span>Workbook · Private</div>
+    </div>
+    <div style="margin-top:clamp(48px,8vw,80px);font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E;line-height:1.6">{{ hero.eyebrow }}</div>
+    <h1 style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,9vw,104px);line-height:0.92;letter-spacing:0.01em;color:#F3EFE6;font-stretch:125%;text-wrap:balance">{{ hero.title }}</h1>
+    <p style="margin:24px 0 0;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.5;color:#CFC9BC;text-wrap:pretty">{{ hero.sub }}</p>
+    <div class="noprint" style="margin-top:clamp(36px,6vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14);border-radius:12px;overflow:hidden">
+      <div style="background:#1E1E1B;padding:24px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">How saving works</div>
+        <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#F3EFE6">{{ saveCopy }}</p>
+      </div>
+      <div style="background:#1E1E1B;padding:24px;display:flex;flex-direction:column;gap:12px;justify-content:center">
+        <button onClick="{{ download }}" style="padding:14px 18px;border:none;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;cursor:pointer;text-align:left" style-hover="background:#E6BE6E">Download for Chip ↓</button>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+          <button onClick="{{ pickFile }}" style="padding:0;border:none;background:none;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#E6BE6E;cursor:pointer">Open a saved file</button>
+          <a href="DEEPER%20Team%20Guide.dc.html" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#E6BE6E">Team Guide ↗</a>
+          <input ref="{{ fileRef }}" type="file" accept=".doc,.html,.htm" onChange="{{ onFile }}" style="display:none">
+        </div>
+        <sc-if value="{{ hasMsg }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:#CFC9BC">{{ msg }}</div></sc-if>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav style="position:sticky;top:0;z-index:20;background:rgba(20,20,18,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.1)">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px">
+    <div style="flex:1;min-width:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a href="{{ n.href }}" style="flex:none;padding:16px 12px 14px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;color:{{ n.color }};border-bottom:2px solid {{ n.line }}">{{ n.label }}</a>
+      </sc-for>
+    </div>
+    <div style="flex:none;display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#A8A398">
+      <span style="white-space:nowrap;color:{{ syncColor }}">{{ syncLabel }}</span>
+      <span style="white-space:nowrap">{{ progress }}</span>
+      <div style="width:56px;height:4px;border-radius:2px;background:rgba(255,255,255,0.14);overflow:hidden"><div style="height:100%;background:#D9A441;width:{{ pct }}"></div></div>
+    </div>
+  </div>
+</nav>
+
+<main>
+<sc-for list="{{ parts }}" as="part" hint-placeholder-count="5">
+<section id="{{ part.id }}" data-screen-label="{{ part.label }}" style="scroll-margin-top:56px;padding:clamp(56px,8vw,88px) 0;border-top:1px solid #DDD6C8;background:{{ part.bg }}">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">{{ part.eyebrow }}</div>
+    <sc-for list="{{ part.blocks }}" as="b" hint-placeholder-count="6">
+      <sc-if value="{{ b.isH1 }}" hint-placeholder-val="{{ false }}">
+        <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%;text-wrap:balance">{{ b.text }}</h2>
+      </sc-if>
+      <sc-if value="{{ b.isH2 }}" hint-placeholder-val="{{ false }}">
+        <h3 style="margin:56px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;line-height:1.25;color:#141412">{{ b.text }}</h3>
+      </sc-if>
+      <sc-if value="{{ b.isH3 }}" hint-placeholder-val="{{ false }}">
+        <h4 style="margin:36px 0 0;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#5E5A52">{{ b.text }}</h4>
+      </sc-if>
+      <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ false }}">
+        <p style="margin:16px 0 0;max-width:720px;font-size:17px;line-height:1.65;color:#2E2C28;text-wrap:pretty">{{ b.text }}</p>
+      </sc-if>
+      <sc-if value="{{ b.isUl }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:20px;max-width:760px;display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ b.items }}" as="it" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:14px minmax(0,1fr);gap:14px;font-size:16px;line-height:1.6;color:#2E2C28"><span style="width:8px;height:8px;margin-top:9px;background:#D9A441"></span><span style="text-wrap:pretty">{{ it }}</span></div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isBrief }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:rgba(255,255,255,0.12);border-radius:12px;overflow:hidden;border:1px solid #141412">
+          <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
+            <div style="background:#141412;padding:22px 20px">
+              <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D9A441">{{ r.k }}</div>
+              <p style="margin:10px 0 0;font-size:15px;line-height:1.55;color:#F3EFE6">{{ r.v }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isKv }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:28px;border:1px solid #DDD6C8;border-radius:12px;overflow:hidden;background:#FAF7F0">
+          <sc-if value="{{ b.hasTitle }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:20px 24px;background:#141412;color:#F3EFE6">
+              <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:18px">{{ b.title }}</div>
+              <p style="margin:6px 0 0;font-size:15px;line-height:1.55;color:#CFC9BC">{{ b.lead }}</p>
+            </div>
+          </sc-if>
+          <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:6px 24px;padding:18px 24px;border-top:1px solid #E8E2D5">
+              <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;line-height:1.45;color:#141412">{{ r.k }}</div>
+              <div style="grid-column:span 2;font-size:15px;line-height:1.6;color:#2E2C28;white-space:pre-line">{{ r.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isCallout }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:20px;background:#D9A441;border-radius:16px;padding:clamp(22px,3vw,32px);color:#141412">
+          <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.16em;text-transform:uppercase">{{ b.title }}</div>
+          <sc-for list="{{ b.body }}" as="l" hint-placeholder-count="1">
+            <p style="margin:10px 0 0;font-size:16px;line-height:1.6;font-weight:600;text-wrap:pretty">{{ l }}</p>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isExample }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:24px;border:1.5px dashed #A8A398;border-radius:16px;padding:clamp(22px,3vw,32px)">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+            <span style="padding:4px 10px;border-radius:4px;background:#E8E2D5;font-family:'Archivo',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.14em;color:#4A463F">EXAMPLE</span>
+            <span style="font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:#141412">{{ b.title }}</span>
+          </div>
+          <div style="margin-top:18px;display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ b.body }}" as="e" hint-placeholder-count="4">
+              <div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#9C6B1E">{{ e.lab }}</div>
+                <p style="margin:4px 0 0;font-size:15px;line-height:1.6;color:#2E2C28">{{ e.txt }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isField }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:32px">
+          <label style="display:block;max-width:760px;font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;line-height:1.45;color:#141412;text-wrap:pretty">{{ b.label }}</label>
+          <textarea value="{{ b.value }}" onChange="{{ b.onChange }}" rows="{{ b.rows }}" placeholder="{{ b.hint }}" style="margin-top:10px;display:block;width:100%;min-height:72px;padding:14px 16px;border:1px solid #DDD6C8;border-radius:10px;background:#FFFDF8;font-size:16px;line-height:1.6;color:#141412;resize:vertical"></textarea>
+        </div>
+      </sc-if>
+      <sc-if value="{{ b.isOutcome }}" hint-placeholder-val="{{ false }}">
+        <article style="margin-top:20px;border:1px solid #DDD6C8;border-radius:14px;overflow:hidden;background:#FAF7F0">
+          <div style="padding:14px 24px;background:#141412;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#D9A441">{{ b.title }}</div>
+          <div style="padding:8px 24px 24px;display:flex;flex-direction:column">
+            <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px 24px;padding-top:16px">
+                <div style="padding-top:12px;font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;line-height:1.4;color:#141412">{{ r.label }}</div>
+                <textarea value="{{ r.value }}" onChange="{{ r.onChange }}" rows="{{ r.rows }}" placeholder="{{ r.hint }}" style="grid-column:span 2;width:100%;min-height:52px;padding:12px 14px;border:1px solid #DDD6C8;border-radius:8px;background:#FFFDF8;font-size:15px;line-height:1.55;color:#141412;resize:vertical"></textarea>
+              </div>
+            </sc-for>
+          </div>
+        </article>
+      </sc-if>
+      <sc-if value="{{ b.isGrid }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:24px;border:1px solid #DDD6C8;border-radius:12px;overflow-x:auto;background:#FAF7F0">
+          <div style="min-width:{{ b.minW }}">
+            <div style="display:grid;grid-template-columns:{{ b.cols }};gap:12px;padding:14px 20px;background:#141412;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;color:#A8A398">
+              <sc-for list="{{ b.head }}" as="h" hint-placeholder-count="4"><div>{{ h }}</div></sc-for>
+            </div>
+            <sc-for list="{{ b.rows }}" as="row" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:{{ b.cols }};gap:12px;padding:12px 20px;border-top:1px solid #E8E2D5;align-items:start">
+                <sc-for list="{{ row }}" as="c" hint-placeholder-count="4">
+                  <div style="min-width:0">
+                    <sc-if value="{{ c.edit }}" hint-placeholder-val="{{ false }}">
+                      <textarea value="{{ c.value }}" onChange="{{ c.onChange }}" rows="{{ c.rows }}" placeholder="{{ c.ph }}" style="width:100%;min-height:42px;padding:9px 11px;border:1px solid #DDD6C8;border-radius:6px;background:#FFFDF8;font-size:14px;line-height:1.5;color:#141412;resize:vertical"></textarea>
+                    </sc-if>
+                    <sc-if value="{{ c.ro }}" hint-placeholder-val="{{ true }}">
+                      <div style="padding-top:2px;font-size:14px;line-height:1.5;color:{{ c.color }};font-weight:{{ c.weight }};white-space:pre-line">{{ c.text }}</div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ b.canAdd }}" hint-placeholder-val="{{ false }}">
+            <div class="noprint" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:12px 20px;border-top:1px solid #E8E2D5">
+              <button onClick="{{ b.addRow }}" style="padding:9px 14px;border:1.5px dashed #D9A441;border-radius:8px;background:transparent;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#7E5414;cursor:pointer" style-hover="background:#F1E6CC">+ Add row</button>
+              <sc-if value="{{ b.hasExtra }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ b.removeRow }}" style="padding:0;border:none;background:none;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#7A756B;cursor:pointer">Remove last added row</button>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </sc-for>
+  </div>
+</section>
+</sc-for>
+
+<section class="noprint" style="padding:clamp(56px,8vw,88px) 0;background:#141412;color:#F3EFE6">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:32px;align-items:end">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#D9A441">Submit</div>
+      <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(28px,4vw,40px);line-height:1.1;font-stretch:125%">Hand your workbook to Chip</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;color:#CFC9BC">Download the file and send it to Chip by Thursday, October 8. It opens in Word, and Melo and Chip can load it into their review page.</p>
+    </div>
+    <button onClick="{{ download }}" style="padding:18px 22px;border:none;border-radius:10px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;cursor:pointer" style-hover="background:#E6BE6E">Download for Chip ↓</button>
+  </div>
+</section>
+</main>
+
+<footer style="background:#141412;padding:32px 0;border-top:1px solid rgba(255,255,255,0.1)">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.14em;color:#F3EFE6">DEEPER: <span style="color:#A8A398;font-weight:600;letter-spacing:0.04em">{{ footer }}</span></div>
+    <a href="#p0" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#D9A441">Back to top ↑</a>
+  </div>
+</footer>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  static DATA = {"key":"connections","person":"Brittney and Nicole","ministry":"Connections","hero":{"eyebrow":"BRITTNEY AND NICOLE | CONNECTIONS (SHARED) | READ FIRST","title":"Connections","sub":"2027 planning workbook | Brittney and Nicole | one shared plan, one weekly lead"},"parts":[{"id":"p0","label":"Start","eyebrow":"BRITTNEY AND NICOLE | CONNECTIONS (SHARED) | READ FIRST","blocks":[{"k":"kv","title":"","lead":"","rows":[{"k":"You own","v":"The Connections plan: the guest-to-member pathway as it exists (first visit, follow-up, One Weekend, membership, Welcome to the Family, handoff to Groups), executed and assessed in 2027. The weekly guest and return record."},{"k":"You do not own","v":"Redesigning the pathway (settled: execute and assess); Groups leadership, approval or joining rules; membership decisions (elders and pastors); Sunday production."},{"k":"Work closely with","v":"Melo (membership, Groups), Chip, Crystal (spaces, Bring Your One), Bre (guest messaging), Fanancy (welcome-team scheduling in Planning Center, if agreed)."},{"k":"Where your plan touches the 2027 goals","v":"Goal 1: 300 weekly (each person once); 160 adult members by Dec 31 (108 today); a guest-return baseline by Mar 31, then a target. Professions of faith and baptisms are pastoral aims, not quotas. Goal 2: a clean handoff into Groups."},{"k":"What Deeper looks like here","v":"People genuinely known and connected, not processed through a funnel. Execute the pathway we already built and find out honestly whether people are being cared for at the other end of it."},{"k":"Team Guide sections to have open","v":"Section 1 (the vision), Section 2 (targets), Section 5 (how to write a plan), Section 7 (status words)."},{"k":"Boundary to confirm on Monday\nOn Monday, decide which of you is the weekly lead for guest data and follow-up, and who is the backup, so the March 31 baseline has one owner. Two names on a shared plan are fine; two names on a weekly number is not. Write both names on the Monday page.","v":""}]},{"k":"h2","text":"How this workbook works"},{"k":"ul","items":["Pages for each day open with what to do and what you finish with. Write in the boxes; they expand. The Team Guide is where you look things up.","EXAMPLE boxes show the form of a good answer. Borrow the form, never the content. Examples add no targets.","Every date you add is PROPOSED until Melo and Chip approve it. Requests are Pending until the person agrees. Costs are estimates with a basis; \"unknown\" and \"none\" are honest answers. Nothing is written twice: costs, people and dates live on Wednesday; Thursday points to them."]}]},{"id":"p1","label":"Monday","eyebrow":"MONDAY, OCTOBER 5 | AFTER THE VISION","blocks":[{"k":"h1","text":"Current reality"},{"k":"p","text":"The pathway as a guest actually experiences it, and the numbers we really have. No redesign."},{"k":"brief","rows":[{"k":"Do this","v":"Turn your prework into a clear current picture: what exists, what works, what is missing."},{"k":"Time","v":"About 60 minutes of the 1:00 to 3:45 window, plus the closing check-in."},{"k":"You finish with","v":"Weekly lead and backup named; the data table filled or marked missing; one sentence naming the biggest leak or opportunity in the pathway."}]},{"k":"h2","text":"The current picture (from your shared prework)"},{"k":"p","text":"Last eight completed Sundays unless noted. \"Missing\" is a legitimate entry; it tells us what the Q1 baseline work must build."},{"k":"grid","id":"f14","head":["Measure","Current figure","Source and period","Confidence"],"rows":[[{"text":"First-time adult guests recorded"},{"id":"f14_0_1","val":"","rows":1},{"id":"f14_0_2","val":"","rows":1},{"id":"f14_0_3","val":"","rows":1}],[{"text":"Of those, who shared contact information"},{"id":"f14_1_1","val":"","rows":1},{"id":"f14_1_2","val":"","rows":1},{"id":"f14_1_3","val":"","rows":1}],[{"text":"Personal contact within 72 hours (count or share)"},{"id":"f14_2_1","val":"","rows":1},{"id":"f14_2_2","val":"","rows":1},{"id":"f14_2_3","val":"","rows":1}],[{"text":"Guests who returned within four weeks"},{"id":"f14_3_1","val":"","rows":1},{"id":"f14_3_2","val":"","rows":1},{"id":"f14_3_3","val":"","rows":1}],[{"text":"One Weekend attendance, last three sessions"},{"id":"f14_4_1","val":"","rows":1},{"id":"f14_4_2","val":"","rows":1},{"id":"f14_4_3","val":"","rows":1}],[{"text":"Membership additions, 2026 year to date"},{"id":"f14_5_1","val":"","rows":1},{"id":"f14_5_2","val":"","rows":1},{"id":"f14_5_3","val":"","rows":1}],[{"text":"Members removed or moved away, 2026 year to date"},{"id":"f14_6_1","val":"","rows":1},{"id":"f14_6_2","val":"","rows":1},{"id":"f14_6_3","val":"","rows":1}],[{"text":"Total adult members today"},{"text":"108 (stated baseline)"},{"id":"f14_7_2","val":"","rows":1},{"id":"f14_7_3","val":"","rows":1}],[{"text":"Professions of faith and baptisms recorded, 2026 year to date"},{"id":"f14_8_1","val":"","rows":1},{"id":"f14_8_2","val":"","rows":1},{"id":"f14_8_3","val":"","rows":1}]]},{"k":"field","id":"f16","label":"Weekly lead and backup for guest data and follow-up in 2027","hint":"Lead: __  Backup: __  (decided Monday).","rows":2},{"k":"field","id":"f18","label":"Walk the pathway as a guest experiences it today: each step, its timing, and who owns it","hint":"First visit, contact, follow-up, second visit, One Weekend, membership conversation, Welcome to the Family, handoff to a group. Where does a step have no owner?","rows":5},{"k":"field","id":"f20","label":"Where do people fall out, and how do you know?","hint":"Evidence, not impressions, where you have it. Where you do not, say so.","rows":3},{"k":"field","id":"f22","label":"Where does the guest record live, who enters it, and when?","hint":"Tool, timing, gaps. This is the system the Q1 baseline depends on.","rows":3},{"k":"field","id":"f24","label":"The biggest leak or opportunity in the pathway for 2027, in one or two sentences","hint":"Name it plainly. This is what Tuesday's outcomes must answer.","rows":2}]},{"id":"p2","label":"Tuesday","eyebrow":"TUESDAY, OCTOBER 6 | CHOOSE THE RESULTS","blocks":[{"k":"h1","text":"One to three outcomes"},{"k":"p","text":"Two good outcomes beat three weak ones. Each must answer Monday's problem and serve a 2027 goal."},{"k":"brief","rows":[{"k":"Do this","v":"Choose the results this ministry pursues in 2027. Write each as an observable change for people by a date, with its baseline, evidence and first action."},{"k":"Time","v":"Morning block for drafting and consultation; refine in the afternoon; share at the closing check-in."},{"k":"You finish with","v":"Outcome cards 1 and 2 are complete (3 is optional), each with a first action and owner."}]},{"k":"h2","text":"Where your plan meets the settled targets"},{"k":"p","text":"These are the settled 2027 targets your ministry most directly serves. You are choosing outcomes that contribute; you are not inventing new targets."},{"k":"grid","id":"f31","head":["Focus area","Settled target it serves","What is yours to move"],"rows":[[{"text":"Guest-return baseline"},{"text":"Reliable guest-return data in Q1; target set after Mar 31"},{"text":"One record, one weekly lead, follow-up timing, four-week return status for every recorded guest"}],[{"text":"Membership growth"},{"text":"160 total adult members by Dec 31 (108 today)"},{"text":"Monthly One Weekend (first Sundays; Jul 11), membership conversations, six Welcome to the Family Sundays; removals tracked honestly. Membership is a commitment to a body, not a database entry."}],[{"text":"Invitation Sundays"},{"text":"Part of 300 weekly and 20 professions of faith"},{"text":"Bring Your One (Mar 28, Aug 22): guest readiness, welcome-team coverage, follow-up capacity for a larger guest count"}],[{"text":"Handoff to Groups"},{"text":"Goal 2: people known and discipled; Family Groups normally entered through One Weekend"},{"text":"What a One Weekend attendee is told about groups, who they meet, and how the handoff is recorded (register D35, D36)"}],[{"text":"EXAMPLE  Connections (illustrative; not an added target)\nOutcome. By March 31, 2027, every first-time adult guest who shares contact information receives a personal contact within 72 hours and appears in the guest record with a four-week return status, so that we know who came back and can set an honest improvement target for the rest of the year.\nBaseline. Follow-up timing: not recorded (missing). Return status: partial, from memory. Guests recorded in the last eight Sundays: [count from prework].\nEvidence. Weekly guest record: guests recorded, contact within 72 hours, returned within four weeks; reviewed monthly in staff meeting.\nFirst action. Agree one guest-record format and the weekly lead; Nicole (lead) and Brittney (backup), by November 15. Confirm the follow-up message with Bre by November 30."},{"id":"f31_4_1","val":"","rows":1},{"id":"f31_4_2","val":"","rows":1}]]},{"k":"p","text":"The example shows the level of specificity. Your outcome may pursue a different result entirely."},{"k":"outcome","title":"OUTCOME 1","rows":[{"id":"f33_0","label":"Outcome","hint":"By [date], [who] will [observable result], so that [benefit to people].","rows":2},{"id":"f33_1","label":"Baseline today, and source","hint":"Or \"missing: how and by when we will get it.\"","rows":2},{"id":"f33_2","label":"Evidence we will look at","hint":"What we count or observe, and how often.","rows":2},{"id":"f33_3","label":"First action, owner, due","hint":"","rows":2},{"id":"f33_4","label":"Goal served","hint":"Write 1 Engage & Expand, 2 Mature & Multiply or 3 Strengthen & Sustain.","rows":2}]},{"k":"outcome","title":"OUTCOME 2","rows":[{"id":"f34_0","label":"Outcome","hint":"By [date], [who] will [observable result], so that [benefit to people].","rows":2},{"id":"f34_1","label":"Baseline today, and source","hint":"Or \"missing: how and by when we will get it.\"","rows":2},{"id":"f34_2","label":"Evidence we will look at","hint":"What we count or observe, and how often.","rows":2},{"id":"f34_3","label":"First action, owner, due","hint":"","rows":2},{"id":"f34_4","label":"Goal served","hint":"Write 1 Engage & Expand, 2 Mature & Multiply or 3 Strengthen & Sustain.","rows":2}]},{"k":"outcome","title":"OUTCOME 3  (optional)","rows":[{"id":"f35_0","label":"Outcome","hint":"By [date], [who] will [observable result], so that [benefit to people].","rows":2},{"id":"f35_1","label":"Baseline today, and source","hint":"Or \"missing: how and by when we will get it.\"","rows":2},{"id":"f35_2","label":"Evidence we will look at","hint":"What we count or observe, and how often.","rows":2},{"id":"f35_3","label":"First action, owner, due","hint":"","rows":2},{"id":"f35_4","label":"Goal served","hint":"Write 1 Engage & Expand, 2 Mature & Multiply or 3 Strengthen & Sustain.","rows":2}]},{"k":"field","id":"f37","label":"Which outcome depends on other people most, and have you spoken to them yet?","hint":"","rows":2}]},{"id":"p3","label":"Wednesday","eyebrow":"WEDNESDAY, OCTOBER 7 | PEOPLE, DATES, BUDGET","blocks":[{"k":"h1","text":"What the outcomes require"},{"k":"p","text":"Reconcile your outcomes with the calendar, coverage, ministry needs and other people's time. Your draft plan is complete by the end of today; you present it this afternoon for feedback."},{"k":"brief","rows":[{"k":"Do this","v":"Check the retained calendar items below, add your proposals, name the people you need, build the budget your plan requires, and turn every dependency into a request marked Agreed or Pending."},{"k":"Time","v":"Morning for the shared calendar walk and handoffs; midday to finish. Draft presentations and feedback in the afternoon."},{"k":"You finish with","v":"A complete draft: calendar proposals, people and coverage, budget proposal and requests, presented and marked up with feedback."}]},{"k":"h2","text":"Already on the 2027 calendar for your area"},{"k":"p","text":"Pulled from the 2027 calendar record. SETTLED means the ministry or rhythm is approved; \"Date proposed\" means the exact date still awaits approval. Do not re-propose these; note changes or conflicts in the box below."},{"k":"grid","id":"f44","head":["Date","Retained item","Status","Owner and time"],"rows":[[{"text":"12 dates"},{"text":"One Weekend. Monthly membership / connection entry point. Jan 3, Feb 7, Mar 7, Apr 4, May 2, Jun 6, Jul 11, Aug 1, Sep 5, Oct 3, Nov 7, Dec 5."},{"text":"SETTLED Dates proposed"},{"text":"Brittney / Nicole; facilitators TBD. After services; time TBD"}],[{"text":"6 dates"},{"text":"Welcome to the Family. Public affirmation of approved members. Jan 24, Mar 14, May 23, Jul 25, Sep 26, Nov 14."},{"text":"SETTLED Dates proposed"},{"text":"Brittney / Nicole and pastoral team"}],[{"text":"Sun Mar 28"},{"text":"Bring Your One invitation emphasis"},{"text":"SETTLEDDate proposed"},{"text":"Crystal / communications / whole church. Within existing services"}],[{"text":"Wed Mar 31"},{"text":"Q1 checkpoint: staffing and guest-return baseline. Agreed deadline"},{"text":"SETTLEDDate set"},{"text":"Melo / Chip; Brittney / Nicole for connection data. Internal"}],[{"text":"Sun Aug 22"},{"text":"Bring Your One invitation emphasis"},{"text":"SETTLEDDate proposed"},{"text":"Crystal / communications / whole church. Within existing services"}],[{"text":"Tue Sep 7"},{"text":"Available-groups listing refresh. Communications checkpoint"},{"text":"PROPOSEDDate proposed"},{"text":"Groups operational lead TBD / communications / approved leaders. Availability update; not a gathering"}]]},{"k":"h3","text":"Open items in the register that touch your area"},{"k":"grid","id":"f46","head":["Ref","Open item and what remains","Status","Owner"],"rows":[[{"text":"D35"},{"text":"Participation and joining across expressions. One Weekend expectation and leader-invited exceptions remain specific to Family Groups. Define audience and joining conditions per approved proposal."},{"text":"Scope decision"},{"text":"Pastors / Groups coordinator / Brittney and Nicole"}],[{"text":"D36"},{"text":"Groups communications. Show what is available, whom it serves, when it meets and how to join. Invite proposals; assess person and proposal. No impression that everyone must complete all five types."},{"text":"Implementation decision"},{"text":"Groups coordinator / communications / connections"}]]},{"k":"field","id":"f48","label":"Conflicts or concerns: One Weekend timing after services, Welcome to the Family dates, Bring Your One capacity, room use","hint":"Name the date and the concern. Proposals to change a settled date go to the register as DECISION NEEDED.","rows":3},{"k":"h2","text":"New calendar proposals"},{"k":"p","text":"Only what your outcomes require. Every row stays PROPOSED until Melo and Chip approve. Worship owns the sanctuary and Kids owns the classrooms on Sunday; for anything else the building has to hold, check with Crystal before writing a date."},{"k":"grid","id":"f51","head":["Proposed date","Item and purpose (who it serves)","Needs: people, room, cost","Status"],"rows":[[{"id":"f51_0_0","val":"","rows":2},{"id":"f51_0_1","val":"","rows":2},{"id":"f51_0_2","val":"","rows":2},{"id":"f51_0_3","val":"PROPOSED","rows":1}],[{"id":"f51_1_0","val":"","rows":2},{"id":"f51_1_1","val":"","rows":2},{"id":"f51_1_2","val":"","rows":2},{"id":"f51_1_3","val":"PROPOSED","rows":1}],[{"id":"f51_2_0","val":"","rows":2},{"id":"f51_2_1","val":"","rows":2},{"id":"f51_2_2","val":"","rows":2},{"id":"f51_2_3","val":"PROPOSED","rows":1}]]},{"k":"h2","text":"People and coverage"},{"k":"field","id":"f54","label":"Who hosts One Weekend, who teaches or facilitates, and who follows up with each attendee afterward?","hint":"Facilitators are TBD in the calendar record. Name people or \"to identify by [date].\"","rows":3},{"k":"field","id":"f56","label":"Sunday welcome team: how many people per service, who leads them, and how are they scheduled?","hint":"If Fanancy schedules them from your approved list, write what she needs and by when.","rows":3},{"k":"field","id":"f58","label":"What must Bre and Nicole (Creative) produce for guests, and by when?","hint":"Follow-up messages, One Weekend invitation, Bring Your One materials, groups listing. Briefs, not requests in passing.","rows":3},{"k":"h2","text":"Ministry budget proposal"},{"k":"p","text":"What this plan needs to happen, with an estimate and its basis. Mark recurring or one-time. Count a shared need once and name who shares it. Unknown is an honest entry."},{"k":"grid","id":"f61","head":["What the plan needs","Estimate","Basis (quote, last year, unit x count)","Recurring or one-time","Shared with"],"rows":[[{"id":"f61_0_0","val":"One Weekend hospitality and materials","rows":1},{"id":"f61_0_1","val":"","rows":2},{"id":"f61_0_2","val":"","rows":2},{"id":"f61_0_3","val":"Recurring (monthly)","rows":1},{"id":"f61_0_4","val":"Crystal","rows":1}],[{"id":"f61_1_0","val":"Guest gifts, cards, printing","rows":1},{"id":"f61_1_1","val":"","rows":2},{"id":"f61_1_2","val":"","rows":2},{"id":"f61_1_3","val":"Recurring","rows":1},{"id":"f61_1_4","val":"Bre","rows":1}],[{"id":"f61_2_0","val":"Welcome-team supplies","rows":1},{"id":"f61_2_1","val":"","rows":2},{"id":"f61_2_2","val":"","rows":2},{"id":"f61_2_3","val":"Recurring","rows":1},{"id":"f61_2_4","val":"","rows":2}],[{"id":"f61_3_0","val":"","rows":2},{"id":"f61_3_1","val":"","rows":2},{"id":"f61_3_2","val":"","rows":2},{"id":"f61_3_3","val":"","rows":2},{"id":"f61_3_4","val":"","rows":2}],[{"id":"f61_4_0","val":"","rows":2},{"id":"f61_4_1","val":"","rows":2},{"id":"f61_4_2","val":"","rows":2},{"id":"f61_4_3","val":"","rows":2},{"id":"f61_4_4","val":"","rows":2}],[{"id":"f61_5_0","val":"","rows":2},{"id":"f61_5_1","val":"","rows":2},{"id":"f61_5_2","val":"","rows":2},{"id":"f61_5_3","val":"","rows":2},{"id":"f61_5_4","val":"","rows":2}]]},{"k":"h2","text":"Requests of other people"},{"k":"p","text":"Ask the person. Write Agreed only after they say yes. If they are not in the room, it stays Pending."},{"k":"grid","id":"f64","head":["I need from (person)","What, specifically","By when","Agreed or Pending"],"rows":[[{"id":"f64_0_0","val":"Bre","rows":1},{"id":"f64_0_1","val":"Guest follow-up message and channel; One Weekend and Bring Your One communication","rows":1},{"id":"f64_0_2","val":"","rows":2},{"id":"f64_0_3","val":"Pending","rows":1}],[{"id":"f64_1_0","val":"Crystal","rows":1},{"id":"f64_1_1","val":"One Weekend room and hospitality; Bring Your One Sunday space plan","rows":1},{"id":"f64_1_2","val":"","rows":2},{"id":"f64_1_3","val":"Pending","rows":1}],[{"id":"f64_2_0","val":"Melo","rows":1},{"id":"f64_2_1","val":"Membership conversation flow; what One Weekend attendees are told about joining a group (D35)","rows":1},{"id":"f64_2_2","val":"","rows":2},{"id":"f64_2_3","val":"Pending","rows":1}],[{"id":"f64_3_0","val":"Fanancy","rows":1},{"id":"f64_3_1","val":"Welcome-team scheduling from an approved list","rows":1},{"id":"f64_3_2","val":"","rows":2},{"id":"f64_3_3","val":"Pending","rows":1}],[{"id":"f64_4_0","val":"","rows":2},{"id":"f64_4_1","val":"","rows":2},{"id":"f64_4_2","val":"","rows":2},{"id":"f64_4_3","val":"","rows":2}],[{"id":"f64_5_0","val":"","rows":2},{"id":"f64_5_1","val":"","rows":2},{"id":"f64_5_2","val":"","rows":2},{"id":"f64_5_3","val":"","rows":2}]]},{"k":"h2","text":"Keep, change, stop"},{"k":"p","text":"What this ministry currently does. Stopping or simplifying something is a legitimate 2027 action; it protects the work that matters most."},{"k":"grid","id":"f67","head":["Keep as is","Change (and how)","Stop or pause (and why)"],"rows":[[{"id":"f67_0_0","val":"","rows":7},{"id":"f67_0_1","val":"","rows":7},{"id":"f67_0_2","val":"","rows":7}]]}]},{"id":"p4","label":"Thursday","eyebrow":"THURSDAY, OCTOBER 8 | FINAL COMPLETION","blocks":[{"k":"h1","text":"Connections plan: 2027 draft"},{"k":"p","text":"Finish the plan from yesterday's feedback, complete this summary, and submit the workbook to Chip. We finish and close early."},{"k":"brief","rows":[{"k":"Do this","v":"Work in yesterday's feedback, fill any gap you left open, and write this summary from your Tuesday and Wednesday pages."},{"k":"Time","v":"Most of the morning; Melo and Chip circulate for final questions."},{"k":"You finish with","v":"This summary completed and the full workbook handed to Chip before you leave. Status: DRAFT for Melo and Chip review."},{"k":"Ministry and plan preparer","v":"Connections  |  Brittney and Nicole"},{"k":"Accountable owner in 2027","v":"Weekly lead named Monday; Brittney and Nicole share the plan; Chip supervises"},{"k":"Status","v":"DRAFT. Melo and Chip review and approve after the week (Oct 9 to 16, 2026)."}]},{"k":"field","id":"f73","label":"Purpose and contribution to the vision","hint":"Why Connections exists at One Family, whom it serves, and which goals it moves. Two or three sentences.","rows":4},{"k":"h2","text":"Outcomes (final wording)"},{"k":"grid","id":"f75","head":["Outcome (by date, who, observable result)","Evidence","Owner"],"rows":[[{"id":"f75_0_0","val":"","rows":3},{"id":"f75_0_1","val":"","rows":3},{"id":"f75_0_2","val":"","rows":3}],[{"id":"f75_1_0","val":"","rows":3},{"id":"f75_1_1","val":"","rows":3},{"id":"f75_1_2","val":"","rows":3}],[{"id":"f75_2_0","val":"","rows":3},{"id":"f75_2_1","val":"","rows":3},{"id":"f75_2_2","val":"","rows":3}]]},{"k":"h2","text":"First quarter: actions and deadlines"},{"k":"p","text":"Include what must be ready before January 1. Actions, not intentions. One owner each."},{"k":"grid","id":"f78","head":["When","Action","Owner","Depends on"],"rows":[[{"id":"f78_0_0","val":"Before Jan 1","rows":1},{"id":"f78_0_1","val":"","rows":2},{"id":"f78_0_2","val":"","rows":2},{"id":"f78_0_3","val":"","rows":2}],[{"id":"f78_1_0","val":"","rows":2},{"id":"f78_1_1","val":"","rows":2},{"id":"f78_1_2","val":"","rows":2},{"id":"f78_1_3","val":"","rows":2}],[{"id":"f78_2_0","val":"","rows":2},{"id":"f78_2_1","val":"","rows":2},{"id":"f78_2_2","val":"","rows":2},{"id":"f78_2_3","val":"","rows":2}],[{"id":"f78_3_0","val":"","rows":2},{"id":"f78_3_1","val":"","rows":2},{"id":"f78_3_2","val":"","rows":2},{"id":"f78_3_3","val":"","rows":2}],[{"id":"f78_4_0","val":"","rows":2},{"id":"f78_4_1","val":"","rows":2},{"id":"f78_4_2","val":"","rows":2},{"id":"f78_4_3","val":"","rows":2}]]},{"k":"h2","text":"Annual milestones"},{"k":"grid","id":"f80","head":["By","What will be true"],"rows":[[{"id":"f80_0_0","val":"Mar 31 (Q1)","rows":1},{"id":"f80_0_1","val":"","rows":2}],[{"id":"f80_1_0","val":"Jun 30 (Q2)","rows":1},{"id":"f80_1_1","val":"","rows":2}],[{"id":"f80_2_0","val":"Sep 30 (Q3)","rows":1},{"id":"f80_2_1","val":"","rows":2}],[{"id":"f80_3_0","val":"Dec 31 (Q4)","rows":1},{"id":"f80_3_1","val":"","rows":2}]]},{"k":"h2","text":"Decisions requiring approval"},{"k":"p","text":"Anything that needs a yes from Melo or Chip: your ministry budget, staffing, a policy question, a new event, a date change to a settled item."},{"k":"grid","id":"f83","head":["Decision needed","Approver","Needed by","Register ref"],"rows":[[{"id":"f83_0_0","val":"","rows":2},{"id":"f83_0_1","val":"","rows":2},{"id":"f83_0_2","val":"","rows":2},{"id":"f83_0_3","val":"","rows":2}],[{"id":"f83_1_0","val":"","rows":2},{"id":"f83_1_1","val":"","rows":2},{"id":"f83_1_2","val":"","rows":2},{"id":"f83_1_3","val":"","rows":2}],[{"id":"f83_2_0","val":"","rows":2},{"id":"f83_2_1","val":"","rows":2},{"id":"f83_2_2","val":"","rows":2},{"id":"f83_2_3","val":"","rows":2}]]},{"k":"field","id":"f85","label":"What we will not add or continue in 2027, to protect this plan","hint":"","rows":2},{"k":"p","text":"First review: date and what we will look at"},{"k":"kv","title":"Monthly scorecard reviews happen in the Tuesday staff meeting (Jan 12 first). Name the evidence you will bring.","lead":"","rows":[{"k":"Where the rest lives\nThe budget proposal, people and coverage, calendar proposals and requests are on the Wednesday page. Outcome detail (baselines and sources) is on the Tuesday cards. Do not copy them here; Chip consolidates from the whole workbook.","v":""}]}]}]};
+  static PW = {"own":"aa968e03","leader":"ac3adfdf"};
+  state = { a: {}, t: 0, active: 'p0', msg: '', unlocked: false, pw: '', pwErr: false, sync: 'local', syncAt: null };
+  syncUrl = '';
+  token() { try { const own = localStorage.getItem('ofc-unlock-' + this.D.key), ld = localStorage.getItem('ofc-unlock-leader'); return this.okHash(own) ? own : ld; } catch (e) { return ''; } }
+  initSync() {
+    fetch('sync-config.json', { cache: 'no-store' }).then(r => r.json()).then(j => { this.syncUrl = (j && j.url) || ''; if (this.syncUrl) { this.setState({ sync: 'loading' }); if (this.state.unlocked) this.pull(); } }).catch(() => {});
+  }
+  pull() {
+    if (!this.syncUrl) return;
+    this.setState({ sync: 'loading' });
+    fetch(this.syncUrl + '?key=' + encodeURIComponent(this.D.key) + '&token=' + encodeURIComponent(this.token()))
+      .then(r => r.json()).then(res => {
+        if (!res.ok) return this.setState({ sync: 'error' });
+        const d = res.data;
+        if (d && d.answers && (d.t || 0) > (this.state.t || 0)) this.setState({ a: d.answers, t: d.t, sync: 'saved', syncAt: new Date(d.t) }, () => this.saveLocal());
+        else { this.setState({ sync: 'saved', syncAt: d ? new Date(d.t) : this.state.syncAt }); if (!d || (this.state.t || 0) > (d.t || 0)) this.push(); }
+      }).catch(() => this.setState({ sync: 'error' }));
+  }
+  push() {
+    if (!this.syncUrl || !this.state.unlocked) return;
+    clearTimeout(this.pushTimer);
+    this.pushTimer = setTimeout(() => {
+      const t = this.state.t || Date.now();
+      this.setState({ sync: 'saving' });
+      fetch(this.syncUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ key: this.D.key, token: this.token(), t, payload: { ...this.buildExport(), t } }) })
+        .then(r => r.json()).then(res => { if (!res.ok) return this.setState({ sync: 'error' }); if (res.stale) return this.pull(); this.setState({ sync: 'saved', syncAt: new Date(t) }); })
+        .catch(() => this.setState({ sync: 'error' }));
+    }, 1200);
+  }
+  saveLocal() { try { localStorage.setItem(this.LS, JSON.stringify({ a: this.state.a, t: this.state.t })); } catch (e) {} }
+  hash(s) { let x = 0x811c9dc5; s = String(s).trim().toLowerCase(); for (let i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(16); }
+  okHash(h) { return h === this.constructor.PW.own || h === this.constructor.PW.leader; }
+  fileRef = React.createRef();
+  get D() { return this.constructor.DATA; }
+  get LS() { return 'ofc-wb-' + this.D.key; }
+  componentDidMount() {
+    try { if (this.okHash(localStorage.getItem('ofc-unlock-' + this.D.key)) || this.okHash(localStorage.getItem('ofc-unlock-leader'))) this.setState({ unlocked: true }); } catch (e) {}
+    try { const s = JSON.parse(localStorage.getItem(this.LS) || 'null'); if (s && s.a) this.setState({ a: s.a, t: s.t || 0 }); } catch (e) {}
+    this.initSync();
+    this.onScroll = () => {
+      let cur = 'p0';
+      for (const p of this.D.parts) { const el = document.getElementById(p.id); if (el && el.getBoundingClientRect().top < 140) cur = p.id; }
+      if (cur !== this.state.active) this.setState({ active: cur });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); clearTimeout(this.pushTimer); }
+  save() { this.setState({ t: Date.now() }, () => { this.saveLocal(); this.push(); }); }
+  set(id, v) { this.setState(s => ({ a: { ...s.a, [id]: v } }), () => this.save()); }
+  val(id, def) { const v = this.state.a[id]; return v === undefined ? (def || '') : v; }
+  gridRows(b) {
+    const n = b.head.length, extra = Number(this.state.a[b.id + '__n'] || 0);
+    const rows = b.rows.slice();
+    for (let x = 0; x < extra; x++) rows.push(Array.from({ length: n }, (_, ci) => ({ id: b.id + '_x' + x + '_' + ci, val: '', rows: 1 })));
+    return rows;
+  }
+  setExtra(b, d) {
+    const cur = Number(this.state.a[b.id + '__n'] || 0), next = Math.max(0, cur + d);
+    this.setState(s => { const a = { ...s.a, [b.id + '__n']: String(next) }; if (d < 0) for (let ci = 0; ci < b.head.length; ci++) delete a[b.id + '_x' + next + '_' + ci]; return { a }; }, () => this.save());
+  }
+  editables() {
+    const out = [];
+    this.D.parts.forEach(p => p.blocks.forEach(b => {
+      if (b.k === 'field') out.push([b.id, '']);
+      if (b.k === 'outcome') b.rows.forEach(r => out.push([r.id, '']));
+      if (b.k === 'grid') this.gridRows(b).forEach(r => r.forEach(c => { if (c.id) out.push([c.id, c.val]); }));
+    }));
+    return out;
+  }
+  buildExport() {
+    const D = this.D;
+    const sections = [];
+    D.parts.forEach(p => {
+      let h = '';
+      const items = [];
+      p.blocks.forEach(b => {
+        if (b.k === 'h1' || b.k === 'h2' || b.k === 'h3') h = b.text;
+        if (b.k === 'field') items.push({ t: 'f', label: b.label || h, value: this.val(b.id) });
+        if (b.k === 'outcome') items.push({ t: 'o', label: b.title, rows: b.rows.map(r => [r.label, this.val(r.id)]) });
+        if (b.k === 'grid' && b.rows.some(r => r.some(c => c.id))) items.push({ t: 'g', label: h, head: b.head, rows: this.gridRows(b).map(r => r.map(c => c.id ? this.val(c.id, c.val) : c.text)) });
+      });
+      if (items.length) sections.push({ label: p.label, eyebrow: p.eyebrow, items });
+    });
+    return { v: 1, key: D.key, person: D.person, ministry: D.ministry, title: D.hero.title, savedAt: new Date().toISOString(), answers: this.state.a, sections };
+  }
+  docHtml(ex) {
+    const e = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+    const ans = v => v && String(v).trim() ? '<p class="a">' + e(v) + '</p>' : '<p class="a e">Not answered</p>';
+    let body = '';
+    ex.sections.forEach(s => {
+      body += '<h2>' + e(s.eyebrow || s.label) + '</h2>';
+      s.items.forEach(it => {
+        if (it.t === 'f') body += '<p class="q">' + e(it.label) + '</p>' + ans(it.value);
+        if (it.t === 'o') { body += '<p class="q">' + e(it.label) + '</p><table>'; it.rows.forEach(r => { body += '<tr><th style="width:30%">' + e(r[0]) + '</th><td>' + e(r[1]) + '</td></tr>'; }); body += '</table>'; }
+        if (it.t === 'g') { body += '<p class="q">' + e(it.label) + '</p><table><tr>' + it.head.map(x => '<th>' + e(x) + '</th>').join('') + '</tr>' + it.rows.map(r => '<tr>' + r.map(c => '<td>' + e(c) + '</td>').join('') + '</tr>').join('') + '</table>'; }
+      });
+    });
+    const json = JSON.stringify(ex).replace(/</g, '\\u003c');
+    const TAG = 'scr' + 'ipt';
+    return '<html><head><meta charset="utf-8"><title>' + e(ex.ministry) + ' workbook</title><style>body{font-family:Arial,sans-serif;color:#141412;font-size:11pt;line-height:1.45}h1{font-size:24pt;margin:0 0 4pt}h2{font-size:13pt;color:#7E5414;border-bottom:1.5pt solid #D9A441;padding-bottom:3pt;margin:24pt 0 6pt;text-transform:uppercase;letter-spacing:1pt}.k{font-size:9pt;letter-spacing:1.5pt;color:#7E5414;text-transform:uppercase}.q{font-weight:bold;margin:12pt 0 3pt}.a{margin:0 0 6pt}.e{color:#8F897D;font-style:italic}table{border-collapse:collapse;width:100%;margin:4pt 0 8pt}td,th{border:1px solid #CFC9BC;padding:4pt 6pt;vertical-align:top;font-size:10pt;text-align:left}th{background:#EFEADF}</style></head><body><p class="k">One Family Church · Deeper 2027 · Draft workbook</p><h1>' + e(ex.title) + '</h1><p>' + e(ex.person) + ' · Saved ' + e(new Date(ex.savedAt).toLocaleString()) + '</p>' + body + '<' + TAG + ' type="application/json" id="ofc-workbook">' + json + '</' + TAG + '></body></html>';
+  }
+  download() {
+    const ex = this.buildExport();
+    const blob = new Blob(['\ufeff', this.docHtml(ex)], { type: 'application/msword' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'OFC ' + this.D.ministry + ' Workbook - ' + this.D.person + '.doc';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    this.setState({ msg: 'Downloaded. Send the file to Chip.' });
+  }
+  onFile(ev) {
+    const f = ev.target.files && ev.target.files[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      const TAG = 'scr' + 'ipt';
+      const m = String(r.result).match(new RegExp('<' + TAG + ' type="application/json" id="ofc-workbook">([\\s\\S]*?)</' + TAG + '>'));
+      let ex = null;
+      try { ex = m && JSON.parse(m[1]); } catch (e) {}
+      if (!ex || !ex.answers) return this.setState({ msg: 'That file is not a saved workbook.' });
+      if (ex.key !== this.D.key) return this.setState({ msg: 'That file belongs to a different workbook.' });
+      this.setState({ a: ex.answers, msg: 'Loaded your saved answers.' }, () => this.save());
+    };
+    r.readAsText(f);
+    ev.target.value = '';
+  }
+  renderVals() {
+    const D = this.D;
+    const seen = {};
+    const parts = D.parts.map((p, pi) => {
+      let label = p.label;
+      if (seen[label]) label = label + ' (cont.)';
+      seen[p.label] = 1;
+      const blocks = p.blocks.map(b => {
+        const o = { ...b, isH1: b.k === 'h1', isH2: b.k === 'h2', isH3: b.k === 'h3', isP: b.k === 'p', isUl: b.k === 'ul', isBrief: b.k === 'brief', isKv: b.k === 'kv', isCallout: b.k === 'callout', isExample: b.k === 'example', isField: b.k === 'field', isOutcome: b.k === 'outcome', isGrid: b.k === 'grid' };
+        if (b.k === 'kv') o.hasTitle = !!b.title;
+        if (b.k === 'callout') o.title = b.title || 'Note';
+        if (b.k === 'field') { o.value = this.val(b.id); o.onChange = e => this.set(b.id, e.target.value); }
+        if (b.k === 'outcome') o.rows = b.rows.map(r => ({ ...r, value: this.val(r.id), onChange: e => this.set(r.id, e.target.value) }));
+        if (b.k === 'grid') {
+          const n = b.head.length;
+          o.cols = n <= 2 ? 'minmax(140px,1fr) minmax(0,2fr)' : 'repeat(' + n + ',minmax(0,1fr))';
+          o.minW = (n * 150) + 'px';
+          o.canAdd = b.rows.some(r => r.some(c => c.id));
+          o.hasExtra = Number(this.state.a[b.id + '__n'] || 0) > 0;
+          o.addRow = () => this.setExtra(b, 1);
+          o.removeRow = () => this.setExtra(b, -1);
+          o.rows = this.gridRows(b).map(r => r.map((c, ci) => c.id
+            ? { edit: true, ro: false, value: this.val(c.id, c.val), rows: Math.min(c.rows, 6), ph: b.head[ci], onChange: e => this.set(c.id, e.target.value) }
+            : { edit: false, ro: true, text: c.text, color: ci === 0 ? '#141412' : '#2E2C28', weight: ci === 0 ? 700 : 400 }));
+        }
+        return o;
+      });
+      return { id: p.id, label, eyebrow: p.eyebrow, blocks, bg: pi % 2 ? '#FAF7F0' : '#F3EFE6' };
+    });
+    const nav = parts.map(p => { const on = this.state.active === p.id; return { href: '#' + p.id, label: p.label, color: on ? '#D9A441' : '#CFC9BC', line: on ? '#D9A441' : 'transparent' }; });
+    const eds = this.editables();
+    const filled = eds.filter(([id, def]) => { const v = this.state.a[id]; return v !== undefined && v.trim() && v !== def; }).length;
+    return {
+      hero: D.hero, parts, nav,
+      progress: filled + ' / ' + eds.length,
+      pct: Math.round(filled / Math.max(1, eds.length) * 100) + '%',
+      footer: D.ministry + ' workbook (' + D.person + ')',
+      download: () => this.download(),
+      pickFile: () => this.fileRef.current && this.fileRef.current.click(),
+      fileRef: this.fileRef,
+      onFile: e => this.onFile(e),
+      msg: this.state.msg, hasMsg: !!this.state.msg,
+      unlocked: this.state.unlocked, locked: !this.state.unlocked,
+      syncLabel: ({ local: 'On this device', loading: 'Loading…', saving: 'Saving…', saved: 'Saved' + (this.state.syncAt ? ' ' + this.state.syncAt.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : ''), error: 'Offline · saved on device' })[this.state.sync],
+      syncColor: this.state.sync === 'error' ? '#F2A9A6' : this.state.sync === 'saved' ? '#E6BE6E' : '#A8A398',
+      saveCopy: this.state.sync === 'local' ? 'Your answers save on this device as you type. When you finish, download the workbook and send the file to Chip.' : 'Your answers save to the church account as you type, so you can pick up on any device with your password. When you finish, download the workbook and send the file to Chip.',
+      pwVal: this.state.pw, hasPwErr: this.state.pwErr,
+      onPw: e => this.setState({ pw: e.target.value, pwErr: false }),
+      submitPw: e => { e.preventDefault(); const h = this.hash(this.state.pw); if (this.okHash(h)) { try { localStorage.setItem(h === this.constructor.PW.leader ? 'ofc-unlock-leader' : 'ofc-unlock-' + this.D.key, h); } catch (x) {} this.setState({ unlocked: true, pw: '' }, () => this.pull()); } else this.setState({ pwErr: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

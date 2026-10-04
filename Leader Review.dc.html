@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3EFE6;color:#141412;font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#9C6B1E;text-decoration:none}
+a:hover{color:#7E5414}
+*{box-sizing:border-box}
+button{font:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F3EFE6">
+<sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;background:#141412;color:#F3EFE6;display:flex;flex-direction:column">
+  <div style="max-width:1120px;width:100%;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+    <a href="DEEPER%20Team%20Guide.dc.html" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#E6BE6E">← Planning week site</a>
+  </div>
+  <div style="flex:1;display:flex;align-items:center">
+    <div style="max-width:1120px;width:100%;margin:0 auto;padding:clamp(40px,8vw,96px) clamp(20px,5vw,48px)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E">DEEPER | Leader review</div>
+      <h1 style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,8vw,96px);line-height:0.92;color:#F3EFE6;font-stretch:125%">Melo and Chip only</h1>
+      <form onSubmit="{{ submitPw }}" style="margin-top:32px;display:flex;flex-wrap:wrap;gap:10px;max-width:520px">
+        <input type="password" value="{{ pwVal }}" onChange="{{ onPw }}" placeholder="Leader password" style="flex:1;min-width:220px;padding:14px 16px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:#1E1E1B;color:#F3EFE6;font-size:16px">
+        <button type="submit" style="padding:14px 22px;border:none;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;cursor:pointer" style-hover="background:#E6BE6E">Unlock</button>
+      </form>
+      <sc-if value="{{ hasPwErr }}" hint-placeholder-val="{{ false }}"><div style="margin-top:12px;font-size:15px;color:#F2A9A6">That password is not correct.</div></sc-if>
+    </div>
+  </div>
+</div>
+</sc-if>
+<sc-if value="{{ unlocked }}" hint-placeholder-val="{{ false }}">
+<header style="background:#141412;color:#F3EFE6">
+  <div style="max-width:1120px;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px) clamp(40px,6vw,64px)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+      <div style="display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#A8A398"><span style="width:8px;height:8px;border-radius:50%;background:#D9A441"></span>Melo and Chip only</div>
+    </div>
+    <div style="margin-top:clamp(40px,7vw,72px);font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E">DEEPER | 2027 planning | Leader review</div>
+    <h1 style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,8vw,96px);line-height:0.92;color:#F3EFE6;font-stretch:125%">Submitted workbooks</h1>
+    <p style="margin:20px 0 0;max-width:720px;font-size:18px;line-height:1.55;color:#CFC9BC;text-wrap:pretty">Open the workbook files the team sends you. They load in this browser only and are never uploaded.</p>
+    <div onDragOver="{{ onDragOver }}" onDrop="{{ onDrop }}" style="margin-top:32px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:24px;border:1.5px dashed {{ dropLine }};border-radius:12px;background:#1E1E1B">
+      <div style="font-size:16px;color:#F3EFE6">Drop workbook files here, or</div>
+      <button onClick="{{ pick }}" style="padding:14px 20px;border:none;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;cursor:pointer" style-hover="background:#E6BE6E">Choose files</button>
+      <sc-if value="{{ hasSync }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ loadCloud }}" style="padding:14px 20px;border:1.5px solid #D9A441;border-radius:8px;background:transparent;color:#D9A441;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;cursor:pointer" style-hover="background:#D9A441;color:#141412">{{ cloudLabel }}</button>
+      </sc-if>
+      <input ref="{{ fileRef }}" type="file" multiple accept=".doc,.html,.htm" onChange="{{ onPick }}" style="display:none">
+    </div>
+    <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ expected }}" as="x" hint-placeholder-count="9">
+        <button onClick="{{ x.open }}" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid {{ x.line }};background:{{ x.bg }};color:{{ x.fg }};font-size:13px;font-weight:700;cursor:{{ x.cursor }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ x.dot }}"></span>{{ x.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+</header>
+
+<main style="max-width:1120px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(20px,5vw,48px)">
+  <sc-if value="{{ empty }}" hint-placeholder-val="{{ true }}">
+    <div style="padding:56px 24px;border:1px solid #DDD6C8;border-radius:16px;background:#FAF7F0;text-align:center">
+      <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#141412">No workbooks loaded yet</div>
+      <p style="margin:10px auto 0;max-width:520px;font-size:16px;line-height:1.6;color:#5E5A52">Each person downloads their workbook with "Download for Chip" and sends you the file.</p>
+    </div>
+  </sc-if>
+  <sc-if value="{{ hasCur }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">{{ cur.person }} · saved {{ cur.saved }}</div>
+        <h2 style="margin:10px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">{{ cur.title }}</h2>
+        <div style="margin-top:10px;font-size:15px;color:#5E5A52">{{ cur.stat }}</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onClick="{{ toggleEmpty }}" style="padding:10px 14px;border:1.5px solid #141412;border-radius:8px;background:{{ toggleBg }};color:{{ toggleFg }};font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer">Hide unanswered</button>
+        <button onClick="{{ remove }}" style="padding:10px 14px;border:1.5px solid #CFC9BC;border-radius:8px;background:transparent;color:#5E5A52;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer">Remove</button>
+      </div>
+    </div>
+    <sc-for list="{{ sections }}" as="s" hint-placeholder-count="4">
+      <section style="margin-top:48px">
+        <div style="padding-bottom:10px;border-bottom:2px solid #D9A441;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#7E5414">{{ s.eyebrow }}</div>
+        <sc-for list="{{ s.items }}" as="it" hint-placeholder-count="3">
+          <div style="margin-top:24px">
+            <div style="max-width:780px;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;line-height:1.45;color:#141412">{{ it.label }}</div>
+            <sc-if value="{{ it.isF }}" hint-placeholder-val="{{ true }}">
+              <div style="margin-top:8px;padding:14px 16px;border-radius:10px;background:{{ it.bg }};font-size:16px;line-height:1.6;color:{{ it.fg }};white-space:pre-wrap">{{ it.value }}</div>
+            </sc-if>
+            <sc-if value="{{ it.isT }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:8px;border:1px solid #DDD6C8;border-radius:10px;overflow-x:auto;background:#FAF7F0">
+                <div style="min-width:{{ it.minW }}">
+                  <sc-if value="{{ it.hasHead }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:grid;grid-template-columns:{{ it.cols }};gap:12px;padding:12px 16px;background:#141412;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#A8A398">
+                      <sc-for list="{{ it.head }}" as="h" hint-placeholder-count="4"><div>{{ h }}</div></sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-for list="{{ it.rows }}" as="row" hint-placeholder-count="3">
+                    <div style="display:grid;grid-template-columns:{{ it.cols }};gap:12px;padding:12px 16px;border-top:1px solid #E8E2D5">
+                      <sc-for list="{{ row }}" as="c" hint-placeholder-count="4"><div style="font-size:14px;line-height:1.5;color:{{ c.fg }};font-weight:{{ c.w }};white-space:pre-wrap;min-width:0">{{ c.t }}</div></sc-for>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </section>
+    </sc-for>
+  </sc-if>
+</main>
+<footer style="background:#141412;padding:32px 0">
+  <div style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,48px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.14em;color:#F3EFE6">DEEPER: <span style="color:#A8A398;font-weight:600;letter-spacing:0.04em">Leader review</span></div>
+    <a href="DEEPER%20Team%20Guide.dc.html" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#D9A441">Team Guide ↗</a>
+  </div>
+</footer>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { books: {}, sel: null, hide: false, drag: false, unlocked: false, pw: '', pwErr: false };
+  static LEADER = 'ac3adfdf';
+  hash(s) { let x = 0x811c9dc5; s = String(s).trim().toLowerCase(); for (let i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(16); }
+  componentDidMount() {
+    try { if (localStorage.getItem('ofc-unlock-leader') === this.constructor.LEADER) this.setState({ unlocked: true }); } catch (e) {}
+    fetch('sync-config.json', { cache: 'no-store' }).then(r => r.json()).then(j => { if (j && j.url) { this.syncUrl = j.url; this.setState({ hasSync: true }, () => { if (this.state.unlocked) this.loadCloud(); }); } }).catch(() => {});
+  }
+  loadCloud() {
+    if (!this.syncUrl) return;
+    this.setState({ cloud: 'loading' });
+    fetch(this.syncUrl + '?all=1&token=' + this.constructor.LEADER).then(r => r.json()).then(res => {
+      if (!res.ok) return this.setState({ cloud: 'error' });
+      this.setState(s => { const books = { ...s.books }; (res.list || []).forEach(ex => { if (ex && ex.key && (!books[ex.key] || books[ex.key].savedAt < ex.savedAt)) books[ex.key] = ex; }); return { books, sel: s.sel || Object.keys(books)[0] || null, cloud: 'done' }; });
+    }).catch(() => this.setState({ cloud: 'error' }));
+  }
+  fileRef = React.createRef();
+  static EXPECTED = [['melo','Melo'],['chip','Chip'],['brittney','Brittney · Kids'],['nicole','Nicole · Creative'],['connections','Connections'],['bre','Bre'],['crystal','Crystal'],['fanancy','Fanancy'],['students','Students']];
+  load(files) {
+    const TAG = 'scr' + 'ipt';
+    const re = new RegExp('<' + TAG + ' type="application/json" id="ofc-workbook">([\\s\\S]*?)</' + TAG + '>');
+    Array.from(files || []).forEach(f => {
+      const r = new FileReader();
+      r.onload = () => {
+        const m = String(r.result).match(re);
+        let ex = null;
+        try { ex = m && JSON.parse(m[1]); } catch (e) {}
+        if (!ex || !ex.key) return;
+        this.setState(s => {
+          const prev = s.books[ex.key];
+          if (prev && prev.savedAt > ex.savedAt) return null;
+          return { books: { ...s.books, [ex.key]: ex }, sel: s.sel || ex.key };
+        });
+      };
+      r.readAsText(f);
+    });
+  }
+  renderVals() {
+    const { books, sel, hide } = this.state;
+    const expected = this.constructor.EXPECTED.map(([k, label]) => {
+      const has = !!books[k], on = sel === k;
+      return { label, open: () => has && this.setState({ sel: k }), bg: on ? '#D9A441' : has ? '#1E1E1B' : 'transparent', fg: on ? '#141412' : has ? '#F3EFE6' : '#7A756B', line: on ? '#D9A441' : has ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.1)', dot: on ? '#141412' : has ? '#D9A441' : '#4A463F', cursor: has ? 'pointer' : 'default' };
+    });
+    const b = sel && books[sel];
+    const filled = v => v != null && String(v).trim() !== '';
+    let sections = [], total = 0, done = 0;
+    if (b) {
+      sections = b.sections.map(s => ({
+        eyebrow: s.eyebrow || s.label,
+        items: s.items.map(it => {
+          if (it.t === 'f') { total++; if (filled(it.value)) done++; return { label: it.label, isF: true, isT: false, value: filled(it.value) ? it.value : 'Not answered', bg: filled(it.value) ? '#FFFDF8' : '#EFEADF', fg: filled(it.value) ? '#141412' : '#8F897D', any: filled(it.value) }; }
+          const rows = it.t === 'o' ? it.rows : it.rows;
+          const any = rows.some(r => (it.t === 'o' ? filled(r[1]) : r.some(filled)));
+          total++; if (any) done++;
+          const n = it.t === 'o' ? 2 : it.head.length;
+          return { label: it.label, isF: false, isT: true, hasHead: it.t === 'g', head: it.head || [], cols: n <= 2 ? 'minmax(140px,1fr) minmax(0,2fr)' : 'repeat(' + n + ',minmax(0,1fr))', minW: (n * 140) + 'px', rows: rows.map(r => r.map((c, ci) => ({ t: filled(c) ? c : '—', fg: filled(c) ? '#141412' : '#A8A398', w: ci === 0 ? 700 : 400 }))), any };
+        }).filter(it => !hide || it.any)
+      })).filter(s => s.items.length);
+    }
+    return {
+      unlocked: this.state.unlocked, locked: !this.state.unlocked, pwVal: this.state.pw, hasPwErr: this.state.pwErr,
+      onPw: e => this.setState({ pw: e.target.value, pwErr: false }),
+      submitPw: e => { e.preventDefault(); const h = this.hash(this.state.pw); if (h === this.constructor.LEADER) { try { localStorage.setItem('ofc-unlock-leader', h); } catch (x) {} this.setState({ unlocked: true, pw: '' }, () => this.loadCloud()); } else this.setState({ pwErr: true }); },
+      hasSync: !!this.state.hasSync, loadCloud: () => this.loadCloud(),
+      cloudLabel: ({ loading: 'Loading…', error: 'Retry cloud load', done: 'Refresh from cloud' })[this.state.cloud] || 'Load from cloud',
+      expected, empty: !b, hasCur: !!b, sections,
+      cur: b ? { person: b.person, title: b.title, saved: new Date(b.savedAt).toLocaleString(), stat: done + ' of ' + total + ' prompts have answers' } : {},
+      dropLine: this.state.drag ? '#D9A441' : 'rgba(255,255,255,0.25)',
+      pick: () => this.fileRef.current && this.fileRef.current.click(),
+      fileRef: this.fileRef,
+      onPick: e => { this.load(e.target.files); e.target.value = ''; },
+      onDragOver: e => { e.preventDefault(); if (!this.state.drag) this.setState({ drag: true }); },
+      onDrop: e => { e.preventDefault(); this.setState({ drag: false }); this.load(e.dataTransfer.files); },
+      toggleEmpty: () => this.setState(s => ({ hide: !s.hide })),
+      toggleBg: hide ? '#141412' : 'transparent', toggleFg: hide ? '#F3EFE6' : '#141412',
+      remove: () => this.setState(s => { const books = { ...s.books }; delete books[s.sel]; return { books, sel: Object.keys(books)[0] || null }; })
+    };
+  }
+}
+</script>
+</body>
+</html>

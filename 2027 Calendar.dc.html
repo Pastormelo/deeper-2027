@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#F3EFE6;color:#141412;font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#9C6B1E;text-decoration:none}
+a:hover{color:#7E5414}
+*{box-sizing:border-box}
+input,button{font:inherit}
+input:focus{outline:none;box-shadow:0 0 0 3px rgba(217,164,65,0.45)}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F3EFE6">
+<sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;background:#141412;color:#F3EFE6;display:flex;flex-direction:column">
+  <div style="max-width:1200px;width:100%;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+    <a href="DEEPER%20Team%20Guide.dc.html" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#E6BE6E">← Planning week site</a>
+  </div>
+  <div style="flex:1;display:flex;align-items:center">
+    <div style="max-width:1200px;width:100%;margin:0 auto;padding:clamp(40px,8vw,96px) clamp(20px,5vw,48px)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E">One Family Church | DEEPER | 2027</div>
+      <h1 style="margin:14px 0 0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,9vw,104px);line-height:0.92;color:#F3EFE6;font-stretch:125%">The 2027 calendar</h1>
+      <p style="margin:24px 0 0;max-width:560px;font-size:18px;line-height:1.55;color:#CFC9BC">The calendar opens when the planning week is ready. Enter the team password.</p>
+      <form onSubmit="{{ submitPw }}" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;max-width:520px">
+        <input type="password" value="{{ pwVal }}" onChange="{{ onPw }}" placeholder="Team password" style="flex:1;min-width:220px;padding:14px 16px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:#1E1E1B;color:#F3EFE6;font-size:16px">
+        <button type="submit" style="padding:14px 22px;border:none;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;cursor:pointer" style-hover="background:#E6BE6E">Unlock</button>
+      </form>
+      <sc-if value="{{ hasPwErr }}" hint-placeholder-val="{{ false }}"><div style="margin-top:12px;font-size:15px;color:#F2A9A6">That password is not correct.</div></sc-if>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ unlocked }}" hint-placeholder-val="{{ false }}">
+<header style="background:#141412;color:#F3EFE6">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(28px,5vw,44px) clamp(20px,5vw,48px) clamp(36px,5vw,56px)">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <img src="assets/onefamily-horizontal-reversed.png" alt="One Family Church" style="height:34px;width:auto;display:block;filter:brightness(0) invert(1)">
+      <a href="DEEPER%20Team%20Guide.dc.html" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#E6BE6E">← Planning week site</a>
+    </div>
+    <div style="margin-top:clamp(40px,6vw,64px);font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#E6BE6E">One Family Church | DEEPER | 2027 reading view</div>
+    <div style="margin-top:14px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px">
+      <div>
+        <h1 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,8vw,96px);line-height:0.92;color:#F3EFE6;font-stretch:125%">The 2027 calendar</h1>
+        <p style="margin:20px 0 0;max-width:680px;font-size:18px;line-height:1.55;color:#CFC9BC;text-wrap:pretty">Year at a glance, the preaching plan, one readable page per month, open items, and the Wednesday list. Where the reading view and the workbook differ, the workbook is the record.</p>
+      </div>
+      <a href="{{ sheetEdit }}" target="_blank" rel="noopener" style="padding:14px 20px;border-radius:8px;background:#D9A441;color:#141412;font-family:'Archivo',sans-serif;font-weight:800;font-size:16px" style-hover="background:#E6BE6E">Open in Google Sheets ↗</a>
+    </div>
+  </div>
+</header>
+
+<nav style="position:sticky;top:0;z-index:20;background:rgba(20,20,18,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.1)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(12px,4vw,40px);display:flex;gap:4px;overflow-x:auto;scrollbar-width:none">
+    <a href="#sheet" style="flex:none;padding:16px 12px 14px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;color:#CFC9BC">Calendar</a>
+    <a href="#read" style="flex:none;padding:16px 12px 14px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;color:#CFC9BC">How to read it</a>
+  </div>
+</nav>
+
+<main>
+<section id="sheet" style="scroll-margin-top:56px;padding:clamp(32px,5vw,56px) 0">
+  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(12px,3vw,48px)">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
+      <sc-for list="{{ legend }}" as="l" hint-placeholder-count="5">
+        <span style="padding:6px 10px;border-radius:4px;background:{{ l.bg }};color:{{ l.fg }};font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;letter-spacing:0.12em">{{ l.label }}</span>
+      </sc-for>
+      <a href="#read" style="padding:6px 4px;font-size:13px;font-weight:700">What these mean ↓</a>
+    </div>
+    <div style="border:1px solid #DDD6C8;border-radius:12px;overflow:hidden;background:#FFFFFF;box-shadow:0 1px 2px rgba(20,20,18,0.05)">
+      <iframe src="{{ sheetEmbed }}" title="2027 calendar (Google Sheets)" style="display:block;width:100%;height:max(560px,78vh);border:0"></iframe>
+    </div>
+    <p style="margin:12px 0 0;font-size:14px;line-height:1.55;color:#5E5A52">If the calendar does not show, sign in to Google with your church account or use Open in Google Sheets.</p>
+  </div>
+</section>
+
+<section id="read" style="scroll-margin-top:56px;padding:clamp(56px,8vw,88px) 0;border-top:1px solid #DDD6C8;background:#FAF7F0">
+  <div style="max-width:1040px;margin:0 auto;padding:0 clamp(20px,5vw,48px)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#9C6B1E">Reference</div>
+    <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#141412;font-stretch:125%">How to read this</h2>
+    <div style="margin-top:32px;display:flex;flex-direction:column;border-top:1px solid #DDD6C8">
+      <sc-for list="{{ labels }}" as="l" hint-placeholder-count="6">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px 24px;padding:18px 0;border-bottom:1px solid #DDD6C8;align-items:start">
+          <div><span style="display:inline-block;padding:6px 10px;border-radius:4px;background:{{ l.bg }};color:{{ l.fg }};font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;letter-spacing:0.12em">{{ l.label }}</span></div>
+          <div style="grid-column:span 2;font-size:16px;line-height:1.55;color:#2E2C28">{{ l.meaning }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:#141412;padding:32px 0">
+  <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,48px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.14em;color:#F3EFE6">DEEPER: <span style="color:#A8A398;font-weight:600;letter-spacing:0.04em">2027 calendar</span></div>
+    <a href="#sheet" style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#D9A441">Back to top ↑</a>
+  </div>
+</footer>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;sheetMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;View only&quot;,&quot;Editable&quot;],&quot;default&quot;:&quot;View only&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { unlocked: false, pw: '', pwErr: false };
+  static OK = ['81bef21f', 'ac3adfdf'];
+  static SHEET = '1WE1vdd5SkSzNp2AZgU8Ld7vIRmRLxt48Km34_1gKOos';
+  static GID = '1915286845';
+  hash(s) { let x = 0x811c9dc5; s = String(s).trim().toLowerCase(); for (let i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(16); }
+  componentDidMount() {
+    try { const ok = this.constructor.OK; if (ok.includes(localStorage.getItem('ofc-unlock-calendar')) || localStorage.getItem('ofc-unlock-leader') === ok[1]) this.setState({ unlocked: true }); } catch (e) {}
+  }
+  renderVals() {
+    const C = this.constructor;
+    const mode = this.props.sheetMode ?? 'View only';
+    const base = 'https://docs.google.com/spreadsheets/d/' + C.SHEET;
+    const L = (label, bg, fg, meaning) => ({ label, bg, fg, meaning });
+    const labels = [
+      L('SETTLED', '#DDF1E4', '#1F6B40', 'The ministry, rhythm or decision is approved. "Date proposed" beside it means the exact date still awaits approval; "date set" means it is fixed.'),
+      L('PROPOSED', '#EBDDBA', '#7E5414', 'Suggested and awaiting approval. Do not announce, book or spend.'),
+      L('UNDER REVIEW', '#D0ECF6', '#1D5F6E', 'Staff review required; may not happen. No reserved date or budget.'),
+      L('PAUSED (REVIEW)', '#DDD6C8', '#2E2C28', 'Provisionally paused for 2027 pending review (VBS, Easter Egg Hunt).'),
+      L('DECISION NEEDED', '#F8DEDD', '#9A2E2B', 'A choice with an approver and a needed-by date; see the open items page.'),
+      L('WINDOW · PENDING PARTNER · LEADER-ARRANGED', '#E8E2D5', '#4A463F', 'A date range, not a single event; a date the partner sets; a rhythm groups or teams arrange themselves.')
+    ];
+    const M = [
+      ['January', 'Standalone Jan 3; DEEPER introduction Jan 10 to 24; guest Jan 31', 'DFT spring begins Jan 13; Groups leader orientation Jan 23; fifth anniversary and public theme reveal Jan 10; residency begins; mission recruitment Jan 24'],
+      ['February', 'Daniel 1-6 begins Feb 7; elder/resident Feb 28', 'Family Groups rollout proposed Feb 8; baptisms Feb 21; Melo review retreat Feb 22-25 (proposed)'],
+      ['March', 'Daniel closes Mar 14; Palm Sunday Mar 21; Good Friday Mar 26; Easter Mar 28', 'Spring DFT completes Mar 17; Kids training Mar 6; baptisms Mar 28; Q1 staffing and guest-return checkpoint Mar 31'],
+      ['April', 'Guest Apr 4; 1 Timothy begins Apr 11', "Parent Commissioning Apr 25; Thrive/FAM event proposed Apr 17; staff retreat Apr 19-20 (proposed); men's/women's pairing decision"],
+      ['May', '1 Timothy closes May 23; Global Mission Sunday May 30', 'Baptisms May 16; team commissioning May 30; confirm June travel and coverage'],
+      ['June', 'Habits opens Jun 6; Jun 13, 20, 27 delegated', 'Prince of Peace trip window (partner dates pending); leader identification deadline Jun 30'],
+      ['July', 'Melo closes Habits Jul 4; guests Jul 11, 18; Multiply the Workers Jul 25', 'Family vacation Jul 5-20 (proposed); 2027 ministry progress update 1 Jul 25; Chip leads Q2 review Jul 13'],
+      ['August', 'Guest Aug 1; James begins Aug 8; Aug 29 delegated', 'DFT fall begins Aug 18; Groups coaching Aug 21; baptisms Aug 22; Kids training Aug 14; Bash under review'],
+      ['September', 'James continues; Sep 19 delegated', 'Groups listing refresh proposed Sep 7; Melo planning retreat Sep 13-17 (proposed); prayer night Sep 15'],
+      ['October', 'James closes Oct 3; strategic Oct 10, 24; guests Oct 17, 31', 'Fall DFT completes Oct 27; 2027 ministry progress update 2 and baptisms Oct 24; 2028 staff planning week Oct 11-14 (proposed)'],
+      ['November', 'Generosity Nov 7, 14; guest Nov 21; Advent begins Nov 28', 'Welcome to the Family Nov 14; prayer night Nov 17; Thanksgiving-eve Wednesday Nov 24 coverage decision'],
+      ['December', 'Advent Dec 5, 12, 19; guest Dec 26', 'Prince of Peace gift Dec 5; baptisms Dec 19; Christmas Eve under review; year-end sustainability milestone Dec 31']
+    ];
+    return {
+      unlocked: this.state.unlocked, locked: !this.state.unlocked,
+      pwVal: this.state.pw, hasPwErr: this.state.pwErr,
+      onPw: e => this.setState({ pw: e.target.value, pwErr: false }),
+      submitPw: e => { e.preventDefault(); const h = this.hash(this.state.pw); if (C.OK.includes(h)) { try { localStorage.setItem(h === C.OK[1] ? 'ofc-unlock-leader' : 'ofc-unlock-calendar', h); } catch (x) {} this.setState({ unlocked: true, pw: '' }); } else this.setState({ pwErr: true }); },
+      sheetEdit: base + '/edit?gid=' + C.GID + '#gid=' + C.GID,
+      sheetEmbed: mode === 'Editable' ? base + '/edit?rm=minimal&gid=' + C.GID + '#gid=' + C.GID : base + '/htmlview?gid=' + C.GID + '&widget=true&headers=false',
+      legend: labels.slice(0, 5),
+      labels,
+      shape: [
+        { k: 'Sundays', v: '52 Sundays; two services at 9:09 and 11:11 a.m. Melo preaches 35 Sundays plus Good Friday (36 messages). 17 Sundays are guest, elder or resident (category only; no person booked).' },
+        { k: 'Series', v: 'Start-the-year standalone Jan 3; DEEPER introduction Jan 10 to 24 (three messages); Daniel 1 to 6 (Feb 7 to Mar 14); 1 Timothy (Apr 11 to May 23); Habits That Transform Us (Jun 6 to Jul 4); James (Aug 8 to Oct 3); Generosity (Nov 7, 14); Advent (Nov 28 to Dec 19). Holy Week: Palm Sunday Mar 21, Good Friday Mar 26, Resurrection Sunday Mar 28. Global Mission Sunday May 30. Strategic standalones Jul 25, Oct 10, Oct 24. Christmas Eve is UNDER REVIEW (D24).' },
+        { k: 'Wednesdays', v: '52 Wednesdays: 26 Formation Nights, 20 DFT sessions (spring Jan 13 to Mar 17; fall Aug 18 to Oct 27, skipping Sep 15), 6 Prayer / Worship Gatherings (Jan 6, Mar 24, May 19, Jul 14, Sep 15, Nov 17). No automatic holiday or summer breaks; coverage is decided explicitly.' },
+        { k: 'Sunday rhythm', v: 'Communion and One Weekend on first Sundays (12; July on the 11th). Welcome to the Family six times (Jan 24, Mar 14, May 23, Jul 25, Sep 26, Nov 14). Six Baptism Sundays (Feb 21, Mar 28, May 16, Aug 22, Oct 24, Dec 19), each preceded by a class. Bring Your One Mar 28 and Aug 22. ministry progress updates Jul 25 and Oct 24.' },
+        { k: 'Protected windows', v: 'Melo review retreat Feb 22 to 25; staff retreat Apr 19 to 20; Prince of Peace trip in June (partner dates pending); Melo family vacation Jul 5 to 20; Melo planning retreat Sep 13 to 17; staff planning week Oct 11 to 14 (plans 2028).' },
+        { k: 'Year-long rhythms', v: 'DNA Groups and the Groups proposal, approval and leader-release process run Jan 1 to Dec 31; Family Groups from Feb 8. All three are SETTLED and leader-arranged, so they do not appear on the monthly pages.' },
+        { k: 'Checkpoints', v: 'Mar 31 (staffing; guest-return baseline). Jun 30 (leader development). Dec 31 (2027 outcomes; financial sustainability). Scorecard reviews in staff meeting monthly; quarterly Apr 13, Jul 13, Oct 12.' }
+      ],
+      months: M.map(([name, preach, plan], i) => ({ n: String(i + 1).padStart(2, '0'), name, preach, plan }))
+    };
+  }
+}
+</script>
+</body>
+</html>
