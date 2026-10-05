@@ -57,7 +57,7 @@ button{font:inherit}
       <input ref="{{ fileRef }}" type="file" multiple accept=".doc,.html,.htm" onChange="{{ onPick }}" style="display:none">
     </div>
     <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:8px">
-      <sc-for list="{{ expected }}" as="x" hint-placeholder-count="9">
+      <sc-for list="{{ expected }}" as="x" hint-placeholder-count="10">
         <button onClick="{{ x.open }}" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid {{ x.line }};background:{{ x.bg }};color:{{ x.fg }};font-size:13px;font-weight:700;cursor:{{ x.cursor }}"><span style="width:7px;height:7px;border-radius:50%;background:{{ x.dot }}"></span>{{ x.label }}</button>
       </sc-for>
     </div>
@@ -141,7 +141,7 @@ class Component extends DCLogic {
     }).catch(() => this.setState({ cloud: 'error' }));
   }
   fileRef = React.createRef();
-  static EXPECTED = [['melo','Melo'],['chip','Chip'],['brittney','Brittney · Kids'],['nicole','Nicole · Creative'],['connections','Connections'],['bre','Bre'],['crystal','Crystal'],['fanancy','Fanancy'],['students','Students']];
+  static EXPECTED = [['melo','Melo'],['chip','Chip'],['brittney','Brittney · Kids'],['nicole','Nicole · Creative'],['connections','Connections'],['bre','Bre'],['crystal','Crystal'],['danny','Danny · Worship'],['fanancy','Fanancy'],['students','Students']];
   load(files) {
     const TAG = 'scr' + 'ipt';
     const re = new RegExp('<' + TAG + ' type="application/json" id="ofc-workbook">([\\s\\S]*?)</' + TAG + '>');

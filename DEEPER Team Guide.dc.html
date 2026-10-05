@@ -87,7 +87,7 @@ input:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(217,164,65,0.4
     <h2 style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#F3EFE6;font-stretch:125%">Calendar and workbooks</h2>
     <p style="margin:16px 0 0;max-width:720px;font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(18px,2.2vw,22px);line-height:1.45;color:#CFC9BC;text-wrap:pretty">The 2027 calendar uses one team password. Each workbook has its own password, and Chip gives you yours. Your answers save on your device; download the finished file and send it to Chip.</p>
     <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px">
-      <sc-for list="{{ workbooks }}" as="w" hint-placeholder-count="10">
+      <sc-for list="{{ workbooks }}" as="w" hint-placeholder-count="11">
         <article style="display:flex;flex-direction:column;background:#1E1E1B;border:1px solid {{ w.line }};border-radius:12px;padding:22px 20px">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
             <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#E6BE6E">{{ w.who }}</div>
@@ -525,6 +525,7 @@ class Component extends DCLogic {
     ['connections', 'Brittney and Nicole', 'Connections', 'Workbook - Connections - Brittney and Nicole', 'aa968e03'],
     ['bre', 'Bre', 'Executive Support and Communications', 'Workbook - Executive Support and Communications - Bre', 'bbacb9d8'],
     ['crystal', 'Crystal', 'Events and Spaces', 'Workbook - Events and Spaces - Crystal', 'c8ad8b8'],
+    ['danny', 'Danny', 'Interim Worship', 'Workbook - Interim Worship - Danny', 'a4071b62'],
     ['fanancy', 'Fanancy', 'Ministry Systems and Strategic Support', 'Workbook - Ministry Systems - Fanancy', 'c9239b9a'],
     ['students', 'Chip with the future students leader', 'Student Ministry', 'Workbook - Student Ministry - Students Leader', 'f309460e'],
     ['review', 'Melo and Chip', 'Leader Review', 'Leader Review', 'ac3adfdf']
@@ -654,7 +655,8 @@ class Component extends DCLogic {
         { name: 'Nicole', plan: 'Creative plan. Shared Connections plan with Brittney.', with: 'Bre, Crystal, Brittney, Melo' },
         { name: 'Bre', plan: 'Executive support to the Lead Pastor, and Communications. Reports directly to Melo.', with: 'Melo, Nicole, Chip, Crystal' },
         { name: 'Crystal', plan: 'Events and Spaces plan. Continues compiling the 2027 Ministry Scorecard; Chip supervises.', with: 'Chip, Brittney, Bre, Nicole' },
-        { name: 'Fanancy', plan: 'Ministry Systems and Strategic Support. Advises Melo and Chip on systems and planning processes, completes projects they assign, and continues Planning Center scheduling for serve teams.', with: 'Chip, Melo, team leaders when consulted' },
+        { name: 'Danny', plan: 'Interim worship plan through March 31: Sunday worship, song selection inside the framework Melo approves, rehearsal and platform flow. Bounded on purpose, plus a handoff file for the next worship leader.', with: 'Melo (framework, Sunday direction), Bre (worship back end and production), Fanancy (scheduling and team updates), Brittney (Kids Serve Sunday)' },
+        { name: 'Fanancy', plan: 'Ministry Systems and Strategic Support Advisor (volunteer). Advises Melo and Chip on systems and planning processes, carries projects they assign, and continues Planning Center scheduling for worship, production, Kids and other serve teams, and sends routine team updates for Danny. Advisory: no one reports to her, and every ministry keeps ownership of its own work.', with: 'Chip (direction), Melo (counsel), team leaders when consulted' },
         { name: 'Future students leader (if attending)', plan: 'Assessment-first contribution to the Students draft. Chip remains responsible and provides authorized information.', with: 'Chip' }
       ],
       outcomes: [
