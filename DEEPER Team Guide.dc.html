@@ -334,7 +334,7 @@ input:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(217,164,65,0.4
     </div>
 
     <h3 style="margin:64px 0 12px;font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;color:#F3EFE6">The daily rhythm</h3>
-    <p style="margin:0;max-width:760px;font-size:16px;line-height:1.7;color:#CFC9BC;text-wrap:pretty">The morning block (9:00 to 12:15) and the closing block (3:45 to 5:00) are the reliable shared windows; collaborative work and decisions affecting several people happen there. The early afternoon is for individual drafting, consultations, and school pickup. Return for the closing block when you can; if you cannot, send Chip a short written update before 3:45. Two days run differently: Wednesday afternoon is when each plan is presented and gets feedback, and Thursday finishes by mid-afternoon.</p>
+    <p style="margin:0;max-width:760px;font-size:16px;line-height:1.7;color:#CFC9BC;text-wrap:pretty">The morning block (9:00 to 12:15) and the closing block (3:45 to 5:00) are the reliable shared windows; collaborative work and decisions affecting several people happen there. The early afternoon is for individual drafting, consultations, and school pickup. Return for the closing block when you can; if you cannot, send Chip a short written update before 3:45. Two days run differently: Wednesday is for completing your plan and preparing to present, and the only group report is the brief 3:45 closing check-in. Thursday morning is when each plan is presented and gets feedback, and Thursday finishes by mid-afternoon.</p>
     <div style="margin-top:28px;border:1px solid rgba(255,255,255,0.14);border-radius:12px;overflow:hidden">
       <sc-for list="{{ rhythm }}" as="r" hint-placeholder-count="9">
         <div style="display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:16px;padding:16px 20px;border-top:1px solid rgba(255,255,255,0.1);background:{{ r.bg }}">
@@ -568,8 +568,8 @@ class Component extends DCLogic {
     const daysRaw = [
       ['Monday','Oct 5','Hear the vision and the new order of service. Clarify your assignment and boundaries. Assess current reality from your prework.','Monday page: current picture; the most important problem or opportunity; what the new Sunday rhythm changes for your area.'],
       ['Tuesday','Oct 6','Choose one to three outcomes. Draft first steps. Consult the people your plan depends on.','Tuesday page: outcomes with baselines, evidence and first actions.'],
-      ['Wednesday','Oct 7','Reconcile calendar, coverage, people and the budget your plan needs. Confirm handoffs. Present the draft in the afternoon and hear feedback.','Wednesday page complete: calendar proposals, people, budget proposal, requests marked agreed or pending, and feedback written on your draft.'],
-      ['Thursday','Oct 8','Finish. Work in the feedback, close the gaps you left open, write the summary, submit. We finish and close early.',"Thursday page: the ministry plan summary, plus the completed workbook in Chip's hands."]
+      ['Wednesday','Oct 7','Reconcile calendar, coverage, people and the budget your plan needs. Confirm handoffs. Finish the draft and prepare to present. The only group report is the brief 3:45 closing check-in; full presentations happen Thursday.','Wednesday page complete: calendar proposals, people, budget proposal, requests marked agreed or pending, and your draft presentation-ready.'],
+      ['Thursday','Oct 8','Present your plan in the morning (about 10 to 15 minutes, then about 5 minutes of feedback). Work in the feedback, close the gaps you left open, write the summary, submit. We finish and close early.',"Thursday page: the ministry plan summary, plus the completed workbook in Chip's hands."]
     ];
     const days = daysRaw.map(([day, date, focus, finish], i) => { const t = i === todayIdx; return { day, date, focus, finish, today: t, bg: t ? '#D9A441' : '#1E1E1B', fg: t ? '#141412' : '#F3EFE6', sub: t ? '#141412' : '#E6BE6E', border: t ? '#D9A441' : 'rgba(255,255,255,0.12)' }; });
 
@@ -581,8 +581,8 @@ class Component extends DCLogic {
       ['1:45 to 3:45','Flexible drafting and school pickup window. No group decisions.',0],
       ['3:45 to 4:40','Closing check-in for everyone back in the room; written updates from anyone still out.',1],
       ['4:40 to 5:00','Add decisions and requests to the register.',1],
-      ['Wednesday, 1:00 on','Each plan presented in about ten minutes with five minutes of feedback. Write down the two or three changes you will make.',2],
-      ['Thursday','Finish the plan, complete the summary, and hand the workbook to Chip. We close by mid-afternoon.',2]
+      ['Wednesday, 3:45','Closing check-in only. Each person briefly reports estimated cost total, people and support needed, and requests still pending. No full presentations on Wednesday.',2],
+      ['Thursday morning','Each plan presented in about 10 to 15 minutes with about 5 minutes of feedback. Write down the two or three changes you will make, revise, and hand the workbook to Chip. We close by mid-afternoon.',2]
     ];
     const rhythm = rhythmRaw.map(([time, what, k]) => ({ time, what, tc: k === 0 ? '#A8A398' : '#E6BE6E', bg: k === 1 ? 'rgba(217,164,65,0.08)' : k === 2 ? '#1E1E1B' : 'transparent' }));
 
