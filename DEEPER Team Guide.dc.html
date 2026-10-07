@@ -325,6 +325,12 @@ input:focus,textarea:focus{outline:none;box-shadow:0 0 0 3px rgba(217,164,65,0.4
           </div>
           <div style="margin-top:6px;font-family:'Archivo',sans-serif;font-weight:900;font-size:28px;font-stretch:125%">{{ d.day }}</div>
           <p style="margin:12px 0 0;font-size:15px;line-height:1.55;flex:1">{{ d.focus }}</p>
+          <sc-if value="{{ d.isWed }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:16px;padding:12px 14px;border-radius:8px;background:#141412;border:1px solid #D9A441;color:#F3EFE6">
+              <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#D9A441">Wednesday finish line</div>
+              <p style="margin:6px 0 0;font-size:15px;line-height:1.5;font-weight:600">Your draft is presentation-ready. Full presentations happen Thursday.</p>
+            </div>
+          </sc-if>
           <div style="margin-top:16px;padding-top:14px;border-top:1px solid {{ d.border }}">
             <div style="font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:{{ d.sub }}">You finish with</div>
             <p style="margin:6px 0 0;font-size:15px;line-height:1.55;font-weight:600">{{ d.finish }}</p>
@@ -571,7 +577,7 @@ class Component extends DCLogic {
       ['Wednesday','Oct 7','Reconcile calendar, coverage, people and the budget your plan needs. Confirm handoffs. Finish the draft and prepare to present. The only group report is the brief 3:45 closing check-in; full presentations happen Thursday.','Wednesday page complete: calendar proposals, people, budget proposal, requests marked agreed or pending, and your draft presentation-ready.'],
       ['Thursday','Oct 8','Present your plan in the morning (about 10 to 15 minutes, then about 5 minutes of feedback). Work in the feedback, close the gaps you left open, write the summary, submit. We finish and close early.',"Thursday page: the ministry plan summary, plus the completed workbook in Chip's hands."]
     ];
-    const days = daysRaw.map(([day, date, focus, finish], i) => { const t = i === todayIdx; return { day, date, focus, finish, today: t, bg: t ? '#D9A441' : '#1E1E1B', fg: t ? '#141412' : '#F3EFE6', sub: t ? '#141412' : '#E6BE6E', border: t ? '#D9A441' : 'rgba(255,255,255,0.12)' }; });
+    const days = daysRaw.map(([day, date, focus, finish], i) => { const t = i === todayIdx; return { day, date, focus, finish, today: t, isWed: day === 'Wednesday', bg: t ? '#D9A441' : '#1E1E1B', fg: t ? '#141412' : '#F3EFE6', sub: t ? '#141412' : '#E6BE6E', border: t ? '#D9A441' : 'rgba(255,255,255,0.12)' }; });
 
     const rhythmRaw = [
       ['9:00 to 9:20',"Prayer, Scripture, today's outputs.",1],
